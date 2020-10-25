@@ -21,6 +21,7 @@
     "@types/redux": "^3.6.0",
     "react": "16.13.1",
     "react-native": "0.63.3",
+    "react-native-app-intro-slider": "^4.0.4",
     "react-native-gesture-handler": "^1.8.0",
     "react-native-reanimated": "^1.13.1",
     "react-native-safe-area-context": "^3.1.8",
