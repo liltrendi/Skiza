@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { useDispatch } from 'react-redux';
 import { View, Text, StyleSheet, ViewStyle, TextStyle, ImageStyle, Image, StatusBar, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import { onboardingSlides } from './slides';
+import {completeOnboarding} from "./../../actions/onboarding"
 
 interface OnboardingProps { }
 
@@ -24,8 +26,10 @@ interface SlideProps {
 
 const Onboarding: React.FC<OnboardingProps> = (): JSX.Element => {
 
+  const dispatch = useDispatch();
+
   const goToApp = (): void => {
-    console.log("go to app")
+    dispatch(completeOnboarding('ONBOARDING_COMPLETE', true));
   }
 
   const renderSlide = ({ item }: SlideProps): JSX.Element => {
