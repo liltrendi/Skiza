@@ -1,9 +1,9 @@
 import React from 'react'
 import { StackNavigationOptions } from '@react-navigation/stack';
-import { HomeHeaderBar } from "../../../components/App/headers/Home";
+import { SettingsHeaderBar } from "../../../components/App/headers/Settings";
 
-export const homeHeaderOptions: StackNavigationOptions = {
-  title: 'Home',
+export const settingsHeaderOptions: StackNavigationOptions = {
+  title: 'Settings',
   headerTitleStyle: {
     fontWeight: 'bold',
     fontSize: 23,
@@ -16,7 +16,7 @@ export const homeHeaderOptions: StackNavigationOptions = {
     paddingRight: 15,
   },
   headerRight: (props) => (
-    <HomeHeaderBar
+    <SettingsHeaderBar
       {...props}
       name={'comment-quote-outline'}
       size={33}

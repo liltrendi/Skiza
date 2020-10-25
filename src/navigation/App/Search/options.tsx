@@ -2,8 +2,8 @@ import React from 'react'
 import { StackNavigationOptions } from '@react-navigation/stack';
 import { HomeHeaderBar } from "../../../components/App/headers/Home";
 
-export const homeHeaderOptions: StackNavigationOptions = {
-  title: 'Home',
+export const searchHeaderOptions: StackNavigationOptions = {
+  title: 'Search',
   headerTitleStyle: {
     fontWeight: 'bold',
     fontSize: 23,

@@ -1,14 +1,14 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 
-interface GenresProps {}
+interface LibraryProps {}
 
-const Genres: React.FC<GenresProps> = (): JSX.Element => {
+const Library: React.FC<LibraryProps> = (): JSX.Element => {
   return (
     <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-        <Text>Genres</Text>
+        <Text>Library</Text>
     </View>
   );
 };
 
-export default Genres;
+export default Library;

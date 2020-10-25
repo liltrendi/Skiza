@@ -2,7 +2,7 @@ import React from 'react'
 import {View, Text, StyleSheet, ViewStyle, TextStyle} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-interface GenresHeaderProps {
+interface SearchHeaderProps {
     name: string;
     size: number;
     color: string;
@@ -14,7 +14,7 @@ interface Styles {
   badgeText: TextStyle;
 }
 
-export const GenresHeaderBar: React.FC<GenresHeaderProps> = ({name, size, color, badgeCount}): JSX.Element => {
+export const SearchHeaderBar: React.FC<SearchHeaderProps> = ({name, size, color, badgeCount}): JSX.Element => {
   if (!badgeCount || badgeCount < 1) return <Icon name={name} size={size} color={color} />;
   return (
     <View style={{width: 24, height: 24, margin: 5}}>
