@@ -6,7 +6,7 @@ export const homeHeaderOptions: StackNavigationOptions = {
   title: 'Home',
   headerTitleStyle: {
     fontWeight: 'bold',
-    fontSize: 23,
+    fontSize: 23
   },
   headerTitleAlign: 'left',
   headerLeftContainerStyle: {

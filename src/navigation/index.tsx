@@ -7,10 +7,10 @@ import PlayerFooter from "./Shared/PlayerFooter"
 type MainAppNavigation = (onboardingComplete: boolean) => JSX.Element
 
 export const mainAppNavigation: MainAppNavigation = (onboardingComplete: boolean): JSX.Element => {
+    const App: React.FC<{}> = (): JSX.Element => onboardingComplete ? AppStackScreens():AuthStackScreens();
     return (
         <NavigationContainer>
-            {onboardingComplete ? AppStackScreens():AuthStackScreens()}
-            <PlayerFooter />
+            <App />
         </NavigationContainer>
     )
 }
