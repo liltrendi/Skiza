@@ -1,6 +1,6 @@
 interface ActionProps {
-    type: string,
-    payload: boolean
+    type: string;
+    payload: boolean;
 }
 
 type OnboardingReducer = (state: boolean, action: ActionProps) => boolean

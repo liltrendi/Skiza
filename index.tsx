@@ -16,6 +16,7 @@ interface ReduxWrapperProps {}
 
 const ReduxWrapper: React.FC<ReduxWrapperProps> = (): JSX.Element => {
     const persistor: Persistor = persistStore(store);
+    // persistor.purge()
     return (
         <Provider store={store}>
             <PersistGate loading={null} persistor={persistor}>

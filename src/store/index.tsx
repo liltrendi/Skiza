@@ -6,8 +6,8 @@ import {rootReducer} from "./../reducers/root"
 import {initialState} from "./initial-state"
 
 interface PersistConfig {
-    key: string,
-    storage: Storage
+    key: string;
+    storage: Storage;
 }
 
 const persistConfig: PersistConfig = {

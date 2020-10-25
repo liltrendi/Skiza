@@ -1,6 +1,6 @@
 interface ActionProps {
-    type: string,
-    payload: string
+    type: string;
+    payload: string;
 }
 
 type ThemeReducer = (state: string, action: ActionProps) => string
