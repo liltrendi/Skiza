@@ -1,12 +1,16 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { AnyAction } from 'redux';
 import { View, Text, StyleSheet, ViewStyle, TextStyle, ImageStyle, Image, StatusBar, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import { onboardingSlides } from './slides';
-import {completeOnboarding} from "./../../actions/onboarding"
+import { completeOnboarding } from "./../../actions/onboarding"
 
-interface OnboardingProps { }
+interface OnboardingProps {
+  showApp: () => Promise<void>
+}
 
 interface Styles {
   container: ViewStyle;
@@ -24,13 +28,7 @@ interface SlideProps {
   item: Slide;
 }
 
-const Onboarding: React.FC<OnboardingProps> = (): JSX.Element => {
-
-  const dispatch = useDispatch();
-
-  const goToApp = (): void => {
-    dispatch(completeOnboarding('ONBOARDING_COMPLETE', true));
-  }
+const Onboarding: React.FC<OnboardingProps> = ({ showApp }): JSX.Element => {
 
   const renderSlide = ({ item }: SlideProps): JSX.Element => {
     return (
@@ -49,7 +47,7 @@ const Onboarding: React.FC<OnboardingProps> = (): JSX.Element => {
       <TouchableOpacity
         activeOpacity={0.65}
         style={styles.doneButtonView}
-        onPress={goToApp}
+        onPress={showApp}
       >
         <Text style={styles.doneButtonText}>Get Started</Text>
       </TouchableOpacity>
@@ -119,4 +117,17 @@ const styles = StyleSheet.create<Styles>({
   }
 })
 
-export default Onboarding;
+const mapStateToProps = () => {
+  return {}
+}
+
+const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
+  return {
+    showApp: () => dispatch(completeOnboarding())
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Onboarding)
