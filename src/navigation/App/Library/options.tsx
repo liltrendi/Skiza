@@ -5,8 +5,9 @@ import { LibraryHeaderBar } from "../../../components/App/headers/Library";
 export const LibraryHeaderOptions: StackNavigationOptions = {
   title: 'Library',
   headerTitleStyle: {
+    fontFamily: "CircularStd-Book",
     fontWeight: 'bold',
-    fontSize: 23,
+    fontSize: 22,
   },
   headerTitleAlign: 'left',
   headerLeftContainerStyle: {

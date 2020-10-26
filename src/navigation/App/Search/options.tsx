@@ -5,8 +5,9 @@ import { HomeHeaderBar } from "../../../components/App/headers/Home";
 export const searchHeaderOptions: StackNavigationOptions = {
   title: 'Search',
   headerTitleStyle: {
+    fontFamily: "CircularStd-Book",
     fontWeight: 'bold',
-    fontSize: 23,
+    fontSize: 22,
   },
   headerTitleAlign: 'left',
   headerLeftContainerStyle: {

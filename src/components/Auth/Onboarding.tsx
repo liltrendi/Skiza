@@ -113,6 +113,7 @@ const styles = StyleSheet.create<Styles>({
   doneButtonText: {
     color: "#fff",
     letterSpacing: 1.2,
+    fontFamily: "CircularStd-Book",
     fontWeight: "bold",
     fontSize: 17
   }

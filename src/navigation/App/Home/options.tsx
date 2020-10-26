@@ -5,8 +5,9 @@ import { HomeHeaderBar } from "../../../components/App/headers/Home";
 export const homeHeaderOptions: StackNavigationOptions = {
   title: 'Home',
   headerTitleStyle: {
+    fontFamily: "CircularStd-Book",
     fontWeight: 'bold',
-    fontSize: 23
+    fontSize: 22
   },
   headerTitleAlign: 'left',
   headerLeftContainerStyle: {
@@ -23,5 +24,5 @@ export const homeHeaderOptions: StackNavigationOptions = {
       color={'#333'}
     />
   ),
-  headerTransparent: true,
+  headerTransparent: true
 };

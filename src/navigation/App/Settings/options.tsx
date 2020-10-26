@@ -5,8 +5,9 @@ import { SettingsHeaderBar } from "../../../components/App/headers/Settings";
 export const settingsHeaderOptions: StackNavigationOptions = {
   title: 'Settings',
   headerTitleStyle: {
+    fontFamily: "CircularStd-Book",
     fontWeight: 'bold',
-    fontSize: 23,
+    fontSize: 22,
   },
   headerTitleAlign: 'left',
   headerLeftContainerStyle: {
