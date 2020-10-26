@@ -114,8 +114,7 @@ const styles = StyleSheet.create<Styles>({
     color: "#fff",
     letterSpacing: 1.2,
     fontWeight: "bold",
-    fontSize: 17,
-    fontFamily: "Shojumaru-Regular"
+    fontSize: 17
   }
 })
 
