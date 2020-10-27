@@ -19,7 +19,7 @@ interface Styles {
 }
 
 const ReadExternalStoragePermissionDenied: React.FC<ReadExternalStoragePermissionDeniedProps> = ({requestPermission}): JSX.Element => {
-    const animation: any = require('./../../../../assets/animations/home/folder-error.json');
+    const animation = require('./../../../../assets/animations/home/folder-error.json');
     return (
         <React.Fragment>
             <LottieView
@@ -31,7 +31,7 @@ const ReadExternalStoragePermissionDenied: React.FC<ReadExternalStoragePermissio
                 Oops! We can't find any songs.
             </Text>
             <TouchableOpacity style={styles.button} activeOpacity={0.85} onPress={requestPermission}>
-                <Text style={styles.buttonText}>Scan</Text>
+                <Text style={styles.buttonText}>Rescan</Text>
             </TouchableOpacity>
         </React.Fragment>
     )

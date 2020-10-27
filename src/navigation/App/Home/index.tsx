@@ -3,7 +3,7 @@ import {createStackNavigator} from "@react-navigation/stack"
 import {HomeScreen} from "./screens"
 import {homeHeaderOptions} from "./options"
 
-type HomeStackNavigatorParams = {
+export type HomeStackNavigatorParams = {
     Home: undefined;
 }
 

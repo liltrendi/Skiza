@@ -1,10 +1,15 @@
+interface Slide {
+    key: string,
+    title: string,
+    text: string,
+    image: any,
+    background: string
+}
 
-
-export const onboardingSlides: any = [
+export const onboardingSlides: Slide[] = [
     {
         key: 'welcome',
         title: 'Skiza',
-        // text: 'Good music.\nControlled by you.',
         text: "Your favorite\nSongs in one place",
         image: require('./../../assets/images/onboarding.png'),
         background: '#fff',

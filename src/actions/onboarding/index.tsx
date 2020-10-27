@@ -2,6 +2,11 @@ import { AnyAction } from "redux"
 import { ThunkAction, ThunkDispatch } from "redux-thunk"
 import { requestReadStoragePermission } from "../../controllers/permissions/storage"
 
+interface UpdateStoragePermissionStatusActionProps {
+    type: string;
+    payload: string;
+}
+
 export const READ_EXTERNAL_STORAGE_PERMISSION_GRANTED: string = "READ_EXTERNAL_STORAGE_PERMISSION_GRANTED"
 export const READ_EXTERNAL_STORAGE_PERMISSION_DENIED: string = "READ_EXTERNAL_STORAGE_PERMISSION_DENIED"
 export const READ_EXTERNAL_STORAGE_PERMISSION_BLOCKED: string = "READ_EXTERNAL_STORAGE_PERMISSION_BLOCKED"
@@ -41,5 +46,18 @@ export const requestReadExternalStoragePermissionAgain = (): ThunkAction<Promise
                 dispatch({ type: READ_EXTERNAL_STORAGE_PERMISSION_BLOCKED, payload: result });
                 return
         }
+    }
+}
+
+export const updateStoragePermissionStatus = (payload: string): UpdateStoragePermissionStatusActionProps => {
+    switch (payload) {
+        case "granted":
+            return { type: READ_EXTERNAL_STORAGE_PERMISSION_GRANTED, payload: payload }
+        case "denied":
+            return { type: READ_EXTERNAL_STORAGE_PERMISSION_DENIED, payload: payload }
+        case "blocked":
+            return { type: READ_EXTERNAL_STORAGE_PERMISSION_BLOCKED, payload: payload }
+        default:
+            return { type: "", payload: ""}
     }
 }
