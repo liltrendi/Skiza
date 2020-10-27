@@ -14,7 +14,7 @@ interface Styles {
 }
 
 const ReadStoragePermissionBlocked: React.FC<ReadStoragePermissionBlockedProps> = (): JSX.Element => {
-    const animation = require('./../../../../assets/animations/home/folder-error.json');
+    const folderAnimation = require('./../../../../assets/animations/home/folder-error.json');
 
     const invokeSettingsOpen = (): void => {
         openSettings()
@@ -23,7 +23,7 @@ const ReadStoragePermissionBlocked: React.FC<ReadStoragePermissionBlockedProps> 
     return (
         <React.Fragment>
             <LottieView
-                source={animation}
+                source={folderAnimation}
                 style={styles.LottieView}
                 autoPlay={true}
             />

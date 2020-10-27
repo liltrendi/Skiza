@@ -17,7 +17,7 @@ interface ScreenOptionsProps {
 type ScreenOptions = ({ }: RouteProps) => ScreenOptionsProps
 
 export const screenOptions: ScreenOptions = ({ route }): ScreenOptionsProps => ({
-    tabBarIcon: ({ focused, color }) => {
+    tabBarIcon: ({ focused, color }): JSX.Element => {
         let iconName: string = "";
         if (route.name === 'Home') {
             iconName = "music";
@@ -26,7 +26,7 @@ export const screenOptions: ScreenOptions = ({ route }): ScreenOptionsProps => (
         } else if (route.name === "Library"){
             iconName = "folder-music-outline"
         } else if(route.name === "Settings"){
-            iconName = "cog-outline"
+            iconName = "account-cog-outline"
         }
         return <Icon name={iconName} size={focused ? 33 : 30} color={color} />;
     }

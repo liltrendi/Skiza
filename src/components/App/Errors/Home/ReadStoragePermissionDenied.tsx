@@ -19,11 +19,11 @@ interface Styles {
 }
 
 const ReadExternalStoragePermissionDenied: React.FC<ReadExternalStoragePermissionDeniedProps> = ({requestPermission}): JSX.Element => {
-    const animation = require('./../../../../assets/animations/home/folder-error.json');
+    const folderAnimation = require('./../../../../assets/animations/home/folder-error.json');
     return (
         <React.Fragment>
             <LottieView
-                source={animation}
+                source={folderAnimation}
                 style={styles.LottieView}
                 autoPlay={true}
             />
