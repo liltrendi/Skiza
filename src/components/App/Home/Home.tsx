@@ -1,27 +1,19 @@
 import React, { useEffect, useRef } from 'react';
-import { ActivityIndicator, AppState, AppStateStatus, StyleSheet, Text, View, ViewStyle } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { ActivityIndicator, AppState, AppStateStatus, StatusBar, StyleSheet,  ViewStyle } from 'react-native';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
-import { updateStoragePermissionStatus } from '../../../actions/onboarding';
-import { checkReadStoragePermissionStatus } from '../../../controllers/permissions/storage';
+import SongList from './SongList';
 import ReadStoragePermissionBlockedError from '../Errors/Home/ReadStoragePermissionBlocked';
 import ReadStoragePermissionDeniedError from '../Errors/Home/ReadStoragePermissionDenied';
-
-interface HomeProps {};
-
-interface Styles {
-  container: ViewStyle
-}
-
-interface ReadExternalStoragePermissionStatusConfig {
-  granted: boolean;
-  denied: boolean;
-  blocked: boolean;
-}
+import { checkReadStoragePermissionStatus } from '../../../controllers/permissions/storage';
+import { updateStoragePermissionStatus } from '../../../actions/onboarding';
+import {HomeProps, ReadExternalStoragePermissionStatusConfig, HomeStyles} from "./interfaces"
 
 const Home: React.FC<HomeProps> = (): JSX.Element => {
   const dispatch = useDispatch()
 
-  const readExternalStoragePermission: string = useSelector((state: RootStateOrAny) => state.readExternalStoragePermission);
+  const globalState: RootStateOrAny = useSelector((state: RootStateOrAny) => state);
+  const readExternalStoragePermission: string = globalState.readExternalStoragePermission;
 
   const readExternalStoragePermissionStatus: ReadExternalStoragePermissionStatusConfig = {
     granted: readExternalStoragePermission === "granted",
@@ -33,7 +25,7 @@ const Home: React.FC<HomeProps> = (): JSX.Element => {
     if (readExternalStoragePermissionStatus.denied) {
       return <ReadStoragePermissionDeniedError />
     } else if (readExternalStoragePermissionStatus.granted) {
-      return <Text>Home</Text>
+      return <SongList />
     } else if (readExternalStoragePermissionStatus.blocked) {
       return <ReadStoragePermissionBlockedError />
     } else {
@@ -70,18 +62,23 @@ const Home: React.FC<HomeProps> = (): JSX.Element => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles(globalState, readExternalStoragePermissionStatus).container}>
       <RenderHome />
-    </View>
+    </SafeAreaView>
   );
 };
 
-const styles = StyleSheet.create<Styles>({
-  container: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center"
-  }
-})
+const styles = (state: RootStateOrAny, storagePermissionStatus: ReadExternalStoragePermissionStatusConfig): HomeStyles => {
+  const showPlayerFooter: boolean = state.showPlayerFooter;
+  return StyleSheet.create<HomeStyles>({
+    container: {
+      justifyContent: storagePermissionStatus.granted ? undefined : "center",
+      alignItems: storagePermissionStatus.granted ? undefined : "center",
+      marginBottom: showPlayerFooter ? 60 : 0,
+      marginTop: StatusBar.currentHeight ? StatusBar.currentHeight : 45,
+      flex: 1,
+    }
+  })
+}
 
 export default Home;

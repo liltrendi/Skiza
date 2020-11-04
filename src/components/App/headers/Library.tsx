@@ -1,18 +1,7 @@
 import React from 'react'
 import {View, Text, StyleSheet, ViewStyle, TextStyle} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-
-interface LibraryHeaderProps {
-    name: string;
-    size: number;
-    color: string;
-    badgeCount?: number;
-}
-
-interface Styles {
-  containerDot: ViewStyle;
-  badgeText: TextStyle;
-}
+import {LibraryHeaderProps, LibraryHeaderStyles} from "./interfaces"
 
 export const LibraryHeaderBar: React.FC<LibraryHeaderProps> = ({name, size, color, badgeCount}): JSX.Element => {
   if (!badgeCount || badgeCount < 1) return <Icon name={name} size={size} color={color} />;
@@ -30,7 +19,7 @@ export const LibraryHeaderBar: React.FC<LibraryHeaderProps> = ({name, size, colo
   );
 };
 
-const styles = StyleSheet.create<Styles>({
+const styles = StyleSheet.create<LibraryHeaderStyles>({
   containerDot: {
     justifyContent: 'center',
     alignItems: 'center',

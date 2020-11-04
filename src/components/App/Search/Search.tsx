@@ -3,12 +3,7 @@ import { StyleSheet } from 'react-native'
 import Bar from './Bar'
 import SearchNotStarted from "./NotStarted"
 import SearchResults from "./Results"
-
-interface SearchProps {}
-
-interface Styles {
-    
-}
+import { SearchProps, SearchStyles } from './interfaces'
 
 const Search: React.FC<SearchProps> = (): JSX.Element => {
     const [searchTerm, setSearchTerm] = useState<string>("");
@@ -31,6 +26,6 @@ const Search: React.FC<SearchProps> = (): JSX.Element => {
 
 export default Search
 
-const styles = StyleSheet.create<Styles>({
+const styles = StyleSheet.create<SearchStyles>({
     
 })

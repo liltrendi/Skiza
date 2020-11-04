@@ -1,7 +1,6 @@
 import React from 'react'
 import { Text, View } from 'react-native'
-
-interface SettingsProps {}
+import { SettingsProps } from './interfaces'
 
 const Settings: React.FC<SettingsProps> = (): JSX.Element => {
     return (

@@ -3,25 +3,15 @@ import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import LottieView from 'lottie-react-native';
-import { StyleSheet, Text, TextStyle, ViewStyle } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import {requestReadExternalStoragePermissionAgain} from "../../../../actions/onboarding"
-
-interface ReadExternalStoragePermissionDeniedProps { 
-    requestPermission: () => Promise<void>
-}
-
-interface Styles {
-    LottieView: ViewStyle;
-    screenText: TextStyle;
-    button: ViewStyle;
-    buttonText: TextStyle;
-}
+import { ReadExternalStoragePermissionDeniedProps, ReadExternalStoragePermissionDeniedStyles } from './interfaces'
 
 const ReadExternalStoragePermissionDenied: React.FC<ReadExternalStoragePermissionDeniedProps> = ({requestPermission}): JSX.Element => {
     const folderAnimation = require('./../../../../assets/animations/home/folder-error.json');
     return (
-        <React.Fragment>
+        <View style={styles.container}>
             <LottieView
                 source={folderAnimation}
                 style={styles.LottieView}
@@ -33,11 +23,16 @@ const ReadExternalStoragePermissionDenied: React.FC<ReadExternalStoragePermissio
             <TouchableOpacity style={styles.button} activeOpacity={0.85} onPress={requestPermission}>
                 <Text style={styles.buttonText}>Rescan</Text>
             </TouchableOpacity>
-        </React.Fragment>
+        </View>
     )
 }
 
-const styles = StyleSheet.create<Styles>({
+const styles = StyleSheet.create<ReadExternalStoragePermissionDeniedStyles>({
+    container: {
+        justifyContent: "center",
+        alignItems: "center",
+        flex: 1,
+    },
     LottieView: {
         height: 80,
         width: 80,

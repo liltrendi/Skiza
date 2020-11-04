@@ -7,26 +7,8 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import { onboardingSlides } from './slides';
 import { completeOnboarding } from "./../../actions/onboarding"
-
-interface OnboardingProps {
-  showApp: () => Promise<void>
-}
-
-interface Styles {
-  container: ViewStyle;
-  title: TextStyle;
-  description: TextStyle;
-  slide: ViewStyle;
-  image: ImageStyle;
-  doneButtonView: ViewStyle;
-  doneButtonText: TextStyle;
-}
-
-type Slide = typeof onboardingSlides[0];
-
-interface SlideProps {
-  item: Slide;
-}
+import { OnboardingProps, SlideProps, OnboardingStyles} from "./interfaces"
+import { Slide } from './types';
 
 const Onboarding: React.FC<OnboardingProps> = ({ showApp }): JSX.Element => {
 
@@ -71,7 +53,7 @@ const Onboarding: React.FC<OnboardingProps> = ({ showApp }): JSX.Element => {
   );
 };
 
-const styles = StyleSheet.create<Styles>({
+const styles = StyleSheet.create<OnboardingStyles>({
   container: {
     flex: 1
   },

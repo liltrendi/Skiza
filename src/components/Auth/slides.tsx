@@ -1,12 +1,6 @@
-interface Slide {
-    key: string,
-    title: string,
-    text: string,
-    image: any,
-    background: string
-}
+import { SlideSchema } from './interfaces';
 
-export const onboardingSlides: Slide[] = [
+export const onboardingSlides: SlideSchema[] = [
     {
         key: 'welcome',
         title: 'Skiza',

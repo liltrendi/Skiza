@@ -1,17 +1,9 @@
 import React from 'react'
-import { StyleSheet, Text, TextStyle, ViewStyle } from 'react-native';
+import { StyleSheet, View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import LottieView from 'lottie-react-native';
 import { openSettings } from 'react-native-permissions';
-
-interface ReadStoragePermissionBlockedProps {}
-
-interface Styles {
-    LottieView: ViewStyle;
-    screenText: TextStyle;
-    button: ViewStyle;
-    buttonText: TextStyle;
-}
+import { ReadStoragePermissionBlockedProps, ReadStoragePermissionBlockedStyles } from './interfaces'
 
 const ReadStoragePermissionBlocked: React.FC<ReadStoragePermissionBlockedProps> = (): JSX.Element => {
     const folderAnimation = require('./../../../../assets/animations/home/folder-error.json');
@@ -21,7 +13,7 @@ const ReadStoragePermissionBlocked: React.FC<ReadStoragePermissionBlockedProps> 
     }
 
     return (
-        <React.Fragment>
+        <View style={styles.container}>
             <LottieView
                 source={folderAnimation}
                 style={styles.LottieView}
@@ -36,13 +28,18 @@ const ReadStoragePermissionBlocked: React.FC<ReadStoragePermissionBlockedProps> 
             <TouchableOpacity style={styles.button} activeOpacity={0.85} onPress={invokeSettingsOpen}>
                 <Text style={styles.buttonText}>Open Settings</Text>
             </TouchableOpacity>
-        </React.Fragment>
+        </View>
     )
 }
 
 export default ReadStoragePermissionBlocked;
 
-const styles = StyleSheet.create<Styles>({
+const styles = StyleSheet.create<ReadStoragePermissionBlockedStyles>({
+    container: {
+        justifyContent: "center",
+        alignItems: "center",
+        flex: 1
+    },
     LottieView: {
         height: 80,
         width: 80,

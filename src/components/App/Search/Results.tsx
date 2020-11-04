@@ -1,13 +1,6 @@
 import React from 'react'
 import {StyleSheet, View, ActivityIndicator, ViewStyle} from "react-native"
-
-interface SearchResultsProps {
-    searchTerm: string;
-}
-
-interface Styles {
-    container: ViewStyle;
-}   
+import { SearchResultsProps, SearchResultsStyles } from './interfaces'   
 
 const SearchResults: React.FC<SearchResultsProps> = ({searchTerm}):JSX.Element => {
     return (
@@ -19,7 +12,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({searchTerm}):JSX.Element =
 
 export default SearchResults
 
-const styles = StyleSheet.create<Styles>({
+const styles = StyleSheet.create<SearchResultsStyles>({
     container: {
         justifyContent: "center",
         alignItems: "center",

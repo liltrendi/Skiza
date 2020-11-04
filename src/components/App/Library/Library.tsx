@@ -1,7 +1,6 @@
 import React from 'react';
 import {View, Text} from 'react-native';
-
-interface LibraryProps {}
+import { LibraryProps } from './interfaces'
 
 const Library: React.FC<LibraryProps> = (): JSX.Element => {
   return (

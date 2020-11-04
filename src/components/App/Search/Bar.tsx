@@ -1,17 +1,8 @@
 import React from 'react'
 import { Icon, Input, Item } from 'native-base'
-import { StyleSheet, View, ViewStyle, NativeSyntheticEvent, TextInputChangeEventData } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import {widthPercentageToDP as wdp} from 'react-native-responsive-screen';
-
-interface BarProps {
-    setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
-    searchTerm: string;
-}
-
-interface Styles {
-    container: ViewStyle;
-    bar: ViewStyle;
-}
+import { BarProps, BarStyles } from './interfaces'
 
 const Bar: React.FC<BarProps> = ({searchTerm, setSearchTerm}): JSX.Element => {
 
@@ -29,7 +20,7 @@ const Bar: React.FC<BarProps> = ({searchTerm, setSearchTerm}): JSX.Element => {
 
 export default Bar
 
-const styles = StyleSheet.create<Styles>({
+const styles = StyleSheet.create<BarStyles>({
     container: {
         top: 65
     },

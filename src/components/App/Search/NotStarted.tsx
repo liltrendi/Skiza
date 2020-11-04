@@ -1,15 +1,7 @@
 import React from 'react'
 import { StyleSheet, View, Text, ViewStyle, TextStyle } from 'react-native'
 import LottieView from 'lottie-react-native';
-
-interface NotStartedProps {}
-
-interface Styles {
-    outerAnimationContainer: ViewStyle;
-    innerAnimationContainer: ViewStyle;
-    LottieView: ViewStyle;
-    searchText: TextStyle;
-}
+import { NotStartedProps, NotStartedStyles } from './interfaces'
 
 const NotStarted: React.FC<NotStartedProps> = (): JSX.Element => {
     const searchAnimation = require("./../../../assets/animations/search/search-glass.json")
@@ -31,7 +23,7 @@ const NotStarted: React.FC<NotStartedProps> = (): JSX.Element => {
 
 export default NotStarted
 
-const styles = StyleSheet.create<Styles>({
+const styles = StyleSheet.create<NotStartedStyles>({
     outerAnimationContainer: {
         justifyContent: "center",
         alignItems: "center",
