@@ -22,7 +22,7 @@ export default Bar
 
 const styles = StyleSheet.create<BarStyles>({
     container: {
-        top: 65
+        top: 63
     },
     bar: {
         backgroundColor: "#f8f8f8",

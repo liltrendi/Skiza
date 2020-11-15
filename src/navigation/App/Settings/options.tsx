@@ -1,6 +1,5 @@
 import React from 'react'
 import { StackNavigationOptions } from '@react-navigation/stack';
-import { SettingsHeaderBar } from "../../../components/App/headers/Settings";
 
 export const settingsHeaderOptions: StackNavigationOptions = {
   title: 'Settings',
@@ -8,6 +7,7 @@ export const settingsHeaderOptions: StackNavigationOptions = {
     fontFamily: "CircularStd-Book",
     fontWeight: 'bold',
     fontSize: 22,
+    paddingBottom: 25
   },
   headerTitleAlign: 'left',
   headerLeftContainerStyle: {
@@ -15,14 +15,13 @@ export const settingsHeaderOptions: StackNavigationOptions = {
   },
   headerRightContainerStyle: {
     paddingRight: 15,
+    paddingBottom: 25
   },
   headerRight: (props) => (
-    <SettingsHeaderBar
-      {...props}
-      name={'comment-quote-outline'}
-      size={33}
-      color={'#333'}
-    />
+    <React.Fragment />
   ),
   headerTransparent: true,
+  headerStyle: {
+    height: 80
+  },
 };

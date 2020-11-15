@@ -75,7 +75,7 @@ const styles = (state: RootStateOrAny, storagePermissionStatus: ReadExternalStor
       justifyContent: storagePermissionStatus.granted ? undefined : "center",
       alignItems: storagePermissionStatus.granted ? undefined : "center",
       marginBottom: showPlayerFooter ? 60 : 0,
-      marginTop: StatusBar.currentHeight ? StatusBar.currentHeight : 45,
+      marginTop: 50,
       flex: 1,
     }
   })

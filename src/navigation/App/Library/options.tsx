@@ -8,6 +8,7 @@ export const LibraryHeaderOptions: StackNavigationOptions = {
     fontFamily: "CircularStd-Book",
     fontWeight: 'bold',
     fontSize: 22,
+    paddingBottom: 25
   },
   headerTitleAlign: 'left',
   headerLeftContainerStyle: {
@@ -15,6 +16,7 @@ export const LibraryHeaderOptions: StackNavigationOptions = {
   },
   headerRightContainerStyle: {
     paddingRight: 15,
+    paddingBottom: 25
   },
   headerRight: (props) => (
     <LibraryHeaderBar
@@ -25,4 +27,7 @@ export const LibraryHeaderOptions: StackNavigationOptions = {
     />
   ),
   headerTransparent: true,
+  headerStyle: {
+    height: 80
+  },
 };
