@@ -24,6 +24,7 @@ export interface SongSchema {
     title: string;
     artist: string;
     cover?: any;
+    isActive: boolean;
 }
 
 export interface RenderItemProps {

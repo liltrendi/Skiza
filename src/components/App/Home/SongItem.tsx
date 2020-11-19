@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 import { SongSchema, SongItemStyles } from "./interfaces"
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const SongItem: React.FC<SongSchema> = ({ id, title, artist, cover }): JSX.Element => {
+const SongItem: React.FC<SongSchema> = ({ id, title, artist, cover, isActive }): JSX.Element => {
 
     const toggleOptions = (songId: string): void => {
         console.log("Options", songId)
@@ -12,6 +12,8 @@ const SongItem: React.FC<SongSchema> = ({ id, title, artist, cover }): JSX.Eleme
     const playSong = (songId: string): void => {
         console.log("Play", songId)
     }
+
+    const styles: SongItemStyles = getStyles(isActive)
 
     return (
         <TouchableOpacity activeOpacity={0.9} onPress={() => playSong(id)} style={styles.container}>
@@ -30,43 +32,47 @@ const SongItem: React.FC<SongSchema> = ({ id, title, artist, cover }): JSX.Eleme
 
 export default SongItem;
 
-const styles = StyleSheet.create<SongItemStyles>({
-    container: {
-        paddingTop: 11,
-        paddingBottom: 11,
-        paddingRight: 11,
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-evenly"
-    },
-    coverContainer: {
-        padding: 0
-    },
-    cover: {
-        width: 50,
-        height: 50,
-        marginLeft: 10,
-        marginRight: 10,
-    },
-    textContainer: {
-        justifyContent: "center",
-        alignItems: "flex-start",
-        flex: 1
-    },
-    title: {
-        fontFamily: "CircularStd-Book",
-        color: "#333",
-        fontSize: 20,
-    },
-    divider: {
-        height: 5
-    },
-    artist: {
-        fontFamily: "CircularStd-Book",
-        color: "#333",
-    },
-    optionsIcon: {
-        paddingLeft: 50,
-        paddingRight: 0
-    }
-})
+const getStyles = (isActive: boolean): SongItemStyles => {
+    return StyleSheet.create<SongItemStyles>({
+        container: {
+            justifyContent: "space-evenly",
+            flexDirection: "row",
+            alignItems: "center",
+            paddingBottom: 11,
+            paddingRight: 11,
+            paddingTop: 11,
+            paddingLeft: 2,
+        },
+        coverContainer: {
+            padding: 0
+        },
+        cover: {
+            marginRight: 10,
+            marginLeft: 10,
+            height: 50,
+            width: 50,
+        },
+        textContainer: {
+            justifyContent: "center",
+            alignItems: "flex-start",
+            flex: 1
+        },
+        title: {
+            fontFamily: "CircularStd-Book",
+            fontWeight: "bold",
+            color: isActive ? "#f05454" : "#333",
+            fontSize: 18,
+        },
+        divider: {
+            height: 5
+        },
+        artist: {
+            fontFamily: "CircularStd-Book",
+            color: "#333",
+        },
+        optionsIcon: {
+            paddingLeft: 50,
+            paddingRight: 0
+        }
+    })
+}
