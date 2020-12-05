@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 import { SongSchema, SongItemStyles } from "./interfaces"
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -36,12 +36,23 @@ const getStyles = (isActive: boolean): SongItemStyles => {
     return StyleSheet.create<SongItemStyles>({
         container: {
             justifyContent: "space-evenly",
+            borderBottomRightRadius: 5,
+            borderBottomLeftRadius: 5,
+            borderTopRightRadius: 5,
+            borderTopLeftRadius: 5,
             flexDirection: "row",
             alignItems: "center",
-            paddingBottom: 11,
-            paddingRight: 11,
-            paddingTop: 11,
-            paddingLeft: 2,
+            borderColor: "#888",
+            borderWidth: 0.5,
+            marginTop: 0,
+            marginBottom: 15, 
+            marginLeft: 16,
+            marginRight: 16,
+            paddingTop: 10,
+            paddingBottom: 10,
+            paddingLeft: 10,
+            paddingRight: 10
+
         },
         coverContainer: {
             padding: 0

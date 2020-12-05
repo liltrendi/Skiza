@@ -9,6 +9,8 @@ import { checkReadStoragePermissionStatus } from '../../../controllers/permissio
 import { updateStoragePermissionStatus } from '../../../actions/onboarding';
 import {HomeProps, ReadExternalStoragePermissionStatusConfig, HomeStyles} from "./interfaces"
 
+const ScrollableTabView = require('react-native-scrollable-tab-view');
+
 const Home: React.FC<HomeProps> = (): JSX.Element => {
   const dispatch = useDispatch()
 
@@ -21,7 +23,7 @@ const Home: React.FC<HomeProps> = (): JSX.Element => {
     blocked: readExternalStoragePermission === "blocked"
   }
 
-  const RenderHomeScreen: React.FC<{}> = (): JSX.Element => {
+  const RenderGenresScreen: React.FC<{tabLabel: string}> = (): JSX.Element => {
     if (readExternalStoragePermissionStatus.denied) {
       return <ReadStoragePermissionDeniedError />
     } else if (readExternalStoragePermissionStatus.granted) {
@@ -65,7 +67,9 @@ const Home: React.FC<HomeProps> = (): JSX.Element => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <RenderHomeScreen />
+      <ScrollableTabView tabBarUnderlineStyle={{backgroundColor: "#f05454"}} tabBarTextStyle={{color: "#000"}}>
+        <RenderGenresScreen tabLabel="Genres" />
+      </ScrollableTabView>
     </SafeAreaView>
   );
 };
@@ -77,7 +81,7 @@ const getStyles = (state: RootStateOrAny, storagePermissionStatus: ReadExternalS
       justifyContent: storagePermissionStatus.granted ? undefined : "center",
       alignItems: storagePermissionStatus.granted ? undefined : "center",
       marginBottom: showPlayerFooter ? 60 : 0,
-      marginTop: 50,
+      marginTop: 60,
       flex: 1,
     }
   })

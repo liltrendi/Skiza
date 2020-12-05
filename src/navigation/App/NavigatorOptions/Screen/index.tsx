@@ -23,8 +23,6 @@ export const screenOptions: ScreenOptions = ({ route }): ScreenOptionsProps => (
             iconName = "music";
         } else if (route.name === "Search") {
             iconName = "magnify"
-        } else if (route.name === "Library"){
-            iconName = "folder-music-outline"
         } else if(route.name === "Settings"){
             iconName = "account-cog-outline"
         }

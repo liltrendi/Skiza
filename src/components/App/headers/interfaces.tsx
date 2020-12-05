@@ -15,20 +15,6 @@ export interface HomeHeaderStyles {
   badgeText: TextStyle;
 }
 
-// Library
-
-export interface LibraryHeaderProps {
-    name: string;
-    size: number;
-    color: string;
-    badgeCount?: number;
-}
-
-export interface LibraryHeaderStyles {
-  containerDot: ViewStyle;
-  badgeText: TextStyle;
-}
-
 // Search
 
 export interface SearchHeaderProps {

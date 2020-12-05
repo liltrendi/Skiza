@@ -29,6 +29,7 @@ export interface SongSchema {
 
 export interface RenderItemProps {
     item: SongSchema;
+    index: number;
 }
 
 // SongItem
@@ -42,4 +43,23 @@ export interface SongItemStyles {
     divider: ViewStyle;
     artist: TextStyle;
     optionsIcon: ViewStyle;
+}
+
+// Genre Categories
+
+export interface GenreCategoriesProps {}
+
+export interface GenreCategoriesStyles {
+  container: ViewStyle;
+  innerContainer: ViewStyle;
+  exploreHeaders: ViewStyle;
+  headerLeftTxt: TextStyle;
+  headerRightView: ViewStyle;
+  headerRightText: TextStyle;
+  outerCategoryContainer: ViewStyle;
+  card: ViewStyle;
+  imageContainer: ViewStyle;
+  image: ImageStyle;
+  cardTitleView: ViewStyle;
+  cardTitleText: TextStyle;
 }
