@@ -68,6 +68,9 @@ const Home: React.FC<HomeProps> = (): JSX.Element => {
   return (
     <SafeAreaView style={styles.container}>
       <ScrollableTabView tabBarUnderlineStyle={{backgroundColor: "#f05454"}} tabBarTextStyle={{color: "#000"}}>
+        <RenderGenresScreen tabLabel="Library" />
+        <RenderGenresScreen tabLabel="Favorites" />
+        <RenderGenresScreen tabLabel="Artists" />
         <RenderGenresScreen tabLabel="Genres" />
       </ScrollableTabView>
     </SafeAreaView>

@@ -1,4 +1,4 @@
-const initialState: boolean = true;
+const initialState: boolean = false;
 
 interface ActionProps {
     type: string;
