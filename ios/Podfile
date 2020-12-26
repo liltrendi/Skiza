@@ -14,6 +14,10 @@ target 'Skiza' do
 
   pod 'react-native-viewpager', :path => '../node_modules/@react-native-community/viewpager'
 
+  pod 'RNFS', :path => '../node_modules/react-native-fs'
+
+  pod 'RNReactNativeGetMusicFiles', :path => '../node_modules/react-native-get-music-files'
+
   target 'SkizaTests' do
     inherit! :complete
     # Pods for testing

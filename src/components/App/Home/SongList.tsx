@@ -1,8 +1,9 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { FlatList } from 'react-native';
 import SongItem from './SongItem';
-import {SongSchema, SongListProps, RenderItemProps} from "./interfaces"
+import {SongSchema, SongListProps, RenderItemProps, LocalSongSchema} from "./interfaces"
 import GenreCategories from './GenreCategories';
+import { RNAndroidAudioStore } from 'react-native-get-music-files';
 
 const songData: SongSchema[] = ((): SongSchema[] => (new Array(109).fill(null)).map((_, index) => ({
     id: `${index+1}`,
@@ -11,9 +12,39 @@ const songData: SongSchema[] = ((): SongSchema[] => (new Array(109).fill(null)).
     isActive: index === 5
 })))()
 
+const songOptions = {
+    title: true,
+    artist: true,
+    album: true,
+    duration: true,
+    cover: false,
+    blured: false
+}
+
 const SongList: React.FC<SongListProps> = (): JSX.Element => {
 
     const placeholderImage: any = require("./../../../assets/images/musical-note.jpg");
+
+    async function getSongsFromLocalStorage(): Promise<Array<LocalSongSchema>>{
+        let results: Promise<Array<LocalSongSchema>> = await RNAndroidAudioStore.getAll(songOptions);
+        return results;
+    }
+
+    useEffect(() => {
+        try {
+            let allSongs: Promise<Array<LocalSongSchema>> = getSongsFromLocalStorage();
+            allSongs
+                .then((data: Array<LocalSongSchema>) => {
+                    console.log("Data", data)
+                    //set state
+                })
+                .catch(error => {
+                    console.log("Error", error)
+                })
+        }catch(e: any){
+            console.log("Exception", e)
+        }
+    }, [])
 
     return (
         <React.Fragment>

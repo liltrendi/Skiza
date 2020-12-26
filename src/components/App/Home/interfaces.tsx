@@ -27,6 +27,15 @@ export interface SongSchema {
     isActive: boolean;
 }
 
+export interface LocalSongSchema {
+  fileName: string;
+  path: string;
+  title: string;
+  author: string;
+  duration: string;
+  album?: string;
+}
+
 export interface RenderItemProps {
     item: SongSchema;
     index: number;

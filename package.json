@@ -7,7 +7,8 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
+    "logger": "adb logcat *:S ReactNative:V ReactNativeJS:V"
   },
   "dependencies": {
     "@react-native-community/async-storage": "^1.12.1",
@@ -26,7 +27,9 @@
     "react": "16.13.1",
     "react-native": "0.63.3",
     "react-native-app-intro-slider": "^4.0.4",
+    "react-native-fs": "^2.16.6",
     "react-native-gesture-handler": "^1.8.0",
+    "react-native-get-music-files": "https://github.com/cinder92/react-native-get-music-files.git#master",
     "react-native-permissions": "^2.2.2",
     "react-native-reanimated": "^1.13.1",
     "react-native-responsive-screen": "^1.4.1",

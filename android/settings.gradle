@@ -1,4 +1,10 @@
 rootProject.name = 'Skiza'
+include ':react-native-get-music-files'
+project(':react-native-get-music-files').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-get-music-files/android')
+include ':react-native-get-music-files'
+project(':react-native-get-music-files').projectDir = new File(rootProject.projectDir, 	'../node_modules/react-native-get-music-files/android')
+include ':react-native-fs'
+project(':react-native-fs').projectDir = new File(rootProject.projectDir, '../node_modules/react-native-fs/android')
 include ':@react-native-community_viewpager'
 project(':@react-native-community_viewpager').projectDir = new File(rootProject.projectDir, '../node_modules/@react-native-community/viewpager/android')
 include ':react-native-vector-icons'
