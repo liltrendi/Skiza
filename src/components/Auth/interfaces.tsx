@@ -1,4 +1,3 @@
-import React from 'react'
 import { ViewStyle, TextStyle, ImageStyle } from 'react-native'
 import { Slide } from "./types"
 

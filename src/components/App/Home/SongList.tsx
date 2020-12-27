@@ -1,43 +1,29 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+import {useSelector} from "react-redux"
 import { FlatList } from 'react-native';
 import SongItem from './SongItem';
 import {ISongListProps, RenderItemProps} from "./interfaces"
 import GenreCategories from './GenreCategories';
 import { ISongsSchema } from '../../../controllers/music/interfaces';
-import {fetchSongsFromLocalStorage, defaultSongOptions} from "../../../controllers/music/getSongs"
+import { RootStateOrAny } from 'react-redux';
 
 const SongList: React.FC<ISongListProps> = (): JSX.Element => {
-    const [fetchedMusic, setFetchedMusic] = useState<Array<ISongsSchema>>([])
 
     const placeholderImage: any = require("./../../../assets/images/musical-note.jpg");
-
-    useEffect(() => {
-        try {
-            if(false){
-                fetchSongsFromLocalStorage(defaultSongOptions)
-                    .then((data: Array<ISongsSchema>) => {
-                        setFetchedMusic(data);
-                    })
-                    .catch((e: Error) => {
-                        setFetchedMusic([]);
-                    })
-            }
-        }catch(e: any){
-            console.log("Exception", e)
-        }
-    }, [])
+    const globalState: RootStateOrAny = useSelector((state: RootStateOrAny) => state);
+    const allSongs: ISongsSchema[] = globalState.songs;
 
     return (
         <React.Fragment>
             <FlatList
-                data={fetchedMusic}
+                data={allSongs}
                 renderItem={({item, index}: RenderItemProps) => {
                     return (
                         <React.Fragment>
                             {index === 0 && (
                                 <GenreCategories />
                             )}
-                            <SongItem id={item.id} title={item.title} author={item.author} cover={placeholderImage} isActive={item.isActive} />
+                            <SongItem id={item.id} title={item.title} author={item.author} cover={item.cover ? item.cover : placeholderImage} isActive={item.isActive} />
                         </React.Fragment>
                     )
                 }}

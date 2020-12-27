@@ -1,12 +1,15 @@
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
-import { RootStateOrAny, useSelector } from 'react-redux';
+import { RootStateOrAny, useSelector, connect } from 'react-redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { AnyAction } from 'redux';
 import LottieView from 'lottie-react-native';
-import { INoSongsOnDeviceStyles} from "./interfaces"
+import { INoSongsOnDeviceStyles, INoSongsOnDeviceProps } from "./interfaces"
 import { ReadExternalStoragePermissionStatusConfig } from "../../Home/interfaces"
+import { fetchSongs } from '../../../../actions/music';
 
-const NoSongsOnDevice: React.FC<{}> = (): JSX.Element => {
+const NoSongsOnDevice: React.FC<INoSongsOnDeviceProps> = ({fetchSongs}): JSX.Element => {
 
     const noSongsAnimation = require('./../../../../assets/animations/home/not-found.json');
 
@@ -35,7 +38,7 @@ const NoSongsOnDevice: React.FC<{}> = (): JSX.Element => {
                 <Text style={styles.screenText}>
                     No songs appear to exist on your device.
                 </Text>
-                <TouchableOpacity style={styles.button} activeOpacity={0.85} onPress={() => {}}>
+                <TouchableOpacity style={styles.button} activeOpacity={0.85} onPress={fetchSongs}>
                     <Text style={styles.buttonText}>Rescan</Text>
                 </TouchableOpacity>
             </View>
@@ -43,7 +46,20 @@ const NoSongsOnDevice: React.FC<{}> = (): JSX.Element => {
     )
 }
 
-export default NoSongsOnDevice
+const mapStateToProps = () => {
+    return {}
+}
+
+const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
+    return {
+        fetchSongs: () => dispatch(fetchSongs())
+    }
+}
+  
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(NoSongsOnDevice)
 
 const getStyles = (state: RootStateOrAny, storagePermissionStatus: ReadExternalStoragePermissionStatusConfig): INoSongsOnDeviceStyles => {
     const showPlayerFooter: boolean = state.showPlayerFooter;

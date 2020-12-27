@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
-import { View, Text, StyleSheet, ViewStyle, TextStyle, ImageStyle, Image, StatusBar, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, StatusBar, TouchableOpacity } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import { onboardingSlides } from './slides';

@@ -1,4 +1,3 @@
-import React from 'react'
 import { ViewStyle, TextStyle } from 'react-native'
 
 // ReadStoragePermissionBlocked
@@ -28,6 +27,10 @@ export interface ReadExternalStoragePermissionDeniedStyles {
 }
 
 // NoSongsOnDevice
+
+export interface INoSongsOnDeviceProps {
+    fetchSongs: () => Promise<void>;
+}
 
 export interface INoSongsOnDeviceStyles {
     safeAreaContainer: ViewStyle;

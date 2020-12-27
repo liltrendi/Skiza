@@ -67,7 +67,7 @@ const Home: React.FC<HomeProps> = (): JSX.Element => {
 
   const styles: HomeStyles = getStyles(globalState, readExternalStoragePermissionStatus);
 
-  if(!isEmptyArray(globalState.songs)){
+  if(isEmptyArray(globalState.songs)){
     return <NoSongsOnDevice />
   }
 
