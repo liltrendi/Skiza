@@ -8,8 +8,7 @@ export const defaultSongOptions: ISongOptions = {
     album: true,
     duration: true,
     cover: true,
-    blured: false,
-    coverFolder: "/.skiza"
+    blured: false
 }
 
 export async function fetchSongsFromLocalStorage(songOptions: ISongOptions): Promise<Array<ISongsSchema>>{

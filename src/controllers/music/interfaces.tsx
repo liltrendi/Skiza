@@ -4,8 +4,9 @@ export interface ISongsSchema {
     title: string;
     author: string;
     duration: string;
-    album?: string;
+    album: string;
     id: string;
+    cover: string | null;
     isActive: boolean;
 }
 
@@ -16,5 +17,4 @@ export interface ISongOptions {
     duration: boolean;
     cover: boolean;
     blured: boolean;
-    coverFolder: string;
 }
