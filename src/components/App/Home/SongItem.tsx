@@ -1,9 +1,9 @@
 import React from 'react'
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
-import { SongSchema, SongItemStyles } from "./interfaces"
+import { ISongSchema, ISongItemStyles } from "./interfaces"
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const SongItem: React.FC<SongSchema> = ({ id, title, artist, cover, isActive }): JSX.Element => {
+const SongItem: React.FC<ISongSchema> = ({ id, title, author, cover, isActive }): JSX.Element => {
 
     const toggleOptions = (songId: string): void => {
         console.log("Options", songId)
@@ -13,7 +13,7 @@ const SongItem: React.FC<SongSchema> = ({ id, title, artist, cover, isActive }):
         console.log("Play", songId)
     }
 
-    const styles: SongItemStyles = getStyles(isActive)
+    const styles: ISongItemStyles = getStyles(isActive)
 
     return (
         <TouchableOpacity activeOpacity={0.9} onPress={() => playSong(id)} style={styles.container}>
@@ -21,7 +21,7 @@ const SongItem: React.FC<SongSchema> = ({ id, title, artist, cover, isActive }):
             <View style={styles.textContainer}>
                 <Text style={styles.title} numberOfLines={1}>{title}</Text>
                 <View style={styles.divider}></View>
-                <Text style={styles.artist} numberOfLines={1}>{artist}</Text>
+                <Text style={styles.author} numberOfLines={1}>{author}</Text>
             </View>
             <TouchableOpacity activeOpacity={0.85} onPress={() => toggleOptions(id)} style={styles.optionsIcon}>
                 <Icon name={"dots-vertical"} size={25} color={"#333"} />
@@ -32,8 +32,8 @@ const SongItem: React.FC<SongSchema> = ({ id, title, artist, cover, isActive }):
 
 export default SongItem;
 
-const getStyles = (isActive: boolean): SongItemStyles => {
-    return StyleSheet.create<SongItemStyles>({
+const getStyles = (isActive: boolean): ISongItemStyles => {
+    return StyleSheet.create<ISongItemStyles>({
         container: {
             justifyContent: "space-evenly",
             borderBottomRightRadius: 5,
@@ -77,7 +77,7 @@ const getStyles = (isActive: boolean): SongItemStyles => {
         divider: {
             height: 5
         },
-        artist: {
+        author: {
             fontFamily: "CircularStd-Book",
             color: "#333",
         },

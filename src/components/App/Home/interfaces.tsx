@@ -17,48 +17,39 @@ export interface ReadExternalStoragePermissionStatusConfig {
 
 // SongList
 
-export interface SongListProps {}
+export interface ISongListProps {}
 
-export interface SongSchema {
+export interface ISongSchema {
     id: string;
     title: string;
-    artist: string;
+    author: string;
     cover?: any;
     isActive: boolean;
 }
 
-export interface LocalSongSchema {
-  fileName: string;
-  path: string;
-  title: string;
-  author: string;
-  duration: string;
-  album?: string;
-}
-
 export interface RenderItemProps {
-    item: SongSchema;
+    item: ISongSchema;
     index: number;
 }
 
 // SongItem
 
-export interface SongItemStyles {
+export interface ISongItemStyles {
     container: ViewStyle;
     coverContainer: ViewStyle;
     cover: ImageStyle;
     textContainer: ViewStyle;
     title: TextStyle;
     divider: ViewStyle;
-    artist: TextStyle;
+    author: TextStyle;
     optionsIcon: ViewStyle;
 }
 
 // Genre Categories
 
-export interface GenreCategoriesProps {}
+export interface IGenreCategoriesProps {}
 
-export interface GenreCategoriesStyles {
+export interface IGenreCategoriesStyles {
   container: ViewStyle;
   innerContainer: ViewStyle;
   exploreHeaders: ViewStyle;

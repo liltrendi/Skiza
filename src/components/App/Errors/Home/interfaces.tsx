@@ -26,3 +26,14 @@ export interface ReadExternalStoragePermissionDeniedStyles {
     button: ViewStyle;
     buttonText: TextStyle;
 }
+
+// NoSongsOnDevice
+
+export interface INoSongsOnDeviceStyles {
+    safeAreaContainer: ViewStyle;
+    container: ViewStyle;
+    LottieView: ViewStyle;
+    screenText: TextStyle;
+    button: ViewStyle;
+    buttonText: TextStyle;
+}

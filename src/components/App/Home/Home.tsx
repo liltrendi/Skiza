@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { ActivityIndicator, AppState, AppStateStatus, StyleSheet } from 'react-native';
+import { ActivityIndicator, AppState, AppStateStatus, StyleSheet, View, Text } from 'react-native';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import SongList from './SongList';
 import ReadStoragePermissionBlockedError from '../Errors/Home/ReadStoragePermissionBlocked';
@@ -8,6 +8,8 @@ import ReadStoragePermissionDeniedError from '../Errors/Home/ReadStoragePermissi
 import { checkReadStoragePermissionStatus } from '../../../controllers/permissions/storage';
 import { updateStoragePermissionStatus } from '../../../actions/onboarding';
 import {HomeProps, ReadExternalStoragePermissionStatusConfig, HomeStyles} from "./interfaces"
+import { isEmptyArray } from '../../../util/util';
+import NoSongsOnDevice from '../Errors/Home/NoSongsOnDevice';
 
 const ScrollableTabView = require('react-native-scrollable-tab-view');
 
@@ -64,6 +66,10 @@ const Home: React.FC<HomeProps> = (): JSX.Element => {
   }, []);
 
   const styles: HomeStyles = getStyles(globalState, readExternalStoragePermissionStatus);
+
+  if(!isEmptyArray(globalState.songs)){
+    return <NoSongsOnDevice />
+  }
 
   return (
     <SafeAreaView style={styles.container}>

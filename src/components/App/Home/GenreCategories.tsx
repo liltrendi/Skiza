@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image } from 'react-native';
-import {GenreCategoriesProps, GenreCategoriesStyles} from "./interfaces"
+import {IGenreCategoriesProps, IGenreCategoriesStyles} from "./interfaces"
 
 const categories = (() => {
     const placeholderImage: any = require("./../../../assets/images/onboarding.png");
@@ -15,10 +15,10 @@ const categories = (() => {
     })
 })()
 
-const GenreCategories: React.FC<GenreCategoriesProps> = (): JSX.Element => {
+const GenreCategories: React.FC<IGenreCategoriesProps> = (): JSX.Element => {
 
     const placeholderImage: any = require("./../../../assets/images/onboarding.png");
-    const styles: GenreCategoriesStyles = getStyles();
+    const styles: IGenreCategoriesStyles = getStyles();
 
     return (
         <ScrollView
@@ -58,9 +58,9 @@ const GenreCategories: React.FC<GenreCategoriesProps> = (): JSX.Element => {
 
 export default GenreCategories;
 
-const getStyles = (): GenreCategoriesStyles => {
+const getStyles = (): IGenreCategoriesStyles => {
     return (
-        StyleSheet.create<GenreCategoriesStyles>({
+        StyleSheet.create<IGenreCategoriesStyles>({
             container: {
               paddingTop: 20,
             },

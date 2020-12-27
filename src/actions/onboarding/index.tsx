@@ -1,5 +1,7 @@
 import { AnyAction } from "redux"
 import { ThunkAction, ThunkDispatch } from "redux-thunk"
+import { defaultSongOptions, fetchSongsFromLocalStorage } from "../../controllers/music/getSongs"
+import { ISongsSchema } from "../../controllers/music/interfaces"
 import { requestReadStoragePermission } from "../../controllers/permissions/storage"
 
 interface UpdateStoragePermissionStatusActionProps {
@@ -11,14 +13,17 @@ export const READ_EXTERNAL_STORAGE_PERMISSION_GRANTED: string = "READ_EXTERNAL_S
 export const READ_EXTERNAL_STORAGE_PERMISSION_DENIED: string = "READ_EXTERNAL_STORAGE_PERMISSION_DENIED"
 export const READ_EXTERNAL_STORAGE_PERMISSION_BLOCKED: string = "READ_EXTERNAL_STORAGE_PERMISSION_BLOCKED"
 export const ONBOARDING_COMPLETE: string = "ONBOARDING_COMPLETE"
+export const FETCHED_SONGS: string = "FETCHED_SONGS"
 
 export const completeOnboarding = (): ThunkAction<Promise<void>, {}, {}, AnyAction> => {
     return async (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {
-        let result = await requestReadStoragePermission()
+        let result: string = await requestReadStoragePermission();
+        let songs: ISongsSchema[] = await fetchSongsFromLocalStorage(defaultSongOptions);
         switch (result) {
             case "granted":
                 dispatch({ type: READ_EXTERNAL_STORAGE_PERMISSION_GRANTED, payload: result });
                 dispatch({ type: ONBOARDING_COMPLETE, payload: true });
+                dispatch({ type: FETCHED_SONGS, payload: songs })
                 return
             case "denied":
                 dispatch({ type: READ_EXTERNAL_STORAGE_PERMISSION_DENIED, payload: result });
