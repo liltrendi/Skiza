@@ -43,7 +43,7 @@ const NoSongsOnDevice: React.FC<INoSongsOnDeviceProps> = ({fetchSongs}): JSX.Ele
                     if(readExternalStoragePermissionStatus.granted){
                         fetchSongs()
                     }else{
-                        Alert.alert("Permission denied", "Please grant Skiza access to your storage from your device Settings", [{text: "Allow access", onPress: openSettings}])
+                        Alert.alert("Permission Denied", "Please grant Skiza access to your storage from your device Settings", [{text: "Allow access", onPress: openSettings }], { cancelable: true })
                     }
                 }}>
                     <Text style={styles.buttonText}>Rescan</Text>
