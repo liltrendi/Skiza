@@ -1,4 +1,8 @@
-export interface ISongsSchema {
+export interface SongSchemaExtender {
+    [key: string]: string;
+}
+
+export interface ISongsSchema extends SongSchemaExtender {
     fileName: string;
     path: string;
     title: string;
@@ -6,8 +10,7 @@ export interface ISongsSchema {
     duration: string;
     album: string;
     id: string;
-    cover: string | null;
-    isActive: boolean;
+    cover: string;
 }
 
 export interface ISongOptions {

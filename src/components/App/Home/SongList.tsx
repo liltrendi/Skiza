@@ -23,7 +23,7 @@ const SongList: React.FC<ISongListProps> = (): JSX.Element => {
                             {index === 0 && (
                                 <GenreCategories />
                             )}
-                            <SongItem id={item.id} title={item.title} author={item.author} cover={item.cover ? item.cover : placeholderImage} isActive={item.isActive} />
+                            <SongItem id={item.id} title={item.title} author={item.author} cover={item.cover ? item.cover : placeholderImage}/>
                         </React.Fragment>
                     )
                 }}

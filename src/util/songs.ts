@@ -20,7 +20,7 @@ export async function restructureFetchedSongs(fetchedSongs: Promise<Array<ISongs
             ...song,
             id: uuid.v4(),
             author: song.author === "<unknown>" ? "Unknown" : song.author,
-            cover: song.cover || null,
+            cover: song.cover || "",
             folder: getFolder(song.path)
         }
     })

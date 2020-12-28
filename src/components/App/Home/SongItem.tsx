@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 import { ISongSchema, ISongItemStyles } from "./interfaces"
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const SongItem: React.FC<ISongSchema> = ({ id, title, author, cover, isActive }): JSX.Element => {
+const SongItem: React.FC<ISongSchema> = ({ id, title, author, cover }): JSX.Element => {
 
     const toggleOptions = (songId: string): void => {
         console.log("Options", songId)
@@ -12,6 +12,8 @@ const SongItem: React.FC<ISongSchema> = ({ id, title, author, cover, isActive })
     const playSong = (songId: string): void => {
         console.log("Play", songId)
     }
+
+    let isActive = false;
 
     const styles: ISongItemStyles = getStyles(isActive)
 

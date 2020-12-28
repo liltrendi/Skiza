@@ -25,8 +25,7 @@ export interface ISongSchema {
     id: string;
     title: string;
     author: string;
-    cover?: any;
-    isActive: boolean;
+    cover: any;
 }
 
 export interface RenderItemProps {

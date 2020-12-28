@@ -6,7 +6,7 @@ export const isNullUndefined = (item: any): boolean => {
     }
 }
 
-export const isEmptyArray = (array: []): boolean => {
+export const isEmptyArray = (array: any[]): boolean => {
     try {
         if (isNullUndefined(array)) {
             return true;
@@ -16,4 +16,8 @@ export const isEmptyArray = (array: []): boolean => {
     } catch (err) {
         return true;
     }
+}
+
+export const isEmptyString = (item: string): boolean => {
+    return item.length === 0;
 }
