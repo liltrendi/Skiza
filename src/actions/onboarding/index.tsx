@@ -18,12 +18,13 @@ export const ONBOARDING_COMPLETE: string = "ONBOARDING_COMPLETE";
 export const completeOnboarding = (): ThunkAction<Promise<void>, {}, {}, AnyAction> => {
     return async (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {
         let result: string = await requestReadStoragePermission();
-        let songs: ISongsSchema[] = await fetchSongsFromLocalStorage(defaultSongOptions);
+        let songs: ISongsSchema[] = [];
         switch (result) {
             case "granted":
+                songs = await fetchSongsFromLocalStorage(defaultSongOptions);
                 dispatch({ type: READ_EXTERNAL_STORAGE_PERMISSION_GRANTED, payload: result });
                 dispatch({ type: ONBOARDING_COMPLETE, payload: true });
-                dispatch({ type: FETCHED_SONGS, payload: songs })
+                dispatch({ type: FETCHED_SONGS, payload: songs });
                 return
             case "denied":
                 dispatch({ type: READ_EXTERNAL_STORAGE_PERMISSION_DENIED, payload: result });
@@ -39,10 +40,13 @@ export const completeOnboarding = (): ThunkAction<Promise<void>, {}, {}, AnyActi
 
 export const requestReadExternalStoragePermissionAgain = (): ThunkAction<Promise<void>, {}, {}, AnyAction> => {
     return async (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {
-        let result = await requestReadStoragePermission()
+        let result = await requestReadStoragePermission();
+        let songs: ISongsSchema[] = [];
         switch (result) {
             case "granted":
+                songs = await fetchSongsFromLocalStorage(defaultSongOptions);
                 dispatch({ type: READ_EXTERNAL_STORAGE_PERMISSION_GRANTED, payload: result });
+                dispatch({ type: FETCHED_SONGS, payload: songs });
                 return
             case "denied":
                 dispatch({ type: READ_EXTERNAL_STORAGE_PERMISSION_DENIED, payload: result });

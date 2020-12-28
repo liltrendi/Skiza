@@ -25,11 +25,20 @@ const Home: React.FC<HomeProps> = (): JSX.Element => {
     blocked: readExternalStoragePermission === "blocked"
   }
 
-  const RenderGenresScreen: React.FC<{tabLabel: string}> = (): JSX.Element => {
+  const styles: HomeStyles = getStyles(globalState, readExternalStoragePermissionStatus);
+
+  const RenderHomeView: React.FC<{}> = (): JSX.Element => {
     if (readExternalStoragePermissionStatus.denied) {
       return <ReadStoragePermissionDeniedError />
     } else if (readExternalStoragePermissionStatus.granted) {
-      return <SongList />
+      return (
+        <ScrollableTabView tabBarUnderlineStyle={{backgroundColor: "#f05454"}} tabBarTextStyle={{color: "#000"}}>
+          <SongList tabLabel="Library" />
+          <SongList tabLabel="Favorites" />
+          <SongList tabLabel="Artists" />
+          <SongList tabLabel="Genres" />
+        </ScrollableTabView>
+      )
     } else if (readExternalStoragePermissionStatus.blocked) {
       return <ReadStoragePermissionBlockedError />
     } else {
@@ -65,20 +74,13 @@ const Home: React.FC<HomeProps> = (): JSX.Element => {
     };
   }, []);
 
-  const styles: HomeStyles = getStyles(globalState, readExternalStoragePermissionStatus);
-
-  if(!isEmptyArray(globalState.songs)){
+  if(isEmptyArray(globalState.songs)){
     return <NoSongsOnDevice />
   }
 
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollableTabView tabBarUnderlineStyle={{backgroundColor: "#f05454"}} tabBarTextStyle={{color: "#000"}}>
-        <RenderGenresScreen tabLabel="Library" />
-        <RenderGenresScreen tabLabel="Favorites" />
-        <RenderGenresScreen tabLabel="Artists" />
-        <RenderGenresScreen tabLabel="Genres" />
-      </ScrollableTabView>
+      <RenderHomeView />
     </SafeAreaView>
   );
 };

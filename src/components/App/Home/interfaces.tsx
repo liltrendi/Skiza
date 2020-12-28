@@ -17,7 +17,9 @@ export interface ReadExternalStoragePermissionStatusConfig {
 
 // SongList
 
-export interface ISongListProps {}
+export interface ISongListProps {
+  tabLabel?: string;
+}
 
 export interface ISongSchema {
     id: string;

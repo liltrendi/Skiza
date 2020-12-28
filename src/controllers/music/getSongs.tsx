@@ -1,4 +1,5 @@
 import { RNAndroidAudioStore } from 'react-native-get-music-files';
+import RNFetchBlob from 'rn-fetch-blob';
 import { restructureFetchedSongs } from '../../util/songs';
 import { ISongOptions, ISongsSchema } from './interfaces';
 
@@ -12,6 +13,7 @@ export const defaultSongOptions: ISongOptions = {
 }
 
 export async function fetchSongsFromLocalStorage(songOptions: ISongOptions): Promise<Array<ISongsSchema>>{
-    let results: Promise<Array<ISongsSchema>> = await RNAndroidAudioStore.getAll(songOptions);
+    const coverFolder: string = RNFetchBlob.fs.dirs.DocumentDir + '/.skiza';
+    let results: Promise<Array<ISongsSchema>> = await RNAndroidAudioStore.getAll({...songOptions, coverFolder});
     return await restructureFetchedSongs(results);
 }

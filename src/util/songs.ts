@@ -15,8 +15,7 @@ export async function restructureFetchedSongs(fetchedSongs: Promise<Array<ISongs
 
     let songs: ISongsSchema[] = await fetchedSongs;
 
-    return songs.map((song) => {
-        console.log("Cover", song)
+    return songs.map((song: ISongsSchema) => {
         return {
             ...song,
             id: uuid.v4(),

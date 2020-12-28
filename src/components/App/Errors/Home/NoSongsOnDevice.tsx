@@ -1,10 +1,11 @@
 import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Alert } from 'react-native';
 import { RootStateOrAny, useSelector, connect } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import LottieView from 'lottie-react-native';
+import { openSettings } from 'react-native-permissions';
 import { INoSongsOnDeviceStyles, INoSongsOnDeviceProps } from "./interfaces"
 import { ReadExternalStoragePermissionStatusConfig } from "../../Home/interfaces"
 import { fetchSongs } from '../../../../actions/music';
@@ -38,7 +39,13 @@ const NoSongsOnDevice: React.FC<INoSongsOnDeviceProps> = ({fetchSongs}): JSX.Ele
                 <Text style={styles.screenText}>
                     No songs appear to exist on your device.
                 </Text>
-                <TouchableOpacity style={styles.button} activeOpacity={0.85} onPress={fetchSongs}>
+                <TouchableOpacity style={styles.button} activeOpacity={0.85} onPress={() => {
+                    if(readExternalStoragePermissionStatus.granted){
+                        fetchSongs()
+                    }else{
+                        Alert.alert("Permission denied", "Please grant Skiza access to your storage from your device Settings", [{text: "Allow access", onPress: openSettings}])
+                    }
+                }}>
                     <Text style={styles.buttonText}>Rescan</Text>
                 </TouchableOpacity>
             </View>
