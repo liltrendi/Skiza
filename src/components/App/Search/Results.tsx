@@ -1,7 +1,7 @@
-import React from 'react'
+import React, { useCallback } from 'react'
 import LottieView from 'lottie-react-native';
 import {StyleSheet, View, Text, FlatList} from "react-native"
-import { isEmptyArray } from '../../../util/util'
+import { isEmptyArray, isEmptyString } from '../../../util/util'
 import { SearchResultsProps, SearchResultsStyles } from './interfaces'
 import {RenderItemProps} from "./../Home/interfaces"
 import SongItem from './../Home/SongItem';
@@ -9,7 +9,15 @@ import SongItem from './../Home/SongItem';
 const SearchResults: React.FC<SearchResultsProps> = ({searchTerm, matchedSongs}):JSX.Element => {
 
     const noSongsAnimation = require('./../../../assets/animations/home/not-found.json');
-    const placeholderImage: any = require("./../../../assets/images/musical-note.jpg");
+
+    const flatListRenderer = useCallback(({item}: RenderItemProps) => {
+        const placeholderImage: any = require("./../../../assets/images/musical-note.jpg");
+        return (
+            <SongItem id={item.id} title={item.title} author={item.author} cover={isEmptyString(item.cover) ? placeholderImage : item.cover} />
+        )
+    }, []);
+    
+    const keyExtractor = useCallback((item) => item.id, []);
 
     if(isEmptyArray(matchedSongs)){
         return (
@@ -29,12 +37,8 @@ const SearchResults: React.FC<SearchResultsProps> = ({searchTerm, matchedSongs})
     return (
         <FlatList
             data={matchedSongs}
-            renderItem={({item}: RenderItemProps) => {
-                return (
-                    <SongItem id={item.id} title={item.title} author={item.author} cover={item.cover ? item.cover : placeholderImage} />
-                )
-            }}
-            keyExtractor={item => item.id}
+            renderItem={flatListRenderer}
+            keyExtractor={keyExtractor}
             style={styles.songList}
         />
     )
