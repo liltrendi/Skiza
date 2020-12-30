@@ -9,5 +9,5 @@ export const tabBarOptions: I_TabBarOptionsProps = {
     activeTintColor: 'red',
     inactiveTintColor: '#000',
     showLabel: false,
-    keyboardHidesTabBar: true
+    keyboardHidesTabBar: false
 };
