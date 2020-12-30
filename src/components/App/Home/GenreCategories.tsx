@@ -1,9 +1,9 @@
 import React from 'react'
-import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image, ImageSourcePropType } from 'react-native';
 import {IGenreCategoriesProps, IGenreCategoriesStyles} from "./interfaces"
 
 const categories = (() => {
-    const placeholderImage: any = require("./../../../assets/images/onboarding.png");
+    const placeholderImage: ImageSourcePropType = require("./../../../assets/images/onboarding.png");
     return (new Array(5).fill(null)).map((_, index) => {
         return (
             {
@@ -17,7 +17,7 @@ const categories = (() => {
 
 const GenreCategories: React.FC<IGenreCategoriesProps> = (): JSX.Element => {
 
-    const placeholderImage: any = require("./../../../assets/images/onboarding.png");
+    const placeholderImage: ImageSourcePropType = require("./../../../assets/images/onboarding.png");
     const styles: IGenreCategoriesStyles = getStyles();
 
     return (

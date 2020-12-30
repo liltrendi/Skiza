@@ -1,4 +1,4 @@
-import { ViewStyle, TextStyle, ImageStyle } from 'react-native'
+import { ViewStyle, TextStyle, ImageStyle, ImageSourcePropType } from 'react-native'
 import { Slide } from "./types"
 
 // Onboarding
@@ -27,6 +27,6 @@ export interface SlideSchema {
     key: string,
     title: string,
     text: string,
-    image: any,
+    image: ImageSourcePropType,
     background: string
 }

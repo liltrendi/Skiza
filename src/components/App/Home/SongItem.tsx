@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React from 'react'
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 import { RootStateOrAny } from 'react-redux';
 import { connect, useSelector } from 'react-redux';

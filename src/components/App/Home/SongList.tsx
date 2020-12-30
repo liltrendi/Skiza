@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react'
 import {useSelector} from "react-redux"
-import { FlatList } from 'react-native';
+import { FlatList, ImageSourcePropType } from 'react-native';
 import SongItem from './SongItem';
 import {ISongListProps, RenderItemProps} from "./interfaces"
 import GenreCategories from './GenreCategories';
@@ -13,7 +13,7 @@ const SongList: React.FC<ISongListProps> = (): JSX.Element => {
     const allSongs: ISongSchema[] = useSelector((state: RootStateOrAny) => state.songs);
 
     const flatListRenderer = useCallback(({item, index}: RenderItemProps) => {
-        const placeholderImage: any = require("./../../../assets/images/musical-note.jpg");
+        const placeholderImage: ImageSourcePropType = require("./../../../assets/images/musical-note.jpg");
         return (
             <React.Fragment>
                 {index === 0 && (
