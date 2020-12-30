@@ -1,43 +1,57 @@
 import React, { useCallback } from 'react'
 import {useSelector} from "react-redux"
-import { FlatList, ImageSourcePropType } from 'react-native';
+import { FlatList, StyleSheet } from 'react-native';
 import SongItem from './SongItem';
-import {I_SongListProps, I_RenderItemProps} from "./interfaces"
+import {I_SongListProps, I_RenderItemProps, I_SongListStyles} from "./interfaces"
 import GenreCategories from './GenreCategories';
-import { I_SongSchema } from '../../../controllers/music/interfaces';
+import { I_SongSchema, I_UniqueArtist } from '../../../controllers/music/interfaces';
 import { RootStateOrAny } from 'react-redux';
-import { isEmptyString } from '../../../util/util';
-import { MUSICAL_NOTE_IMAGE } from '../../../assets/images';
+import { getUniqueArtists } from '../../../util/songs';
 
 const SongList: React.FC<I_SongListProps> = (): JSX.Element => {
 
     const allSongs: I_SongSchema[] = useSelector((state: RootStateOrAny) => state.songs);
+    const uniqueArtists: I_UniqueArtist[] = getUniqueArtists(allSongs);
+
+    const ArtistsTopSection: React.FC<{index: number}> = ({index}): JSX.Element => {
+        if(index === 0 && uniqueArtists.length > 2){
+            return <GenreCategories uniqueArtists={uniqueArtists} />
+        }
+
+        return <React.Fragment />
+    }
 
     const flatListRenderer = useCallback(({item, index}: I_RenderItemProps) => {
-        const placeholderImage: ImageSourcePropType = MUSICAL_NOTE_IMAGE;
         return (
             <React.Fragment>
-                {index === 0 && (
-                    <GenreCategories />
-                )}
-                <SongItem id={item.id} title={item.title} author={item.author} cover={isEmptyString(item.cover) ? placeholderImage : item.cover} />
+                <ArtistsTopSection index={index} />
+                <SongItem id={item.id} title={item.title} author={item.author} cover={item.cover} />
             </React.Fragment>
         )
     }, []);
     
     const keyExtractor = useCallback((item: I_SongSchema) => item.id, []);
 
+    const shouldMarginate: boolean = uniqueArtists.length < 3;
+
+    const styles: I_SongListStyles = getStyles(shouldMarginate);
+
     return (
-        <React.Fragment>
-            <FlatList
-                data={allSongs}
-                renderItem={flatListRenderer}
-                keyExtractor={keyExtractor}
-            />
-        </React.Fragment>
+        <FlatList
+            data={allSongs}
+            renderItem={flatListRenderer}
+            keyExtractor={keyExtractor}
+            style={styles.flatList}
+        />
     )
 }
 
-
-
 export default SongList;
+
+const getStyles = (shouldMarginate: boolean): I_SongListStyles => {
+    return StyleSheet.create<I_SongListStyles>({
+        flatList: {
+            marginTop: shouldMarginate ? 15 : 0
+        }
+    })
+}

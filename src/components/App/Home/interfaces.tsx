@@ -1,5 +1,6 @@
 import React from 'react'
 import {ViewStyle, TextStyle, ImageStyle} from "react-native"
+import { I_UniqueArtist } from '../../../controllers/music/interfaces'
 
 // Home
 
@@ -21,11 +22,15 @@ export interface I_SongListProps {
   tabLabel?: string;
 }
 
+export interface I_SongListStyles {
+  flatList: ViewStyle;
+}
+
 export interface I_SongItemProps {
     id: string;
     title: string;
     author: string;
-    cover: any;
+    cover: string;
 }
 
 export interface I_RenderItemProps {
@@ -48,7 +53,9 @@ export interface I_SongItemStyles {
 
 // Genre Categories
 
-export interface I_GenreCategoriesProps {}
+export interface I_GenreCategoriesProps {
+  uniqueArtists: I_UniqueArtist[];
+}
 
 export interface I_GenreCategoriesStyles {
   container: ViewStyle;

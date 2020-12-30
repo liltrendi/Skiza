@@ -34,9 +34,8 @@ const Home: React.FC<I_HomeProps> = (): JSX.Element => {
       return (
         <ScrollableTabView tabBarUnderlineStyle={{backgroundColor: "#f05454"}} tabBarTextStyle={{color: "#000"}}>
           <SongList tabLabel="Library" />
-          <SongList tabLabel="Favorites" />
-          <SongList tabLabel="Artists" />
-          <SongList tabLabel="Genres" />
+          <SongList tabLabel="Playlists" />
+          <SongList tabLabel="Albums" />
         </ScrollableTabView>
       )
     } else if (readExternalStoragePermissionStatus.blocked) {

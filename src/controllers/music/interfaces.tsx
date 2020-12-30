@@ -1,3 +1,5 @@
+import { ImageSourcePropType } from "react-native";
+
 export interface I_SongSchemaExtender {
     [key: string]: string;
 }
@@ -20,4 +22,12 @@ export interface I_SongOptions {
     duration: boolean;
     cover: boolean;
     blured: boolean;
+}
+
+export interface I_UniqueArtist {
+    id: string;
+    name: string;
+    songs: string[];
+    albums: string[];
+    randomCover: string;
 }

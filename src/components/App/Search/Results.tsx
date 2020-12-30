@@ -1,22 +1,20 @@
 import React, { useCallback } from 'react'
 import LottieView from 'lottie-react-native';
-import {StyleSheet, View, Text, FlatList, ImageSourcePropType} from "react-native"
-import { isEmptyArray, isEmptyString } from '../../../util/util'
+import {StyleSheet, View, Text, FlatList} from "react-native"
+import { isEmptyArray } from '../../../util/util'
 import { I_SearchResultsProps, I_SearchResultsStyles } from './interfaces'
 import {I_RenderItemProps} from "./../Home/interfaces"
 import SongItem from './../Home/SongItem';
 import { I_SongSchema } from '../../../controllers/music/interfaces';
 import { HOME_NOT_FOUND_ANIMATION } from '../../../assets/animations';
-import { MUSICAL_NOTE_IMAGE } from '../../../assets/images';
  
 const SearchResults: React.FC<I_SearchResultsProps> = ({searchTerm, matchedSongs}):JSX.Element => {
-
+ 
     const noSongsAnimation = HOME_NOT_FOUND_ANIMATION;
 
     const flatListRenderer = useCallback(({item}: I_RenderItemProps) => {
-        const placeholderImage: ImageSourcePropType = MUSICAL_NOTE_IMAGE;
         return (
-            <SongItem id={item.id} title={item.title} author={item.author} cover={isEmptyString(item.cover) ? placeholderImage : item.cover} />
+            <SongItem id={item.id} title={item.title} author={item.author} cover={item.cover} />
         )
     }, []);
     

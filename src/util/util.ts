@@ -21,3 +21,7 @@ export const isEmptyArray = (array: any[]): boolean => {
 export const isEmptyString = (item: string): boolean => {
     return item.length === 0;
 }
+
+export const capitalizeFirstLetter = (item: string): string => {
+    return item.charAt(0).toUpperCase() + item.slice(1);
+}

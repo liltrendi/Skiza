@@ -1,24 +1,11 @@
 import React from 'react'
-import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image, ImageSourcePropType } from 'react-native';
+import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { ONBOARDING_IMAGE } from '../../../assets/images';
+import { deduceCoverArtToUse } from '../../../util/songs';
 import {I_GenreCategoriesProps, I_GenreCategoriesStyles} from "./interfaces"
 
-const categories = (() => {
-    const placeholderImage: ImageSourcePropType = ONBOARDING_IMAGE;
-    return (new Array(5).fill(null)).map((_, index) => {
-        return (
-            {
-                id: `${index+1}`,
-                genre: `Genre ${index+1}`,
-                cover: placeholderImage
-            }
-        )
-    })
-})()
+const GenreCategories: React.FC<I_GenreCategoriesProps> = ({uniqueArtists}): JSX.Element => {
 
-const GenreCategories: React.FC<I_GenreCategoriesProps> = (): JSX.Element => {
-
-    const placeholderImage: ImageSourcePropType = ONBOARDING_IMAGE;
     const styles: I_GenreCategoriesStyles = getStyles();
 
     return (
@@ -29,22 +16,22 @@ const GenreCategories: React.FC<I_GenreCategoriesProps> = (): JSX.Element => {
         >
             <View style={styles.innerContainer}>
                 <View style={styles.exploreHeaders}>
-                    <Text style={styles.headerLeftTxt}>Browse Categories</Text>
+                    <Text style={styles.headerLeftTxt}>Browse Artists</Text>
                     <TouchableOpacity style={styles.headerRightView}>
                         <Text style={styles.headerRightText}>View all {` >`}</Text>
                     </TouchableOpacity>
             </View>
             <View style={styles.outerCategoryContainer}>
                 <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-                    {categories.map((item, index) => {
+                    {uniqueArtists.slice(0,5).map((item, index: number) => {
                         return (
-                            <TouchableOpacity key={index} activeOpacity={0.7} style={{...styles.card, marginLeft: index === 0 ? 16:0}}>
+                            <TouchableOpacity key={item.id} activeOpacity={0.7} style={{...styles.card, marginLeft: index === 0 ? 16:0}}>
                                 <View style={styles.imageContainer}>
-                                    <Image source={placeholderImage} style={styles.image} />
+                                    <Image source={deduceCoverArtToUse(item.randomCover, ONBOARDING_IMAGE)} style={styles.image} />
                                 </View>
                                 <View style={styles.cardTitleView}>
-                                    <Text style={styles.cardTitleText}>
-                                        {item.genre}
+                                    <Text style={styles.cardTitleText} numberOfLines={1}>
+                                        {item.name}
                                     </Text>
                                 </View>
                             </TouchableOpacity>

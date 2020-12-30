@@ -8,6 +8,8 @@ import { I_SongItemProps, I_SongItemStyles } from "./interfaces"
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { setCurrentSong } from '../../../actions/music';
 import { I_SongSchema } from '../../../controllers/music/interfaces';
+import { MUSICAL_NOTE_IMAGE } from '../../../assets/images';
+import { deduceCoverArtToUse } from '../../../util/songs';
 
 interface I_AdditionalProps extends I_SongItemProps {
     setCurrentSong: (song: I_SongSchema | undefined) => Promise<void>;
@@ -36,7 +38,7 @@ const SongItem: React.FC<T_Props> = ({ id, title, author, cover, setCurrentSong 
 
     return (
         <TouchableOpacity activeOpacity={0.9} onPress={(): void => playSong(id)} style={styles.container}>
-            <Image source={cover} style={styles.cover} />
+            <Image source={deduceCoverArtToUse(cover, MUSICAL_NOTE_IMAGE)} style={styles.cover} />
             <View style={styles.textContainer}>
                 <Text style={styles.title} numberOfLines={1}>{title}</Text>
                 <View style={styles.divider}></View>
