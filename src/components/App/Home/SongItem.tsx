@@ -1,40 +1,70 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
-import { ISongSchema, ISongItemStyles } from "./interfaces"
+import { RootStateOrAny } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { AnyAction } from 'redux';
+import { ISongItemProps, ISongItemStyles } from "./interfaces"
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { setCurrentSong } from '../../../actions/music';
+import { ISongSchema } from '../../../controllers/music/interfaces';
 
-const SongItem: React.FC<ISongSchema> = ({ id, title, author, cover }): JSX.Element => {
+interface AdditionalProps extends ISongItemProps {
+    setCurrentSong: (song: ISongSchema | undefined) => Promise<void>;
+}
+
+type Props = ISongItemProps & AdditionalProps;
+
+const SongItem: React.FC<Props> = ({ id, title, author, cover, setCurrentSong }): JSX.Element => {
+
+    const allSongs: ISongSchema[] = useSelector((state: RootStateOrAny) => state.songs);
+    const currentSong: ISongSchema = useSelector((state: RootStateOrAny) => state.currentSong);
 
     const toggleOptions = (songId: string): void => {
         console.log("Options", songId)
     }
 
     const playSong = (songId: string): void => {
-        console.log("Play", songId)
+        const song: ISongSchema | undefined = allSongs.find((item: ISongSchema) => item.id === songId);
+        console.log("Playing", song);
+        setCurrentSong(song);
     }
 
-    let isActive = false;
+    const isActive: boolean = currentSong ? currentSong.id === id : false;
 
     const styles: ISongItemStyles = getStyles(isActive)
 
     return (
-        <TouchableOpacity activeOpacity={0.9} onPress={() => playSong(id)} style={styles.container}>
+        <TouchableOpacity activeOpacity={0.9} onPress={(): void => playSong(id)} style={styles.container}>
             <Image source={cover} style={styles.cover} />
             <View style={styles.textContainer}>
                 <Text style={styles.title} numberOfLines={1}>{title}</Text>
                 <View style={styles.divider}></View>
                 <Text style={styles.author} numberOfLines={1}>{author}</Text>
             </View>
-            <TouchableOpacity activeOpacity={0.85} onPress={() => toggleOptions(id)} style={styles.optionsIcon}>
+            <TouchableOpacity activeOpacity={0.85} onPress={(): void => toggleOptions(id)} style={styles.optionsIcon}>
                 <Icon name={"dots-vertical"} size={25} color={"#333"} />
             </TouchableOpacity>
         </TouchableOpacity>
     )
 }
 
-export default SongItem;
+const mapStateToProps = () => {
+    return {}
+}
 
-const getStyles = (isActive: boolean): ISongItemStyles => {
+const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
+    return {
+        setCurrentSong: (song: ISongSchema | undefined) => dispatch(setCurrentSong(song))
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(SongItem)
+
+const getStyles = (isActive: boolean | undefined): ISongItemStyles => {
     return StyleSheet.create<ISongItemStyles>({
         container: {
             justifyContent: "space-evenly",

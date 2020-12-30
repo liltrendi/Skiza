@@ -2,7 +2,7 @@ export interface SongSchemaExtender {
     [key: string]: string;
 }
 
-export interface ISongsSchema extends SongSchemaExtender {
+export interface ISongSchema extends SongSchemaExtender {
     fileName: string;
     path: string;
     title: string;

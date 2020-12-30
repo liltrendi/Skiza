@@ -1,4 +1,4 @@
-import {ISongsSchema} from "../controllers/music/interfaces"
+import {ISongSchema} from "../controllers/music/interfaces"
 import {isNullUndefined} from "./util"
 
 const uuid = require('react-native-uuid');
@@ -8,14 +8,14 @@ export function getFolder(path: string): string {
 	return dirArr[dirArr.length - 2];
 }
 
-export async function restructureFetchedSongs(fetchedSongs: Promise<Array<ISongsSchema>>): Promise<Array<ISongsSchema>>{
+export async function restructureFetchedSongs(fetchedSongs: Promise<Array<ISongSchema>>): Promise<Array<ISongSchema>>{
     if(isNullUndefined(fetchedSongs)){
         return [];
     }
 
-    let songs: ISongsSchema[] = await fetchedSongs;
+    let songs: ISongSchema[] = await fetchedSongs;
 
-    return songs.map((song: ISongsSchema) => {
+    return songs.map((song: ISongSchema) => {
         return {
             ...song,
             id: uuid.v4(),

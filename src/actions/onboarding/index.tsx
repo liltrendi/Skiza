@@ -1,7 +1,7 @@
 import { AnyAction } from "redux"
 import { ThunkAction, ThunkDispatch } from "redux-thunk"
 import { defaultSongOptions, fetchSongsFromLocalStorage } from "../../controllers/music/getSongs"
-import { ISongsSchema } from "../../controllers/music/interfaces"
+import { ISongSchema } from "../../controllers/music/interfaces"
 import { requestReadStoragePermission } from "../../controllers/permissions/storage"
 import { FETCHED_SONGS } from '../../actions/music';
 
@@ -18,7 +18,7 @@ export const ONBOARDING_COMPLETE: string = "ONBOARDING_COMPLETE";
 export const completeOnboarding = (): ThunkAction<Promise<void>, {}, {}, AnyAction> => {
     return async (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {
         let result: string = await requestReadStoragePermission();
-        let songs: ISongsSchema[] = [];
+        let songs: ISongSchema[] = [];
         switch (result) {
             case "granted":
                 songs = await fetchSongsFromLocalStorage(defaultSongOptions);
@@ -41,7 +41,7 @@ export const completeOnboarding = (): ThunkAction<Promise<void>, {}, {}, AnyActi
 export const requestReadExternalStoragePermissionAgain = (): ThunkAction<Promise<void>, {}, {}, AnyAction> => {
     return async (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {
         let result = await requestReadStoragePermission();
-        let songs: ISongsSchema[] = [];
+        let songs: ISongSchema[] = [];
         switch (result) {
             case "granted":
                 songs = await fetchSongsFromLocalStorage(defaultSongOptions);

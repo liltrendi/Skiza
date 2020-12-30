@@ -5,6 +5,7 @@ import { isEmptyArray, isEmptyString } from '../../../util/util'
 import { SearchResultsProps, SearchResultsStyles } from './interfaces'
 import {RenderItemProps} from "./../Home/interfaces"
 import SongItem from './../Home/SongItem';
+import { ISongSchema } from '../../../controllers/music/interfaces';
  
 const SearchResults: React.FC<SearchResultsProps> = ({searchTerm, matchedSongs}):JSX.Element => {
 
@@ -17,7 +18,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({searchTerm, matchedSongs})
         )
     }, []);
     
-    const keyExtractor = useCallback((item) => item.id, []);
+    const keyExtractor = useCallback((item: ISongSchema) => item.id, []);
 
     if(isEmptyArray(matchedSongs)){
         return (

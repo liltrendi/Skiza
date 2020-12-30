@@ -1,6 +1,6 @@
 import React from 'react'
 import { ViewStyle, TextStyle } from 'react-native'
-import { ISongsSchema } from '../../../controllers/music/interfaces'
+import { ISongSchema } from '../../../controllers/music/interfaces'
 
 // Search
 
@@ -37,7 +37,7 @@ export interface NotStartedStyles {
 
 export interface SearchResultsProps {
     searchTerm: string;
-    matchedSongs: ISongsSchema[];
+    matchedSongs: ISongSchema[];
 }
 
 export interface SearchResultsStyles {

@@ -1,5 +1,6 @@
 import React from 'react'
 import {ViewStyle, TextStyle, ImageStyle} from "react-native"
+import { ISongSchema } from '../../../controllers/music/interfaces'
 
 // Home
 
@@ -21,7 +22,7 @@ export interface ISongListProps {
   tabLabel?: string;
 }
 
-export interface ISongSchema {
+export interface ISongItemProps {
     id: string;
     title: string;
     author: string;
@@ -29,7 +30,7 @@ export interface ISongSchema {
 }
 
 export interface RenderItemProps {
-    item: ISongSchema;
+    item: ISongItemProps;
     index: number;
 }
 

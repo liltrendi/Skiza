@@ -1,15 +1,15 @@
-import { ISongsSchema } from "../../controllers/music/interfaces";
+import { ISongSchema } from "../../controllers/music/interfaces";
 
 interface ActionProps {
     type: string;
-    payload: ISongsSchema[];
+    payload: ISongSchema[];
 }
 
-type SongsReducer = (state: ISongsSchema[], action: ActionProps) => ISongsSchema[]
+type SongsReducer = (state: ISongSchema[], action: ActionProps) => ISongSchema[]
 
-const initialState: ISongsSchema[] = [];
+const initialState: ISongSchema[] = [];
 
-export const songsReducer: SongsReducer = (state: ISongsSchema[] = initialState, action: ActionProps): ISongsSchema[] => {
+export const songsReducer: SongsReducer = (state: ISongSchema[] = initialState, action: ActionProps): ISongSchema[] => {
     switch(action.type){
         case "FETCHED_SONGS":
             return action.payload
