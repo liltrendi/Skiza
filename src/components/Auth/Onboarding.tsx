@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { connect, RootStateOrAny, useSelector } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import { View, Text, StyleSheet, Image, StatusBar, TouchableOpacity } from 'react-native';
@@ -11,6 +11,9 @@ import { I_OnboardingProps, I_SlideProps, I_OnboardingStyles} from "./interfaces
 import { T_Slide } from './types';
 
 const Onboarding: React.FC<I_OnboardingProps> = ({ showApp }): JSX.Element => {
+
+  const globalState: RootStateOrAny = useSelector((state: RootStateOrAny) => state);
+  const styles: I_OnboardingStyles = getStyles(globalState)
 
   const renderSlide = ({ item }: I_SlideProps): JSX.Element => {
     return (
@@ -53,51 +56,53 @@ const Onboarding: React.FC<I_OnboardingProps> = ({ showApp }): JSX.Element => {
   );
 };
 
-const styles = StyleSheet.create<I_OnboardingStyles>({
-  container: {
-    flex: 1
-  },
-  slide: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingBottom: 96,
-  },
-  image: {
-    width: 320,
-    height: 320,
-    marginTop: 35,
-    marginBottom: 20
-  },
-  title: {
-    fontSize: 35,
-    color: '#1a1a1a',
-    textAlign: 'center',
-    fontFamily: "Shojumaru-Regular"
-  },
-  description: {
-    fontSize: 22,
-    color: '#1a1a1a',
-    textAlign: 'center',
-    fontFamily: "Shojumaru-Regular"
-  },
-  doneButtonView: {
-    alignItems: "center",
-    backgroundColor: "#f05454",
-    padding: 17,
-    borderTopLeftRadius: 5,
-    borderTopRightRadius: 5,
-    borderBottomLeftRadius: 5,
-    borderBottomRightRadius: 5
-  },
-  doneButtonText: {
-    color: "#fff",
-    letterSpacing: 1.2,
-    fontFamily: "CircularStd-Book",
-    fontWeight: "bold",
-    fontSize: 17
-  }
-})
+const getStyles = (state: RootStateOrAny): I_OnboardingStyles => {
+  return StyleSheet.create<I_OnboardingStyles>({
+    container: {
+      flex: 1
+    },
+    slide: {
+      flex: 1,
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingBottom: 96,
+    },
+    image: {
+      width: 320,
+      height: 320,
+      marginTop: 35,
+      marginBottom: 20
+    },
+    title: {
+      fontSize: 35,
+      color: '#1a1a1a',
+      textAlign: 'center',
+      fontFamily: "Shojumaru-Regular"
+    },
+    description: {
+      fontSize: 22,
+      color: '#1a1a1a',
+      textAlign: 'center',
+      fontFamily: "Shojumaru-Regular"
+    },
+    doneButtonView: {
+      alignItems: "center",
+      backgroundColor: "#f05454",
+      padding: 17,
+      borderTopLeftRadius: 5,
+      borderTopRightRadius: 5,
+      borderBottomLeftRadius: 5,
+      borderBottomRightRadius: 5
+    },
+    doneButtonText: {
+      color: "#fff",
+      letterSpacing: 1.2,
+      fontFamily: "CircularStd-Book",
+      fontWeight: "bold",
+      fontSize: 17
+    }
+  })
+}
 
 const mapStateToProps = () => {
   return {}

@@ -8,9 +8,14 @@ import { I_SongSchema, I_UniqueArtist } from '../../../controllers/music/interfa
 import { RootStateOrAny } from 'react-redux';
 import { getUniqueArtists } from '../../../util/songs';
 
+interface I_GlobalStateProps {
+    songs: I_SongSchema[];
+}
+
 const SongList: React.FC<I_SongListProps> = (): JSX.Element => {
 
-    const allSongs: I_SongSchema[] = useSelector((state: RootStateOrAny) => state.songs);
+    const globalState: RootStateOrAny = useSelector((state: RootStateOrAny) => state);
+    const {songs: allSongs}: I_GlobalStateProps = globalState;
     const uniqueArtists: I_UniqueArtist[] = getUniqueArtists(allSongs);
 
     const ArtistsTopSection: React.FC<{index: number}> = ({index}): JSX.Element => {
@@ -34,7 +39,7 @@ const SongList: React.FC<I_SongListProps> = (): JSX.Element => {
 
     const shouldMarginate: boolean = uniqueArtists.length < 3;
 
-    const styles: I_SongListStyles = getStyles(shouldMarginate);
+    const styles: I_SongListStyles = getStyles(globalState, shouldMarginate);
 
     return (
         <FlatList
@@ -48,7 +53,7 @@ const SongList: React.FC<I_SongListProps> = (): JSX.Element => {
 
 export default SongList;
 
-const getStyles = (shouldMarginate: boolean): I_SongListStyles => {
+const getStyles = (state: RootStateOrAny, shouldMarginate: boolean): I_SongListStyles => {
     return StyleSheet.create<I_SongListStyles>({
         flatList: {
             marginTop: shouldMarginate ? 15 : 0

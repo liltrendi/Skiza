@@ -17,10 +17,15 @@ interface I_AdditionalProps extends I_SongItemProps {
 
 type T_Props = I_SongItemProps & I_AdditionalProps;
 
+interface I_GlobalStateProps {
+    songs: I_SongSchema[]; 
+    currentSong: null | I_SongSchema;
+}
+
 const SongItem: React.FC<T_Props> = ({ id, title, author, cover, setCurrentSong }): JSX.Element => {
 
-    const allSongs: I_SongSchema[] = useSelector((state: RootStateOrAny) => state.songs);
-    const currentSong: null | I_SongSchema = useSelector((state: RootStateOrAny) => state.currentSong);
+    const globalState: RootStateOrAny = useSelector((state: RootStateOrAny) => state);
+    const {songs: allSongs, currentSong}: I_GlobalStateProps = globalState;
 
     const toggleOptions = (songId: string): void => {
         console.log("Options", songId)
@@ -34,7 +39,7 @@ const SongItem: React.FC<T_Props> = ({ id, title, author, cover, setCurrentSong 
 
     const isActive: boolean = currentSong ? currentSong.id === id : false;
 
-    const styles: I_SongItemStyles = getStyles(isActive)
+    const styles: I_SongItemStyles = getStyles(globalState, isActive)
 
     return (
         <TouchableOpacity activeOpacity={0.9} onPress={(): void => playSong(id)} style={styles.container}>
@@ -66,7 +71,7 @@ export default connect(
     mapDispatchToProps
 )(SongItem)
 
-const getStyles = (isActive: boolean | undefined): I_SongItemStyles => {
+const getStyles = (state: RootStateOrAny, isActive: boolean | undefined): I_SongItemStyles => {
     return StyleSheet.create<I_SongItemStyles>({
         container: {
             justifyContent: "space-evenly",

@@ -1,12 +1,13 @@
 import React from 'react'
+import { RootStateOrAny, useSelector } from 'react-redux';
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image } from 'react-native';
 import { ONBOARDING_IMAGE } from '../../../assets/images';
 import { deduceCoverArtToUse } from '../../../util/songs';
 import {I_GenreCategoriesProps, I_GenreCategoriesStyles} from "./interfaces"
 
 const GenreCategories: React.FC<I_GenreCategoriesProps> = ({uniqueArtists}): JSX.Element => {
-
-    const styles: I_GenreCategoriesStyles = getStyles();
+    const globalState: RootStateOrAny = useSelector((state: RootStateOrAny) => state);
+    const styles: I_GenreCategoriesStyles = getStyles(globalState);
 
     return (
         <ScrollView
@@ -46,7 +47,7 @@ const GenreCategories: React.FC<I_GenreCategoriesProps> = ({uniqueArtists}): JSX
 
 export default GenreCategories;
 
-const getStyles = (): I_GenreCategoriesStyles => {
+const getStyles = (state: RootStateOrAny): I_GenreCategoriesStyles => {
     return (
         StyleSheet.create<I_GenreCategoriesStyles>({
             container: {

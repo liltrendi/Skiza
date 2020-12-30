@@ -8,11 +8,15 @@ import SongItem from './../Home/SongItem';
 import { I_SongSchema } from '../../../controllers/music/interfaces';
 import { HOME_NOT_FOUND_ANIMATION } from '../../../assets/animations';
 import { RootStateOrAny, useSelector } from 'react-redux';
+
+interface I_GlobalStateProps {
+    currentSong: null | I_SongSchema;
+}
  
 const SearchResults: React.FC<I_SearchResultsProps> = ({searchTerm, matchedSongs}):JSX.Element => {
  
     const noSongsAnimation = HOME_NOT_FOUND_ANIMATION;
-    const currentSong: null | I_SongSchema = useSelector((state: RootStateOrAny) => state.currentSong);
+    const globalState: RootStateOrAny = useSelector((state: RootStateOrAny) => state);
 
     const flatListRenderer = useCallback(({item}: I_RenderItemProps) => {
         return (
@@ -22,7 +26,7 @@ const SearchResults: React.FC<I_SearchResultsProps> = ({searchTerm, matchedSongs
     
     const keyExtractor = useCallback((item: I_SongSchema) => item.id, []);
 
-    const styles = getStyles(currentSong);
+    const styles = getStyles(globalState);
 
     if(isEmptyArray(matchedSongs)){
         return (
@@ -51,7 +55,8 @@ const SearchResults: React.FC<I_SearchResultsProps> = ({searchTerm, matchedSongs
 
 export default SearchResults
 
-const getStyles = (showingPlayerFooter: null | I_SongSchema): I_SearchResultsStyles => {
+const getStyles = (state: RootStateOrAny): I_SearchResultsStyles => {
+    const {currentSong: showingPlayerFooter}: I_GlobalStateProps = state;
     return StyleSheet.create<I_SearchResultsStyles>({
         container: {
             justifyContent: "center",
