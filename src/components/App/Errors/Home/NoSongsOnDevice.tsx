@@ -9,10 +9,11 @@ import { openSettings } from 'react-native-permissions';
 import { I_NoSongsOnDeviceStyles, I_NoSongsOnDeviceProps } from "./interfaces"
 import { I_ReadExternalStoragePermissionStatusConfig } from "../../Home/interfaces"
 import { fetchSongs } from '../../../../actions/music';
+import { HOME_NOT_FOUND_ANIMATION } from '../../../../assets/animations';
 
 const NoSongsOnDevice: React.FC<I_NoSongsOnDeviceProps> = ({fetchSongs}): JSX.Element => {
 
-    const noSongsAnimation = require('./../../../../assets/animations/home/not-found.json');
+    const noSongsAnimation = HOME_NOT_FOUND_ANIMATION;
 
     const globalState: RootStateOrAny = useSelector((state: RootStateOrAny) => state);
     const readExternalStoragePermission: string = globalState.readExternalStoragePermission;

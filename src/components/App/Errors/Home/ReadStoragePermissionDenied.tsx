@@ -7,9 +7,10 @@ import { StyleSheet, View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import {requestReadExternalStoragePermissionAgain} from "../../../../actions/onboarding"
 import { I_ReadExternalStoragePermissionDeniedProps, I_ReadExternalStoragePermissionDeniedStyles } from './interfaces'
+import { HOME_FOLDER_ERROR_ANIMATION } from '../../../../assets/animations';
 
 const ReadExternalStoragePermissionDenied: React.FC<I_ReadExternalStoragePermissionDeniedProps> = ({requestPermission}): JSX.Element => {
-    const folderAnimation = require('./../../../../assets/animations/home/folder-error.json');
+    const folderAnimation = HOME_FOLDER_ERROR_ANIMATION;
     return (
         <View style={styles.container}>
             <LottieView

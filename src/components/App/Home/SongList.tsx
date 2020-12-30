@@ -7,13 +7,14 @@ import GenreCategories from './GenreCategories';
 import { I_SongSchema } from '../../../controllers/music/interfaces';
 import { RootStateOrAny } from 'react-redux';
 import { isEmptyString } from '../../../util/util';
+import { MUSICAL_NOTE_IMAGE } from '../../../assets/images';
 
 const SongList: React.FC<I_SongListProps> = (): JSX.Element => {
 
     const allSongs: I_SongSchema[] = useSelector((state: RootStateOrAny) => state.songs);
 
     const flatListRenderer = useCallback(({item, index}: I_RenderItemProps) => {
-        const placeholderImage: ImageSourcePropType = require("./../../../assets/images/musical-note.jpg");
+        const placeholderImage: ImageSourcePropType = MUSICAL_NOTE_IMAGE;
         return (
             <React.Fragment>
                 {index === 0 && (

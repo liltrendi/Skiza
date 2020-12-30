@@ -2,9 +2,10 @@ import React from 'react'
 import { StyleSheet, View, Text } from 'react-native'
 import LottieView from 'lottie-react-native';
 import { I_NotStartedProps, I_NotStartedStyles } from './interfaces'
+import { SEARCH_SEARCH_GLASS_ANIMATION } from '../../../assets/animations';
 
 const NotStarted: React.FC<I_NotStartedProps> = (): JSX.Element => {
-    const searchAnimation = require("./../../../assets/animations/search/search-glass.json")
+    const searchAnimation = SEARCH_SEARCH_GLASS_ANIMATION;
     return (
         <View style={styles.outerAnimationContainer}>
                 <View style={styles.innerAnimationContainer}>

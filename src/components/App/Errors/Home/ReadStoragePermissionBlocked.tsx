@@ -3,9 +3,10 @@ import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import LottieView from 'lottie-react-native';
 import { openSettings } from 'react-native-permissions';
 import { I_ReadStoragePermissionBlockedProps, I_ReadStoragePermissionBlockedStyles } from './interfaces'
+import { HOME_FOLDER_ERROR_ANIMATION } from '../../../../assets/animations';
 
 const ReadStoragePermissionBlocked: React.FC<I_ReadStoragePermissionBlockedProps> = (): JSX.Element => {
-    const folderAnimation = require('./../../../../assets/animations/home/folder-error.json');
+    const folderAnimation = HOME_FOLDER_ERROR_ANIMATION;
 
     const invokeSettingsOpen = (): void => {
         openSettings()

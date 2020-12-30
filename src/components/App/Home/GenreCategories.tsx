@@ -1,9 +1,10 @@
 import React from 'react'
 import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image, ImageSourcePropType } from 'react-native';
+import { ONBOARDING_IMAGE } from '../../../assets/images';
 import {I_GenreCategoriesProps, I_GenreCategoriesStyles} from "./interfaces"
 
 const categories = (() => {
-    const placeholderImage: ImageSourcePropType = require("./../../../assets/images/onboarding.png");
+    const placeholderImage: ImageSourcePropType = ONBOARDING_IMAGE;
     return (new Array(5).fill(null)).map((_, index) => {
         return (
             {
@@ -17,7 +18,7 @@ const categories = (() => {
 
 const GenreCategories: React.FC<I_GenreCategoriesProps> = (): JSX.Element => {
 
-    const placeholderImage: ImageSourcePropType = require("./../../../assets/images/onboarding.png");
+    const placeholderImage: ImageSourcePropType = ONBOARDING_IMAGE;
     const styles: I_GenreCategoriesStyles = getStyles();
 
     return (
