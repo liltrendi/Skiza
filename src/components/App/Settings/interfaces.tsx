@@ -3,4 +3,4 @@ import {  } from 'react-native'
 
 // Settings
 
-export interface SettingsProps {}
+export interface I_SettingsProps {}

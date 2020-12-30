@@ -1,9 +1,9 @@
 import React from 'react'
-import {View, Text, StyleSheet, ViewStyle, TextStyle} from 'react-native';
+import {View, Text, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { SettingsHeaderProps, SettingsHeaderStyles } from './interfaces'
+import { I_SettingsHeaderProps, I_SettingsHeaderStyles } from './interfaces'
 
-export const SettingsHeaderBar: React.FC<SettingsHeaderProps> = ({name, size, color, badgeCount}): JSX.Element => {
+export const SettingsHeaderBar: React.FC<I_SettingsHeaderProps> = ({name, size, color, badgeCount}): JSX.Element => {
   if (!badgeCount || badgeCount < 1) return <Icon name={name} size={size} color={color} />;
   return (
     <View style={{width: 24, height: 24, margin: 5}}>
@@ -19,7 +19,7 @@ export const SettingsHeaderBar: React.FC<SettingsHeaderProps> = ({name, size, co
   );
 };
 
-const styles = StyleSheet.create<SettingsHeaderStyles>({
+const styles = StyleSheet.create<I_SettingsHeaderStyles>({
   containerDot: {
     justifyContent: 'center',
     alignItems: 'center',

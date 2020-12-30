@@ -1,8 +1,8 @@
-export interface SongSchemaExtender {
+export interface I_SongSchemaExtender {
     [key: string]: string;
 }
 
-export interface ISongSchema extends SongSchemaExtender {
+export interface I_SongSchema extends I_SongSchemaExtender {
     fileName: string;
     path: string;
     title: string;
@@ -13,7 +13,7 @@ export interface ISongSchema extends SongSchemaExtender {
     cover: string;
 }
 
-export interface ISongOptions {
+export interface I_SongOptions {
     title: boolean;
     artist: boolean;
     album: boolean;

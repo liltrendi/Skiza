@@ -2,17 +2,17 @@ import React, { useCallback } from 'react'
 import {useSelector} from "react-redux"
 import { FlatList, ImageSourcePropType } from 'react-native';
 import SongItem from './SongItem';
-import {ISongListProps, RenderItemProps} from "./interfaces"
+import {I_SongListProps, I_RenderItemProps} from "./interfaces"
 import GenreCategories from './GenreCategories';
-import { ISongSchema } from '../../../controllers/music/interfaces';
+import { I_SongSchema } from '../../../controllers/music/interfaces';
 import { RootStateOrAny } from 'react-redux';
 import { isEmptyString } from '../../../util/util';
 
-const SongList: React.FC<ISongListProps> = (): JSX.Element => {
+const SongList: React.FC<I_SongListProps> = (): JSX.Element => {
 
-    const allSongs: ISongSchema[] = useSelector((state: RootStateOrAny) => state.songs);
+    const allSongs: I_SongSchema[] = useSelector((state: RootStateOrAny) => state.songs);
 
-    const flatListRenderer = useCallback(({item, index}: RenderItemProps) => {
+    const flatListRenderer = useCallback(({item, index}: I_RenderItemProps) => {
         const placeholderImage: ImageSourcePropType = require("./../../../assets/images/musical-note.jpg");
         return (
             <React.Fragment>
@@ -24,7 +24,7 @@ const SongList: React.FC<ISongListProps> = (): JSX.Element => {
         )
     }, []);
     
-    const keyExtractor = useCallback((item: ISongSchema) => item.id, []);
+    const keyExtractor = useCallback((item: I_SongSchema) => item.id, []);
 
     return (
         <React.Fragment>

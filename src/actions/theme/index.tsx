@@ -1,8 +1,8 @@
-interface ActionProps {
+interface I_ActionProps {
     type: string;
     payload: string;
 }
 
-export const switchTheme= (type: string, payload: string): ActionProps => ({
+export const switchTheme= (type: string, payload: string): I_ActionProps => ({
     type, payload
 })

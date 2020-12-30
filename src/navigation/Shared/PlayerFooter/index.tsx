@@ -1,13 +1,13 @@
 import React from 'react'
 import { StyleSheet, Text, View, ViewStyle } from 'react-native'
 
-interface PlayerFooterProps {}
+interface I_PlayerFooterProps {}
 
-interface Styles {
+interface I_Styles {
     container: ViewStyle;
 }
 
-const PlayerFooter: React.FC<PlayerFooterProps> = (): JSX.Element => {
+const PlayerFooter: React.FC<I_PlayerFooterProps> = (): JSX.Element => {
     return (
         <View style={styles.container}>
             <Text>Player</Text>
@@ -15,7 +15,7 @@ const PlayerFooter: React.FC<PlayerFooterProps> = (): JSX.Element => {
     )
 }
 
-const styles = StyleSheet.create<Styles>({
+const styles = StyleSheet.create<I_Styles>({
     container: {
         flexDirection: "row",
         alignItems: "center",

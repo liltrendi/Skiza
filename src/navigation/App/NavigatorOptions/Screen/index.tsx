@@ -1,22 +1,22 @@
 import React from 'react'
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-interface RouteProps {
+interface I_RouteProps {
     route: { name: string };
 }
 
-interface TabBarIconProps {
+interface I_TabBarIconProps {
     focused: boolean;
     color: string;
 }
 
-interface ScreenOptionsProps {
-    tabBarIcon: ({ }: TabBarIconProps) => JSX.Element
+interface I_ScreenOptionsProps {
+    tabBarIcon: ({ }: I_TabBarIconProps) => JSX.Element
 }
 
-type ScreenOptions = ({ }: RouteProps) => ScreenOptionsProps
+type T_ScreenOptions = ({ }: I_RouteProps) => I_ScreenOptionsProps
 
-export const screenOptions: ScreenOptions = ({ route }): ScreenOptionsProps => ({
+export const screenOptions: T_ScreenOptions = ({ route }): I_ScreenOptionsProps => ({
     tabBarIcon: ({ focused, color }): JSX.Element => {
         let iconName: string = "";
         if (route.name === 'Home') {

@@ -1,9 +1,9 @@
 import React from 'react'
 import {View, Text, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { SearchHeaderProps, SearchHeaderStyles } from './interfaces'
+import { I_SearchHeaderProps, I_SearchHeaderStyles } from './interfaces'
 
-export const SearchHeaderBar: React.FC<SearchHeaderProps> = ({name, size, color, badgeCount}): JSX.Element => {
+export const SearchHeaderBar: React.FC<I_SearchHeaderProps> = ({name, size, color, badgeCount}): JSX.Element => {
   if (!badgeCount || badgeCount < 1) return <Icon name={name} size={size} color={color} />;
   return (
     <View style={{width: 24, height: 24, margin: 5}}>
@@ -19,7 +19,7 @@ export const SearchHeaderBar: React.FC<SearchHeaderProps> = ({name, size, color,
   );
 };
 
-const styles = StyleSheet.create<SearchHeaderStyles>({
+const styles = StyleSheet.create<I_SearchHeaderStyles>({
   containerDot: {
     justifyContent: 'center',
     alignItems: 'center',

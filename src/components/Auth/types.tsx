@@ -1,3 +1,3 @@
 import { onboardingSlides } from './slides';
 
-export type Slide = typeof onboardingSlides[0];
+export type T_Slide = typeof onboardingSlides[0];

@@ -2,9 +2,9 @@ import { ViewStyle, TextStyle } from 'react-native'
 
 // ReadStoragePermissionBlocked
 
-export interface ReadStoragePermissionBlockedProps {}
+export interface I_ReadStoragePermissionBlockedProps {}
 
-export interface ReadStoragePermissionBlockedStyles {
+export interface I_ReadStoragePermissionBlockedStyles {
     container: ViewStyle;
     LottieView: ViewStyle;
     screenText: TextStyle;
@@ -14,11 +14,11 @@ export interface ReadStoragePermissionBlockedStyles {
 
 // ReadStoragePermissionDenied
 
-export interface ReadExternalStoragePermissionDeniedProps { 
+export interface I_ReadExternalStoragePermissionDeniedProps { 
     requestPermission: () => Promise<void>
 }
 
-export interface ReadExternalStoragePermissionDeniedStyles {
+export interface I_ReadExternalStoragePermissionDeniedStyles {
     container: ViewStyle;
     LottieView: ViewStyle;
     screenText: TextStyle;
@@ -28,11 +28,11 @@ export interface ReadExternalStoragePermissionDeniedStyles {
 
 // NoSongsOnDevice
 
-export interface INoSongsOnDeviceProps {
+export interface I_NoSongsOnDeviceProps {
     fetchSongs: () => Promise<void>;
 }
 
-export interface INoSongsOnDeviceStyles {
+export interface I_NoSongsOnDeviceStyles {
     safeAreaContainer: ViewStyle;
     container: ViewStyle;
     LottieView: ViewStyle;

@@ -1,15 +1,15 @@
-import { ISongSchema } from "../../controllers/music/interfaces";
+import { I_SongSchema } from "../../controllers/music/interfaces";
 
-const initialState: null | ISongSchema = null;
+const initialState: null | I_SongSchema = null;
 
-interface ActionProps {
+interface I_ActionProps {
     type: string;
-    payload: ISongSchema;
+    payload: I_SongSchema;
 }
 
-type CurrentSongReducer = (state: null | ISongSchema, action: ActionProps) => ISongSchema | null;
+type T_CurrentSongReducer = (state: null | I_SongSchema, action: I_ActionProps) => I_SongSchema | null;
 
-export const currentSongReducer: CurrentSongReducer = (state: null | ISongSchema = initialState, action: ActionProps): ISongSchema | null => {
+export const currentSongReducer: T_CurrentSongReducer = (state: null | I_SongSchema = initialState, action: I_ActionProps): I_SongSchema | null => {
     switch(action.type){
         case "SET_CURRENT_SONG":
             return action.payload;

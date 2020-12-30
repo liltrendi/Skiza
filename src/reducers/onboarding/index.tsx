@@ -1,13 +1,13 @@
-interface ActionProps {
+interface I_ActionProps {
     type: string;
     payload: boolean;
 }
 
-type OnboardingReducer = (state: boolean, action: ActionProps) => boolean
+type T_OnboardingReducer = (state: boolean, action: I_ActionProps) => boolean
 
 const initialState: boolean = false;
 
-export const onboardingReducer: OnboardingReducer = (state: boolean = initialState, action: ActionProps): boolean => {
+export const onboardingReducer: T_OnboardingReducer = (state: boolean = initialState, action: I_ActionProps): boolean => {
     switch(action.type){
         case "ONBOARDING_COMPLETE":
             return action.payload

@@ -3,11 +3,11 @@ import {createStackNavigator} from "@react-navigation/stack"
 import {OnboardingScreen} from "./screens"
 import { authScreenOptions } from "./options"
 
-type AuthStackNavigatorParams = {
+type T_AuthStackNavigatorParams = {
     Onboarding: undefined;
 }
 
-const AuthStack = createStackNavigator<AuthStackNavigatorParams>()
+const AuthStack = createStackNavigator<T_AuthStackNavigatorParams>()
 
 export const AuthStackScreens = (): JSX.Element => {
     return (

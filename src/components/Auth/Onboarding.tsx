@@ -7,12 +7,12 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import AppIntroSlider from 'react-native-app-intro-slider';
 import { onboardingSlides } from './slides';
 import { completeOnboarding } from "./../../actions/onboarding"
-import { OnboardingProps, SlideProps, OnboardingStyles} from "./interfaces"
-import { Slide } from './types';
+import { I_OnboardingProps, I_SlideProps, I_OnboardingStyles} from "./interfaces"
+import { T_Slide } from './types';
 
-const Onboarding: React.FC<OnboardingProps> = ({ showApp }): JSX.Element => {
+const Onboarding: React.FC<I_OnboardingProps> = ({ showApp }): JSX.Element => {
 
-  const renderSlide = ({ item }: SlideProps): JSX.Element => {
+  const renderSlide = ({ item }: I_SlideProps): JSX.Element => {
     return (
       <View style={{ flex: 1, backgroundColor: item.background }}>
         <SafeAreaView style={styles.slide}>
@@ -36,7 +36,7 @@ const Onboarding: React.FC<OnboardingProps> = ({ showApp }): JSX.Element => {
     );
   };
 
-  const keyExtractor = (item: Slide): string => item.title;
+  const keyExtractor = (item: T_Slide): string => item.title;
 
   return (
     <View style={styles.container}>
@@ -53,7 +53,7 @@ const Onboarding: React.FC<OnboardingProps> = ({ showApp }): JSX.Element => {
   );
 };
 
-const styles = StyleSheet.create<OnboardingStyles>({
+const styles = StyleSheet.create<I_OnboardingStyles>({
   container: {
     flex: 1
   },

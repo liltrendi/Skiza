@@ -4,35 +4,35 @@ import { RootStateOrAny } from 'react-redux';
 import { connect, useSelector } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
-import { ISongItemProps, ISongItemStyles } from "./interfaces"
+import { I_SongItemProps, I_SongItemStyles } from "./interfaces"
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { setCurrentSong } from '../../../actions/music';
-import { ISongSchema } from '../../../controllers/music/interfaces';
+import { I_SongSchema } from '../../../controllers/music/interfaces';
 
-interface AdditionalProps extends ISongItemProps {
-    setCurrentSong: (song: ISongSchema | undefined) => Promise<void>;
+interface I_AdditionalProps extends I_SongItemProps {
+    setCurrentSong: (song: I_SongSchema | undefined) => Promise<void>;
 }
 
-type Props = ISongItemProps & AdditionalProps;
+type T_Props = I_SongItemProps & I_AdditionalProps;
 
-const SongItem: React.FC<Props> = ({ id, title, author, cover, setCurrentSong }): JSX.Element => {
+const SongItem: React.FC<T_Props> = ({ id, title, author, cover, setCurrentSong }): JSX.Element => {
 
-    const allSongs: ISongSchema[] = useSelector((state: RootStateOrAny) => state.songs);
-    const currentSong: ISongSchema = useSelector((state: RootStateOrAny) => state.currentSong);
+    const allSongs: I_SongSchema[] = useSelector((state: RootStateOrAny) => state.songs);
+    const currentSong: I_SongSchema = useSelector((state: RootStateOrAny) => state.currentSong);
 
     const toggleOptions = (songId: string): void => {
         console.log("Options", songId)
     }
 
     const playSong = (songId: string): void => {
-        const song: ISongSchema | undefined = allSongs.find((item: ISongSchema) => item.id === songId);
+        const song: I_SongSchema | undefined = allSongs.find((item: I_SongSchema) => item.id === songId);
         console.log("Playing", song);
         setCurrentSong(song);
     }
 
     const isActive: boolean = currentSong ? currentSong.id === id : false;
 
-    const styles: ISongItemStyles = getStyles(isActive)
+    const styles: I_SongItemStyles = getStyles(isActive)
 
     return (
         <TouchableOpacity activeOpacity={0.9} onPress={(): void => playSong(id)} style={styles.container}>
@@ -55,7 +55,7 @@ const mapStateToProps = () => {
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
     return {
-        setCurrentSong: (song: ISongSchema | undefined) => dispatch(setCurrentSong(song))
+        setCurrentSong: (song: I_SongSchema | undefined) => dispatch(setCurrentSong(song))
     }
 }
 
@@ -64,8 +64,8 @@ export default connect(
     mapDispatchToProps
 )(SongItem)
 
-const getStyles = (isActive: boolean | undefined): ISongItemStyles => {
-    return StyleSheet.create<ISongItemStyles>({
+const getStyles = (isActive: boolean | undefined): I_SongItemStyles => {
+    return StyleSheet.create<I_SongItemStyles>({
         container: {
             justifyContent: "space-evenly",
             borderBottomRightRadius: 5,

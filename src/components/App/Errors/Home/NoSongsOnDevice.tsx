@@ -6,24 +6,24 @@ import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import LottieView from 'lottie-react-native';
 import { openSettings } from 'react-native-permissions';
-import { INoSongsOnDeviceStyles, INoSongsOnDeviceProps } from "./interfaces"
-import { ReadExternalStoragePermissionStatusConfig } from "../../Home/interfaces"
+import { I_NoSongsOnDeviceStyles, I_NoSongsOnDeviceProps } from "./interfaces"
+import { I_ReadExternalStoragePermissionStatusConfig } from "../../Home/interfaces"
 import { fetchSongs } from '../../../../actions/music';
 
-const NoSongsOnDevice: React.FC<INoSongsOnDeviceProps> = ({fetchSongs}): JSX.Element => {
+const NoSongsOnDevice: React.FC<I_NoSongsOnDeviceProps> = ({fetchSongs}): JSX.Element => {
 
     const noSongsAnimation = require('./../../../../assets/animations/home/not-found.json');
 
     const globalState: RootStateOrAny = useSelector((state: RootStateOrAny) => state);
     const readExternalStoragePermission: string = globalState.readExternalStoragePermission;
 
-    const readExternalStoragePermissionStatus: ReadExternalStoragePermissionStatusConfig = {
+    const readExternalStoragePermissionStatus: I_ReadExternalStoragePermissionStatusConfig = {
         granted: readExternalStoragePermission === "granted",
         denied: readExternalStoragePermission === "denied",
         blocked: readExternalStoragePermission === "blocked"
     }
 
-    const styles: INoSongsOnDeviceStyles = getStyles(globalState, readExternalStoragePermissionStatus);
+    const styles: I_NoSongsOnDeviceStyles = getStyles(globalState, readExternalStoragePermissionStatus);
 
     return (
         <SafeAreaView style={styles.safeAreaContainer}>
@@ -68,9 +68,9 @@ export default connect(
     mapDispatchToProps
 )(NoSongsOnDevice)
 
-const getStyles = (state: RootStateOrAny, storagePermissionStatus: ReadExternalStoragePermissionStatusConfig): INoSongsOnDeviceStyles => {
+const getStyles = (state: RootStateOrAny, storagePermissionStatus: I_ReadExternalStoragePermissionStatusConfig): I_NoSongsOnDeviceStyles => {
     const showPlayerFooter: boolean = state.showPlayerFooter;
-    return StyleSheet.create<INoSongsOnDeviceStyles>({
+    return StyleSheet.create<I_NoSongsOnDeviceStyles>({
         safeAreaContainer: {
             justifyContent: storagePermissionStatus.granted ? undefined : "center",
             alignItems: storagePermissionStatus.granted ? undefined : "center",

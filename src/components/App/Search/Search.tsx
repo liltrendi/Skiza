@@ -2,24 +2,24 @@ import React, {useState} from 'react'
 import { StyleSheet } from 'react-native'
 import {useSelector} from "react-redux"
 import { RootStateOrAny } from 'react-redux';
-import { ISongSchema } from '../../../controllers/music/interfaces';
+import { I_SongSchema } from '../../../controllers/music/interfaces';
 import Bar from './Bar'
 import SearchNotStarted from "./NotStarted"
 import SearchResults from "./Results"
-import { SearchProps, SearchStyles } from './interfaces'
+import { I_SearchProps, I_SearchStyles } from './interfaces'
 import { filterMatchingSongsFromSearch } from '../../../controllers/music/search';
 
-const Search: React.FC<SearchProps> = (): JSX.Element => {
+const Search: React.FC<I_SearchProps> = (): JSX.Element => {
     const [searchTerm, setSearchTerm] = useState<string>("");
 
-    const allSongs: ISongSchema[] = useSelector((state: RootStateOrAny) => state.songs);
+    const allSongs: I_SongSchema[] = useSelector((state: RootStateOrAny) => state.songs);
 
     const RenderSearch: React.FC<{}> = ():JSX.Element => {
         if(searchTerm.length < 1){
             return <SearchNotStarted />
         }
 
-        const matchedSongs: ISongSchema[] = filterMatchingSongsFromSearch(allSongs, searchTerm);
+        const matchedSongs: I_SongSchema[] = filterMatchingSongsFromSearch(allSongs, searchTerm);
         
         return <SearchResults searchTerm={searchTerm} matchedSongs={matchedSongs} />
     }
@@ -34,6 +34,6 @@ const Search: React.FC<SearchProps> = (): JSX.Element => {
 
 export default Search
 
-const styles = StyleSheet.create<SearchStyles>({
+const styles = StyleSheet.create<I_SearchStyles>({
     
 })

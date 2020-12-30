@@ -1,16 +1,15 @@
 import React from 'react'
 import {ViewStyle, TextStyle, ImageStyle} from "react-native"
-import { ISongSchema } from '../../../controllers/music/interfaces'
 
 // Home
 
-export interface HomeProps {};
+export interface I_HomeProps {};
 
-export interface HomeStyles {
+export interface I_HomeStyles {
   container: ViewStyle
 }
 
-export interface ReadExternalStoragePermissionStatusConfig {
+export interface I_ReadExternalStoragePermissionStatusConfig {
   granted: boolean;
   denied: boolean;
   blocked: boolean;
@@ -18,25 +17,25 @@ export interface ReadExternalStoragePermissionStatusConfig {
 
 // SongList
 
-export interface ISongListProps {
+export interface I_SongListProps {
   tabLabel?: string;
 }
 
-export interface ISongItemProps {
+export interface I_SongItemProps {
     id: string;
     title: string;
     author: string;
     cover: any;
 }
 
-export interface RenderItemProps {
-    item: ISongItemProps;
+export interface I_RenderItemProps {
+    item: I_SongItemProps;
     index: number;
 }
 
 // SongItem
 
-export interface ISongItemStyles {
+export interface I_SongItemStyles {
     container: ViewStyle;
     coverContainer: ViewStyle;
     cover: ImageStyle;
@@ -49,9 +48,9 @@ export interface ISongItemStyles {
 
 // Genre Categories
 
-export interface IGenreCategoriesProps {}
+export interface I_GenreCategoriesProps {}
 
-export interface IGenreCategoriesStyles {
+export interface I_GenreCategoriesStyles {
   container: ViewStyle;
   innerContainer: ViewStyle;
   exploreHeaders: ViewStyle;

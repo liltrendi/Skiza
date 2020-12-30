@@ -1,9 +1,9 @@
 import React from 'react'
 import {View, Text, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {HomeHeaderProps, HomeHeaderStyles} from "./interfaces"
+import {I_HomeHeaderProps, I_HomeHeaderStyles} from "./interfaces"
 
-export const HomeHeaderBar: React.FC<HomeHeaderProps> = ({name, size, color, badgeCount}): JSX.Element => {
+export const HomeHeaderBar: React.FC<I_HomeHeaderProps> = ({name, size, color, badgeCount}): JSX.Element => {
   if (!badgeCount || badgeCount < 1) return <Icon name={name} size={size} color={color} />;
   return (
     <View>
@@ -19,7 +19,7 @@ export const HomeHeaderBar: React.FC<HomeHeaderProps> = ({name, size, color, bad
   );
 };
 
-const styles = StyleSheet.create<HomeHeaderStyles>({
+const styles = StyleSheet.create<I_HomeHeaderStyles>({
   containerDot: {
     justifyContent: 'center',
     alignItems: 'center',

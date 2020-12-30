@@ -1,13 +1,13 @@
 import { ViewStyle, TextStyle, ImageStyle, ImageSourcePropType } from 'react-native'
-import { Slide } from "./types"
+import { T_Slide } from "./types"
 
 // Onboarding
 
-export interface OnboardingProps {
+export interface I_OnboardingProps {
     showApp: () => Promise<void>
 }
 
-export interface OnboardingStyles {
+export interface I_OnboardingStyles {
     container: ViewStyle;
     title: TextStyle;
     description: TextStyle;
@@ -17,13 +17,13 @@ export interface OnboardingStyles {
     doneButtonText: TextStyle;
 }
 
-export interface SlideProps {
-    item: Slide;
+export interface I_SlideProps {
+    item: T_Slide;
 }
 
 // slides
 
-export interface SlideSchema {
+export interface I_SlideSchema {
     key: string,
     title: string,
     text: string,

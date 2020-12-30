@@ -1,13 +1,13 @@
 const initialState: boolean = true;
 
-interface ActionProps {
+interface I_ActionProps {
     type: string;
     payload: boolean;
 }
 
-type PlayerFooterReducer = (state: boolean, action: ActionProps) => boolean
+type T_PlayerFooterReducer = (state: boolean, action: I_ActionProps) => boolean
 
-export const playerFooterReducer: PlayerFooterReducer = (state: boolean = initialState, action: ActionProps): boolean => {
+export const playerFooterReducer: T_PlayerFooterReducer = (state: boolean = initialState, action: I_ActionProps): boolean => {
     switch(action.type){
         case "SHOW_PLAYER_FOOTER":
             return action.payload;

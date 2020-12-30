@@ -8,13 +8,13 @@ import { tabBarOptions } from "./NavigatorOptions/BottomTab"
 import PlayerFooter from "../Shared/PlayerFooter"
 import { RootStateOrAny, useSelector } from "react-redux"
 
-type AppStackNavigatorParams = {
+type T_AppStackNavigatorParams = {
     Home: undefined;
     Search: undefined;
     Settings: undefined;
 }
 
-const AppStack = createBottomTabNavigator<AppStackNavigatorParams>();
+const AppStack = createBottomTabNavigator<T_AppStackNavigatorParams>();
 
 export const AppStackScreens = (): JSX.Element => {
     const showPlayerFooter: boolean = useSelector((state: RootStateOrAny) => state.showPlayerFooter);

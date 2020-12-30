@@ -1,13 +1,13 @@
-import { ISongSchema } from "./interfaces";
+import { I_SongSchema } from "./interfaces";
 
-export function filterMatchingSongsFromSearch(songs: ISongSchema[], searchTerm: string): ISongSchema[]{
+export function filterMatchingSongsFromSearch(songs: I_SongSchema[], searchTerm: string): I_SongSchema[]{
     const songPropertiesToSearchWithin: string[] = ["album", "author", "fileName", "title"];
     const searchRegex: RegExp = new RegExp(searchTerm, 'i');
 
-    const filteredSongs: ISongSchema[] = songs.reduce((acc: ISongSchema[], song: ISongSchema) => {
+    const filteredSongs: I_SongSchema[] = songs.reduce((acc: I_SongSchema[], song: I_SongSchema) => {
         for(let property of songPropertiesToSearchWithin){
             let songProperty: string = song[property];
-            let songAlreadyMatched: ISongSchema | undefined = acc.find((item: ISongSchema) => item.id === song.id);
+            let songAlreadyMatched: I_SongSchema | undefined = acc.find((item: I_SongSchema) => item.id === song.id);
 
             if(!songAlreadyMatched && songProperty.match(searchRegex)){
                 acc.push(song);

@@ -3,15 +3,15 @@ import {createStackNavigator} from "@react-navigation/stack"
 import {SearchScreen} from "./screens"
 import {searchHeaderOptions} from "./options"
 
-type SearchStackNavigatorParams = {
+type T_SearchStackNavigatorParams = {
     Search: undefined;
 }
 
-const SearchStack = createStackNavigator<SearchStackNavigatorParams>()
+const SearchStack = createStackNavigator<T_SearchStackNavigatorParams>()
 
-interface SearchStackScreensProps {}
+interface I_SearchStackScreensProps {}
 
-export const SearchStackScreens: React.FC<SearchStackScreensProps> = (): JSX.Element => {
+export const SearchStackScreens: React.FC<I_SearchStackScreensProps> = (): JSX.Element => {
     return (
         <SearchStack.Navigator>
             <SearchStack.Screen name={"Search"} component={SearchScreen} options={searchHeaderOptions} />

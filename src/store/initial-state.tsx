@@ -1,3 +1,3 @@
-interface InitialState {}
+interface I_InitialState {}
 
-export const initialState: InitialState = {}
+export const initialState: I_InitialState = {}

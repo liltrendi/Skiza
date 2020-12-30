@@ -6,9 +6,9 @@ import LottieView from 'lottie-react-native';
 import { StyleSheet, View, Text } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import {requestReadExternalStoragePermissionAgain} from "../../../../actions/onboarding"
-import { ReadExternalStoragePermissionDeniedProps, ReadExternalStoragePermissionDeniedStyles } from './interfaces'
+import { I_ReadExternalStoragePermissionDeniedProps, I_ReadExternalStoragePermissionDeniedStyles } from './interfaces'
 
-const ReadExternalStoragePermissionDenied: React.FC<ReadExternalStoragePermissionDeniedProps> = ({requestPermission}): JSX.Element => {
+const ReadExternalStoragePermissionDenied: React.FC<I_ReadExternalStoragePermissionDeniedProps> = ({requestPermission}): JSX.Element => {
     const folderAnimation = require('./../../../../assets/animations/home/folder-error.json');
     return (
         <View style={styles.container}>
@@ -27,7 +27,7 @@ const ReadExternalStoragePermissionDenied: React.FC<ReadExternalStoragePermissio
     )
 }
 
-const styles = StyleSheet.create<ReadExternalStoragePermissionDeniedStyles>({
+const styles = StyleSheet.create<I_ReadExternalStoragePermissionDeniedStyles>({
     container: {
         justifyContent: "center",
         alignItems: "center",

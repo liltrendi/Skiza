@@ -7,25 +7,25 @@ import ReadStoragePermissionBlockedError from '../Errors/Home/ReadStoragePermiss
 import ReadStoragePermissionDeniedError from '../Errors/Home/ReadStoragePermissionDenied';
 import { checkReadStoragePermissionStatus } from '../../../controllers/permissions/storage';
 import { updateStoragePermissionStatus } from '../../../actions/onboarding';
-import {HomeProps, ReadExternalStoragePermissionStatusConfig, HomeStyles} from "./interfaces"
+import {I_HomeProps, I_ReadExternalStoragePermissionStatusConfig, I_HomeStyles} from "./interfaces"
 import { isEmptyArray } from '../../../util/util';
 import NoSongsOnDevice from '../Errors/Home/NoSongsOnDevice';
 
 const ScrollableTabView = require('react-native-scrollable-tab-view');
 
-const Home: React.FC<HomeProps> = (): JSX.Element => {
+const Home: React.FC<I_HomeProps> = (): JSX.Element => {
   const dispatch = useDispatch()
 
   const globalState: RootStateOrAny = useSelector((state: RootStateOrAny) => state);
   const readExternalStoragePermission: string = globalState.readExternalStoragePermission;
 
-  const readExternalStoragePermissionStatus: ReadExternalStoragePermissionStatusConfig = {
+  const readExternalStoragePermissionStatus: I_ReadExternalStoragePermissionStatusConfig = {
     granted: readExternalStoragePermission === "granted",
     denied: readExternalStoragePermission === "denied",
     blocked: readExternalStoragePermission === "blocked"
   }
 
-  const styles: HomeStyles = getStyles(globalState, readExternalStoragePermissionStatus);
+  const styles: I_HomeStyles = getStyles(globalState, readExternalStoragePermissionStatus);
 
   const RenderHomeView: React.FC<{}> = (): JSX.Element => {
     if (readExternalStoragePermissionStatus.denied) {
@@ -85,9 +85,9 @@ const Home: React.FC<HomeProps> = (): JSX.Element => {
   );
 };
 
-const getStyles = (state: RootStateOrAny, storagePermissionStatus: ReadExternalStoragePermissionStatusConfig): HomeStyles => {
+const getStyles = (state: RootStateOrAny, storagePermissionStatus: I_ReadExternalStoragePermissionStatusConfig): I_HomeStyles => {
   const showPlayerFooter: boolean = state.showPlayerFooter;
-  return StyleSheet.create<HomeStyles>({
+  return StyleSheet.create<I_HomeStyles>({
     container: {
       justifyContent: storagePermissionStatus.granted ? undefined : "center",
       alignItems: storagePermissionStatus.granted ? undefined : "center",

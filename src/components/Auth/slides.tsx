@@ -1,6 +1,6 @@
-import { SlideSchema } from './interfaces';
+import { I_SlideSchema } from './interfaces';
 
-export const onboardingSlides: SlideSchema[] = [
+export const onboardingSlides: I_SlideSchema[] = [
     {
         key: 'welcome',
         title: 'Skiza',

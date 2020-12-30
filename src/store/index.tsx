@@ -5,16 +5,16 @@ import thunk from "redux-thunk";
 import {rootReducer} from "./../reducers/root"
 import {initialState} from "./initial-state"
 
-interface PersistConfig {
+interface I_PersistConfig {
     key: string;
     storage: Storage;
 }
 
-const persistConfig: PersistConfig = {
+const persistConfig: I_PersistConfig = {
     key: 'skizaStore',
     storage: AsyncStorage
 }
 
-const persistedReducer: any = persistReducer(persistConfig, rootReducer);
+const persistedReducer = persistReducer(persistConfig, rootReducer);
 
 export const store: Store<unknown, Action<any>> = createStore(persistedReducer, initialState, applyMiddleware(thunk))

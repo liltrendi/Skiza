@@ -1,32 +1,32 @@
 import React from 'react'
 import { ViewStyle, TextStyle } from 'react-native'
-import { ISongSchema } from '../../../controllers/music/interfaces'
+import { I_SongSchema } from '../../../controllers/music/interfaces'
 
 // Search
 
-export interface SearchProps {}
+export interface I_SearchProps {}
 
-export interface SearchStyles {
+export interface I_SearchStyles {
     
 }
 
 // Bar
 
-export interface BarProps {
+export interface I_BarProps {
     setSearchTerm: React.Dispatch<React.SetStateAction<string>>;
     searchTerm: string;
 }
 
-export interface BarStyles {
+export interface I_BarStyles {
     container: ViewStyle;
     bar: ViewStyle;
 }
 
 // NotStarted
 
-export interface NotStartedProps {}
+export interface I_NotStartedProps {}
 
-export interface NotStartedStyles {
+export interface I_NotStartedStyles {
     outerAnimationContainer: ViewStyle;
     innerAnimationContainer: ViewStyle;
     LottieView: ViewStyle;
@@ -35,12 +35,12 @@ export interface NotStartedStyles {
 
 // Results
 
-export interface SearchResultsProps {
+export interface I_SearchResultsProps {
     searchTerm: string;
-    matchedSongs: ISongSchema[];
+    matchedSongs: I_SongSchema[];
 }
 
-export interface SearchResultsStyles {
+export interface I_SearchResultsStyles {
     container: ViewStyle;
     LottieView: ViewStyle;
     noResultsText: TextStyle;

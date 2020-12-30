@@ -3,9 +3,9 @@ import {NavigationContainer} from "@react-navigation/native"
 import {AppStackScreens} from "./App"
 import {AuthStackScreens} from "./Auth"
 
-type MainAppNavigation = (onboardingComplete: boolean) => JSX.Element
+type T_MainAppNavigation = (onboardingComplete: boolean) => JSX.Element
 
-export const mainAppNavigation: MainAppNavigation = (onboardingComplete: boolean): JSX.Element => {
+export const mainAppNavigation: T_MainAppNavigation = (onboardingComplete: boolean): JSX.Element => {
     const App: React.FC<{}> = (): JSX.Element => onboardingComplete ? AppStackScreens():AuthStackScreens();
     return (
         <NavigationContainer>

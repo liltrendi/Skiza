@@ -1,11 +1,11 @@
 import { AnyAction } from "redux"
 import { ThunkAction, ThunkDispatch } from "redux-thunk"
 import { defaultSongOptions, fetchSongsFromLocalStorage } from "../../controllers/music/getSongs"
-import { ISongSchema } from "../../controllers/music/interfaces"
+import { I_SongSchema } from "../../controllers/music/interfaces"
 import { requestReadStoragePermission } from "../../controllers/permissions/storage"
 import { FETCHED_SONGS } from '../../actions/music';
 
-interface UpdateStoragePermissionStatusActionProps {
+interface I_UpdateStoragePermissionStatusActionProps {
     type: string;
     payload: string;
 }
@@ -18,7 +18,7 @@ export const ONBOARDING_COMPLETE: string = "ONBOARDING_COMPLETE";
 export const completeOnboarding = (): ThunkAction<Promise<void>, {}, {}, AnyAction> => {
     return async (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {
         let result: string = await requestReadStoragePermission();
-        let songs: ISongSchema[] = [];
+        let songs: I_SongSchema[] = [];
         switch (result) {
             case "granted":
                 songs = await fetchSongsFromLocalStorage(defaultSongOptions);
@@ -41,7 +41,7 @@ export const completeOnboarding = (): ThunkAction<Promise<void>, {}, {}, AnyActi
 export const requestReadExternalStoragePermissionAgain = (): ThunkAction<Promise<void>, {}, {}, AnyAction> => {
     return async (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {
         let result = await requestReadStoragePermission();
-        let songs: ISongSchema[] = [];
+        let songs: I_SongSchema[] = [];
         switch (result) {
             case "granted":
                 songs = await fetchSongsFromLocalStorage(defaultSongOptions);
@@ -58,7 +58,7 @@ export const requestReadExternalStoragePermissionAgain = (): ThunkAction<Promise
     }
 }
 
-export const updateStoragePermissionStatus = (payload: string): UpdateStoragePermissionStatusActionProps => {
+export const updateStoragePermissionStatus = (payload: string): I_UpdateStoragePermissionStatusActionProps => {
     switch (payload) {
         case "granted":
             return { type: READ_EXTERNAL_STORAGE_PERMISSION_GRANTED, payload: payload }
