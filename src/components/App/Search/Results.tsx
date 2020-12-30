@@ -7,10 +7,12 @@ import {I_RenderItemProps} from "./../Home/interfaces"
 import SongItem from './../Home/SongItem';
 import { I_SongSchema } from '../../../controllers/music/interfaces';
 import { HOME_NOT_FOUND_ANIMATION } from '../../../assets/animations';
+import { RootStateOrAny, useSelector } from 'react-redux';
  
 const SearchResults: React.FC<I_SearchResultsProps> = ({searchTerm, matchedSongs}):JSX.Element => {
  
     const noSongsAnimation = HOME_NOT_FOUND_ANIMATION;
+    const currentSong: null | I_SongSchema = useSelector((state: RootStateOrAny) => state.currentSong);
 
     const flatListRenderer = useCallback(({item}: I_RenderItemProps) => {
         return (
@@ -19,6 +21,8 @@ const SearchResults: React.FC<I_SearchResultsProps> = ({searchTerm, matchedSongs
     }, []);
     
     const keyExtractor = useCallback((item: I_SongSchema) => item.id, []);
+
+    const styles = getStyles(currentSong);
 
     if(isEmptyArray(matchedSongs)){
         return (
@@ -47,28 +51,31 @@ const SearchResults: React.FC<I_SearchResultsProps> = ({searchTerm, matchedSongs
 
 export default SearchResults
 
-const styles = StyleSheet.create<I_SearchResultsStyles>({
-    container: {
-        justifyContent: "center",
-        alignItems: "center",
-        flex: 1
-    },
-    LottieView: {
-        height: 80,
-        width: 80,
-        marginBottom: 10
-    },
-    noResultsText: {
-        fontFamily: "CircularStd-Book",
-        fontSize: 15,
-        paddingLeft: 20,
-        paddingRight: 20,
-        textAlign: "center"
-    },
-    searchTerm: {
-        fontWeight: "bold"
-    },
-    songList: {
-        marginTop: 85
-    }
-})
+const getStyles = (showingPlayerFooter: null | I_SongSchema): I_SearchResultsStyles => {
+    return StyleSheet.create<I_SearchResultsStyles>({
+        container: {
+            justifyContent: "center",
+            alignItems: "center",
+            flex: 1
+        },
+        LottieView: {
+            height: 80,
+            width: 80,
+            marginBottom: 10
+        },
+        noResultsText: {
+            fontFamily: "CircularStd-Book",
+            fontSize: 15,
+            paddingLeft: 20,
+            paddingRight: 20,
+            textAlign: "center"
+        },
+        searchTerm: {
+            fontWeight: "bold"
+        },
+        songList: {
+            marginTop: 85,
+            marginBottom: showingPlayerFooter ? 60 : 0
+        }
+    })
+}

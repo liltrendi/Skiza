@@ -20,7 +20,7 @@ type T_Props = I_SongItemProps & I_AdditionalProps;
 const SongItem: React.FC<T_Props> = ({ id, title, author, cover, setCurrentSong }): JSX.Element => {
 
     const allSongs: I_SongSchema[] = useSelector((state: RootStateOrAny) => state.songs);
-    const currentSong: I_SongSchema = useSelector((state: RootStateOrAny) => state.currentSong);
+    const currentSong: null | I_SongSchema = useSelector((state: RootStateOrAny) => state.currentSong);
 
     const toggleOptions = (songId: string): void => {
         console.log("Options", songId)

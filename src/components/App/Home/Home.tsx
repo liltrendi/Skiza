@@ -10,6 +10,7 @@ import { updateStoragePermissionStatus } from '../../../actions/onboarding';
 import {I_HomeProps, I_ReadExternalStoragePermissionStatusConfig, I_HomeStyles} from "./interfaces"
 import { isEmptyArray } from '../../../util/util';
 import NoSongsOnDevice from '../Errors/Home/NoSongsOnDevice';
+import { I_SongSchema } from '../../../controllers/music/interfaces';
 
 const ScrollableTabView = require('react-native-scrollable-tab-view');
 
@@ -85,12 +86,12 @@ const Home: React.FC<I_HomeProps> = (): JSX.Element => {
 };
 
 const getStyles = (state: RootStateOrAny, storagePermissionStatus: I_ReadExternalStoragePermissionStatusConfig): I_HomeStyles => {
-  const showPlayerFooter: boolean = state.showPlayerFooter;
+  const showingPlayerFooter: null | I_SongSchema = state.currentSong;
   return StyleSheet.create<I_HomeStyles>({
     container: {
       justifyContent: storagePermissionStatus.granted ? undefined : "center",
       alignItems: storagePermissionStatus.granted ? undefined : "center",
-      marginBottom: showPlayerFooter ? 60 : 0,
+      marginBottom: showingPlayerFooter ? 60 : 0,
       marginTop: 60,
       flex: 1,
     }

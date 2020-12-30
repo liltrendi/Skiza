@@ -10,6 +10,7 @@ import { I_NoSongsOnDeviceStyles, I_NoSongsOnDeviceProps } from "./interfaces"
 import { I_ReadExternalStoragePermissionStatusConfig } from "../../Home/interfaces"
 import { fetchSongs } from '../../../../actions/music';
 import { HOME_NOT_FOUND_ANIMATION } from '../../../../assets/animations';
+import { I_SongSchema } from '../../../../controllers/music/interfaces';
 
 const NoSongsOnDevice: React.FC<I_NoSongsOnDeviceProps> = ({fetchSongs}): JSX.Element => {
 
@@ -70,12 +71,12 @@ export default connect(
 )(NoSongsOnDevice)
 
 const getStyles = (state: RootStateOrAny, storagePermissionStatus: I_ReadExternalStoragePermissionStatusConfig): I_NoSongsOnDeviceStyles => {
-    const showPlayerFooter: boolean = state.showPlayerFooter;
+    const currentSong: null | I_SongSchema = state.currentSong;
     return StyleSheet.create<I_NoSongsOnDeviceStyles>({
         safeAreaContainer: {
             justifyContent: storagePermissionStatus.granted ? undefined : "center",
             alignItems: storagePermissionStatus.granted ? undefined : "center",
-            marginBottom: showPlayerFooter ? 60 : 0,
+            marginBottom: currentSong ? 60 : 0,
             marginTop: 60,
             flex: 1,
         },

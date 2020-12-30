@@ -17,7 +17,7 @@ type T_AppStackNavigatorParams = {
 const AppStack = createBottomTabNavigator<T_AppStackNavigatorParams>();
 
 export const AppStackScreens = (): JSX.Element => {
-    const showPlayerFooter: boolean = useSelector((state: RootStateOrAny) => state.showPlayerFooter);
+    const showingPlayerFooter: boolean = useSelector((state: RootStateOrAny) => state.currentSong);
     return (
         <React.Fragment>
             <AppStack.Navigator screenOptions={screenOptions} tabBarOptions={tabBarOptions}>
@@ -25,7 +25,7 @@ export const AppStackScreens = (): JSX.Element => {
                 <AppStack.Screen name={"Search"} component={SearchStackScreens} />
                 <AppStack.Screen name={"Settings"} component={SettingsStackScreens} />
             </AppStack.Navigator>
-            {showPlayerFooter && <PlayerFooter />}
+            {showingPlayerFooter && <PlayerFooter />}
         </React.Fragment>
     )
 }
