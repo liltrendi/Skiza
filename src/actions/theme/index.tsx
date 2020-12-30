@@ -3,6 +3,9 @@ interface I_ActionProps {
     payload: string;
 }
 
-export const switchTheme= (type: string, payload: string): I_ActionProps => ({
-    type, payload
-})
+export const switchTheme = (type: string): I_ActionProps => {
+    return {
+        type,
+        payload: type
+    }
+} 

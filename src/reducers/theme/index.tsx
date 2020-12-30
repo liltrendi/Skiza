@@ -5,7 +5,7 @@ interface I_ActionProps {
 
 type T_ThemeReducer = (state: string, action: I_ActionProps) => string
 
-const initialState: string = "light";
+const initialState: string = "LIGHT";
 
 export const themeReducer: T_ThemeReducer = (state: string = initialState, action: I_ActionProps): string => {
     switch(action.type){
