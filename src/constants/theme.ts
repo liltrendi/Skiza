@@ -7,7 +7,7 @@ export const DARK_THEME: I_DarkTheme = {
     secondaryTxt: "#f3f3f3",
     brightColor: "#f05454",
     lighterDark: "#222",
-    darkBorder: "#090910"
+    lightBorder: "#a2a2a2"
 }
 
 export const LIGHT_THEME: I_LightTheme = {

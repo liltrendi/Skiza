@@ -6,7 +6,7 @@ import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import { I_SongItemProps, I_SongItemStyles } from "./interfaces"
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import { setCurrentSong } from '../../../actions/music';
+import { setCurrentSong, setSongPlayingStatus } from '../../../actions/music';
 import { I_SongSchema } from '../../../controllers/music/interfaces';
 import { MUSICAL_NOTE_IMAGE } from '../../../assets/images';
 import { deduceCoverArtToUse } from '../../../util/songs';
@@ -15,6 +15,7 @@ import { isThemeDark } from '../../../util/theme';
 
 interface I_AdditionalProps extends I_SongItemProps {
     setCurrentSong: (song: I_SongSchema | undefined) => Promise<void>;
+    setSongPlayingStatus: (song: I_SongSchema | undefined, status: boolean) => Promise<void>;
 }
 
 type T_Props = I_SongItemProps & I_AdditionalProps;
@@ -25,7 +26,7 @@ interface I_GlobalStateProps {
     theme: string;
 }
 
-const SongItem: React.FC<T_Props> = ({ id, title, author, cover, setCurrentSong }): JSX.Element => {
+const SongItem: React.FC<T_Props> = ({ id, title, author, cover, setCurrentSong, setSongPlayingStatus }): JSX.Element => {
 
     const globalState: RootStateOrAny = useSelector((state: RootStateOrAny) => state);
     const {songs: allSongs, currentSong}: I_GlobalStateProps = globalState;
@@ -38,6 +39,7 @@ const SongItem: React.FC<T_Props> = ({ id, title, author, cover, setCurrentSong 
         const song: I_SongSchema | undefined = allSongs.find((item: I_SongSchema) => item.id === songId);
         console.log("Playing", song);
         setCurrentSong(song);
+        setSongPlayingStatus(song, true)
     }
 
     const isActive: boolean = currentSong ? currentSong.id === id : false;
@@ -65,7 +67,8 @@ const mapStateToProps = () => {
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
     return {
-        setCurrentSong: (song: I_SongSchema | undefined) => dispatch(setCurrentSong(song))
+        setCurrentSong: (song: I_SongSchema | undefined) => dispatch(setCurrentSong(song)),
+        setSongPlayingStatus: (song: I_SongSchema | undefined, status: boolean) => dispatch(setSongPlayingStatus(song, status))
     }
 }
 
@@ -85,7 +88,7 @@ const getStyles = (state: RootStateOrAny, isActive: boolean | undefined): I_Song
             borderTopLeftRadius: 5,
             flexDirection: "row",
             alignItems: "center",
-            borderColor: isThemeDark(theme) ? DARK_THEME.darkBorder : LIGHT_THEME.darkBorder,
+            borderColor: isThemeDark(theme) ? DARK_THEME.lightBorder : LIGHT_THEME.darkBorder,
             borderWidth: 0.5,
             marginTop: 0,
             marginBottom: 15, 

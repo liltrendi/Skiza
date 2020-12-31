@@ -92,7 +92,7 @@ const getStyles = (state: RootStateOrAny): I_GenreCategoriesStyles => {
                 borderBottomLeftRadius: 30,
                 borderTopRightRadius: 30,
                 borderTopLeftRadius: 30,
-                borderColor: isThemeDark(theme) ? DARK_THEME.darkBorder : LIGHT_THEME.darkBorder,
+                borderColor: isThemeDark(theme) ? DARK_THEME.lightBorder : LIGHT_THEME.darkBorder,
                 borderWidth: 0.5,
                 marginRight: 16,
                 height: 200,

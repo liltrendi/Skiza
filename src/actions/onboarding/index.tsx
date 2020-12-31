@@ -3,17 +3,12 @@ import { ThunkAction, ThunkDispatch } from "redux-thunk"
 import { defaultSongOptions, fetchSongsFromLocalStorage } from "../../controllers/music/getSongs"
 import { I_SongSchema } from "../../controllers/music/interfaces"
 import { requestReadStoragePermission } from "../../controllers/permissions/storage"
-import { FETCHED_SONGS } from '../../actions/music';
+import { FETCHED_SONGS, ONBOARDING_COMPLETE, READ_EXTERNAL_STORAGE_PERMISSION_BLOCKED, READ_EXTERNAL_STORAGE_PERMISSION_DENIED, READ_EXTERNAL_STORAGE_PERMISSION_GRANTED } from "../../constants/actions"
 
 interface I_UpdateStoragePermissionStatusActionProps {
     type: string;
     payload: string;
 }
-
-export const READ_EXTERNAL_STORAGE_PERMISSION_GRANTED: string = "READ_EXTERNAL_STORAGE_PERMISSION_GRANTED";
-export const READ_EXTERNAL_STORAGE_PERMISSION_DENIED: string = "READ_EXTERNAL_STORAGE_PERMISSION_DENIED";
-export const READ_EXTERNAL_STORAGE_PERMISSION_BLOCKED: string = "READ_EXTERNAL_STORAGE_PERMISSION_BLOCKED";
-export const ONBOARDING_COMPLETE: string = "ONBOARDING_COMPLETE";
 
 export const completeOnboarding = (): ThunkAction<Promise<void>, {}, {}, AnyAction> => {
     return async (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {

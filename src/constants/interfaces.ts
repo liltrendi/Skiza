@@ -5,7 +5,7 @@ export interface I_DarkTheme {
     secondaryTxt: string;
     brightColor: string;
     lighterDark: string;
-    darkBorder: string;
+    lightBorder: string;
 }
 
 export interface I_LightTheme {
