@@ -1,6 +1,5 @@
 import React from 'react'
 import { StackNavigationOptions } from '@react-navigation/stack';
-import { HomeHeaderBar } from "../../../components/App/headers/Home";
 import { RootStateOrAny } from 'react-redux';
 import { isThemeDark } from '../../../util/theme';
 import { DARK_THEME, LIGHT_THEME } from '../../../constants/theme';
@@ -28,12 +27,6 @@ export const searchHeaderOptions = (state: RootStateOrAny): StackNavigationOptio
       paddingBottom: 25
     },
     headerRight: (props) => (
-      // <HomeHeaderBar
-      //   {...props}
-      //   name={'comment-quote-outline'}
-      //   size={33}
-      //   color={'#333'}
-      // />
       <React.Fragment />
     ),
     headerTransparent: false,

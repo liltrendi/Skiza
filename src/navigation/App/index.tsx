@@ -1,4 +1,4 @@
-import React, { useEffect } from "react"
+import React from "react"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { HomeStackScreens } from "./Home"
 import { SearchStackScreens } from "./Search"
