@@ -33,3 +33,27 @@ export interface I_SettingsReportIssueStyles {
     topText: TextStyle;
     bottomText: TextStyle;
 }
+
+// Settings - About App
+
+export interface I_SettingsAboutAppProps {}
+
+export interface I_SettingsAboutAppStyles {
+    container: ViewStyle;
+    icon: ViewStyle;
+    textContainer: ViewStyle;
+    topText: TextStyle;
+    bottomText: TextStyle;
+}
+
+// Settings - Share App
+
+export interface I_SettingsShareAppProps {}
+
+export interface I_SettingsShareAppStyles {
+    container: ViewStyle;
+    icon: ViewStyle;
+    textContainer: ViewStyle;
+    topText: TextStyle;
+    bottomText: TextStyle;
+}
