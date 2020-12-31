@@ -119,7 +119,7 @@ const getStyles = (state: RootStateOrAny): I_PlayerFooterStyles => {
         },
         icon: {
             marginLeft: 15,
-            marginRight: 10
+            marginRight: 12
         }
     })
 }

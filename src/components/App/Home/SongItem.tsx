@@ -81,6 +81,7 @@ const getStyles = (state: RootStateOrAny, isActive: boolean | undefined): I_Song
     const {theme}: I_GlobalStateProps = state;
     return StyleSheet.create<I_SongItemStyles>({
         container: {
+            borderColor: isThemeDark(theme) ? DARK_THEME.lightBorder : LIGHT_THEME.darkBorder,
             justifyContent: "space-evenly",
             borderBottomRightRadius: 5,
             borderBottomLeftRadius: 5,
@@ -88,16 +89,15 @@ const getStyles = (state: RootStateOrAny, isActive: boolean | undefined): I_Song
             borderTopLeftRadius: 5,
             flexDirection: "row",
             alignItems: "center",
-            borderColor: isThemeDark(theme) ? DARK_THEME.lightBorder : LIGHT_THEME.darkBorder,
-            borderWidth: 0.5,
-            marginTop: 0,
-            marginBottom: 15, 
-            marginLeft: 16,
-            marginRight: 16,
-            paddingTop: 10,
             paddingBottom: 10,
+            paddingRight: 10,
             paddingLeft: 10,
-            paddingRight: 10
+            paddingTop: 10,
+            marginBottom: 10, 
+            borderWidth: 0,
+            marginRight: 5,
+            marginLeft: 5,
+            marginTop: 0,
 
         },
         coverContainer: {
