@@ -20,7 +20,7 @@ const Search: React.FC<I_SearchProps> = (): JSX.Element => {
 
     const styles: I_SearchStyles = getStyles(globalState);
 
-    const RenderSearch: React.FC<{}> = ():JSX.Element => {
+    const RenderSearchResults: React.FC<{}> = ():JSX.Element => {
         if(searchTerm.length < 1){
             return <SearchNotStarted />
         }
@@ -33,7 +33,7 @@ const Search: React.FC<I_SearchProps> = (): JSX.Element => {
     return (
         <React.Fragment>
             <Bar searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-            <RenderSearch />
+            <RenderSearchResults />
         </React.Fragment>
     )
 }

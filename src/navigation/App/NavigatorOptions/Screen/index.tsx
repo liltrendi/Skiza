@@ -3,7 +3,8 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 interface I_RouteProps {
     route: { name: string };
-}
+    theme: string;
+} 
 
 interface I_TabBarIconProps {
     focused: boolean;
@@ -16,7 +17,7 @@ interface I_ScreenOptionsProps {
 
 type T_ScreenOptions = ({ }: I_RouteProps) => I_ScreenOptionsProps
 
-export const screenOptions: T_ScreenOptions = ({ route }): I_ScreenOptionsProps => ({
+export const screenOptions: T_ScreenOptions = ({ route, theme }): I_ScreenOptionsProps => ({
     tabBarIcon: ({ focused, color }): JSX.Element => {
         let iconName: string = "";
         if (route.name === 'Home') {

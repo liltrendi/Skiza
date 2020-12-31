@@ -20,6 +20,8 @@ export interface I_BarProps {
 export interface I_BarStyles {
     container: ViewStyle;
     bar: ViewStyle;
+    searchIcon: ViewStyle;
+    input: TextStyle;
 }
 
 // NotStarted

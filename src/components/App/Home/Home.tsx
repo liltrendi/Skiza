@@ -11,8 +11,15 @@ import {I_HomeProps, I_ReadExternalStoragePermissionStatusConfig, I_HomeStyles} 
 import { isEmptyArray } from '../../../util/util';
 import NoSongsOnDevice from '../Errors/Home/NoSongsOnDevice';
 import { I_SongSchema } from '../../../controllers/music/interfaces';
+import { isThemeDark } from '../../../util/theme';
+import { DARK_THEME, LIGHT_THEME } from '../../../constants/theme';
 
 const ScrollableTabView = require('react-native-scrollable-tab-view');
+
+interface I_GlobalStateProps {
+  currentSong: null | I_SongSchema;
+  theme: string;
+}
 
 const Home: React.FC<I_HomeProps> = (): JSX.Element => {
   const dispatch = useDispatch()
@@ -33,7 +40,7 @@ const Home: React.FC<I_HomeProps> = (): JSX.Element => {
       return <ReadStoragePermissionDeniedError />
     } else if (readExternalStoragePermissionStatus.granted) {
       return (
-        <ScrollableTabView tabBarUnderlineStyle={{backgroundColor: "#f05454"}} tabBarTextStyle={{color: "#000"}}>
+        <ScrollableTabView tabBarUnderlineStyle={styles.scrollableTabView} tabBarTextStyle={styles.tabBarTextStyle}>
           <SongList tabLabel="Library" />
           <SongList tabLabel="Playlists" />
           <SongList tabLabel="Albums" />
@@ -86,14 +93,21 @@ const Home: React.FC<I_HomeProps> = (): JSX.Element => {
 };
 
 const getStyles = (state: RootStateOrAny, storagePermissionStatus: I_ReadExternalStoragePermissionStatusConfig): I_HomeStyles => {
-  const showingPlayerFooter: null | I_SongSchema = state.currentSong;
+  const {currentSong: showingPlayerFooter, theme}: I_GlobalStateProps = state;
   return StyleSheet.create<I_HomeStyles>({
     container: {
       justifyContent: storagePermissionStatus.granted ? undefined : "center",
       alignItems: storagePermissionStatus.granted ? undefined : "center",
       marginBottom: showingPlayerFooter ? 60 : 0,
-      marginTop: 60,
+      backgroundColor: isThemeDark(theme) ? DARK_THEME.primaryBg : LIGHT_THEME.primaryBg,
+      marginTop: 0,
       flex: 1,
+    },
+    scrollableTabView: {
+      backgroundColor: isThemeDark(theme) ? DARK_THEME.brightColor : LIGHT_THEME.brightColor
+    },
+    tabBarTextStyle: {
+      color: isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt
     }
   })
 }

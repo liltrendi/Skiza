@@ -1,0 +1,1 @@
+export const isThemeDark = ((theme: string): boolean => theme === "DARK")

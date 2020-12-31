@@ -8,9 +8,12 @@ import SongItem from './../Home/SongItem';
 import { I_SongSchema } from '../../../controllers/music/interfaces';
 import { HOME_NOT_FOUND_ANIMATION } from '../../../assets/animations';
 import { RootStateOrAny, useSelector } from 'react-redux';
+import { isThemeDark } from '../../../util/theme';
+import { DARK_THEME, LIGHT_THEME } from '../../../constants/theme';
 
 interface I_GlobalStateProps {
     currentSong: null | I_SongSchema;
+    theme: string;
 }
  
 const SearchResults: React.FC<I_SearchResultsProps> = ({searchTerm, matchedSongs}):JSX.Element => {
@@ -56,9 +59,10 @@ const SearchResults: React.FC<I_SearchResultsProps> = ({searchTerm, matchedSongs
 export default SearchResults
 
 const getStyles = (state: RootStateOrAny): I_SearchResultsStyles => {
-    const {currentSong: showingPlayerFooter}: I_GlobalStateProps = state;
+    const {currentSong: showingPlayerFooter, theme}: I_GlobalStateProps = state;
     return StyleSheet.create<I_SearchResultsStyles>({
         container: {
+            backgroundColor: isThemeDark(theme) ? DARK_THEME.primaryBg : LIGHT_THEME.primaryBg,
             justifyContent: "center",
             alignItems: "center",
             flex: 1
@@ -79,8 +83,9 @@ const getStyles = (state: RootStateOrAny): I_SearchResultsStyles => {
             fontWeight: "bold"
         },
         songList: {
-            marginTop: 85,
-            marginBottom: showingPlayerFooter ? 60 : 0
+            backgroundColor: isThemeDark(theme) ? DARK_THEME.primaryBg : LIGHT_THEME.primaryBg,
+            marginBottom: showingPlayerFooter ? 60 : 0,
+            paddingTop: 5,
         }
     })
 }

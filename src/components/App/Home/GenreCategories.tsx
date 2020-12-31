@@ -4,6 +4,12 @@ import { View, Text, ScrollView, StyleSheet, TouchableOpacity, Image } from 'rea
 import { ONBOARDING_IMAGE } from '../../../assets/images';
 import { deduceCoverArtToUse } from '../../../util/songs';
 import {I_GenreCategoriesProps, I_GenreCategoriesStyles} from "./interfaces"
+import { isThemeDark } from '../../../util/theme';
+import { DARK_THEME, LIGHT_THEME, SHARED_THEME } from '../../../constants/theme';
+
+interface I_GlobalStateProps {
+    theme: string;
+}
 
 const GenreCategories: React.FC<I_GenreCategoriesProps> = ({uniqueArtists}): JSX.Element => {
     const globalState: RootStateOrAny = useSelector((state: RootStateOrAny) => state);
@@ -48,6 +54,7 @@ const GenreCategories: React.FC<I_GenreCategoriesProps> = ({uniqueArtists}): JSX
 export default GenreCategories;
 
 const getStyles = (state: RootStateOrAny): I_GenreCategoriesStyles => {
+    const {theme}: I_GlobalStateProps = state;
     return (
         StyleSheet.create<I_GenreCategoriesStyles>({
             container: {
@@ -64,6 +71,7 @@ const getStyles = (state: RootStateOrAny): I_GenreCategoriesStyles => {
               fontSize: 18,
               fontWeight: '700',
               paddingHorizontal: 35,
+              color: isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt
             },
             headerRightView: {
               justifyContent: 'center',
@@ -71,7 +79,8 @@ const getStyles = (state: RootStateOrAny): I_GenreCategoriesStyles => {
             },
             headerRightText: {
               textDecorationLine: 'underline',
-              paddingRight: 20
+              paddingRight: 20,
+              color: isThemeDark(theme) ? DARK_THEME.brightColor : LIGHT_THEME.primaryTxt
             },
             outerCategoryContainer: {
               height: 200,
@@ -83,7 +92,7 @@ const getStyles = (state: RootStateOrAny): I_GenreCategoriesStyles => {
                 borderBottomLeftRadius: 30,
                 borderTopRightRadius: 30,
                 borderTopLeftRadius: 30,
-                borderColor: '#888',
+                borderColor: isThemeDark(theme) ? DARK_THEME.darkBorder : LIGHT_THEME.darkBorder,
                 borderWidth: 0.5,
                 marginRight: 16,
                 height: 200,
@@ -104,14 +113,14 @@ const getStyles = (state: RootStateOrAny): I_GenreCategoriesStyles => {
             cardTitleView: {
                 borderBottomRightRadius: 30,
                 borderBottomLeftRadius: 30,
-                backgroundColor: "#666",
+                backgroundColor: SHARED_THEME.cardBottom,
                 alignItems: "center",
                 padding: 12,
             },
             cardTitleText: {
                 fontWeight: "bold",
                 fontSize: 18,
-                color: "#fff"
+                color: SHARED_THEME.lightTextLv2
             }
         })
     )

@@ -8,6 +8,8 @@ export interface I_HomeProps {};
 
 export interface I_HomeStyles {
   container: ViewStyle
+  scrollableTabView: ViewStyle;
+  tabBarTextStyle: TextStyle;
 }
 
 export interface I_ReadExternalStoragePermissionStatusConfig {

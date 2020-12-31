@@ -10,6 +10,8 @@ import { setCurrentSong } from '../../../actions/music';
 import { I_SongSchema } from '../../../controllers/music/interfaces';
 import { MUSICAL_NOTE_IMAGE } from '../../../assets/images';
 import { deduceCoverArtToUse } from '../../../util/songs';
+import { DARK_THEME, LIGHT_THEME, SHARED_THEME } from '../../../constants/theme';
+import { isThemeDark } from '../../../util/theme';
 
 interface I_AdditionalProps extends I_SongItemProps {
     setCurrentSong: (song: I_SongSchema | undefined) => Promise<void>;
@@ -20,6 +22,7 @@ type T_Props = I_SongItemProps & I_AdditionalProps;
 interface I_GlobalStateProps {
     songs: I_SongSchema[]; 
     currentSong: null | I_SongSchema;
+    theme: string;
 }
 
 const SongItem: React.FC<T_Props> = ({ id, title, author, cover, setCurrentSong }): JSX.Element => {
@@ -50,7 +53,7 @@ const SongItem: React.FC<T_Props> = ({ id, title, author, cover, setCurrentSong 
                 <Text style={styles.author} numberOfLines={1}>{author}</Text>
             </View>
             <TouchableOpacity activeOpacity={0.85} onPress={(): void => toggleOptions(id)} style={styles.optionsIcon}>
-                <Icon name={"dots-vertical"} size={25} color={"#333"} />
+                <Icon name={"dots-vertical"} size={25} color={isThemeDark(globalState.theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt} />
             </TouchableOpacity>
         </TouchableOpacity>
     )
@@ -72,6 +75,7 @@ export default connect(
 )(SongItem)
 
 const getStyles = (state: RootStateOrAny, isActive: boolean | undefined): I_SongItemStyles => {
+    const {theme}: I_GlobalStateProps = state;
     return StyleSheet.create<I_SongItemStyles>({
         container: {
             justifyContent: "space-evenly",
@@ -81,7 +85,7 @@ const getStyles = (state: RootStateOrAny, isActive: boolean | undefined): I_Song
             borderTopLeftRadius: 5,
             flexDirection: "row",
             alignItems: "center",
-            borderColor: "#888",
+            borderColor: isThemeDark(theme) ? DARK_THEME.darkBorder : LIGHT_THEME.darkBorder,
             borderWidth: 0.5,
             marginTop: 0,
             marginBottom: 15, 
@@ -110,7 +114,7 @@ const getStyles = (state: RootStateOrAny, isActive: boolean | undefined): I_Song
         title: {
             fontFamily: "CircularStd-Book",
             fontWeight: "bold",
-            color: isActive ? "#f05454" : "#333",
+            color: isActive ? SHARED_THEME.brightTextLv2 : (isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt),
             fontSize: 18,
         },
         divider: {
@@ -118,7 +122,7 @@ const getStyles = (state: RootStateOrAny, isActive: boolean | undefined): I_Song
         },
         author: {
             fontFamily: "CircularStd-Book",
-            color: "#333",
+            color: isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt,
         },
         optionsIcon: {
             paddingLeft: 50,
