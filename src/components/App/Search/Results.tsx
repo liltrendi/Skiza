@@ -80,7 +80,8 @@ const getStyles = (state: RootStateOrAny): I_SearchResultsStyles => {
             textAlign: "center"
         },
         searchTerm: {
-            fontWeight: "bold"
+            fontWeight: "bold",
+            fontFamily: "CircularStd-Book",
         },
         songList: {
             backgroundColor: isThemeDark(theme) ? DARK_THEME.primaryBg : LIGHT_THEME.primaryBg,

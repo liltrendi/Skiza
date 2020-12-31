@@ -71,7 +71,8 @@ const getStyles = (state: RootStateOrAny): I_GenreCategoriesStyles => {
               fontSize: 18,
               fontWeight: '700',
               paddingHorizontal: 35,
-              color: isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt
+              color: isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt,
+              fontFamily: "CircularStd-Book",
             },
             headerRightView: {
               justifyContent: 'center',
@@ -80,7 +81,8 @@ const getStyles = (state: RootStateOrAny): I_GenreCategoriesStyles => {
             headerRightText: {
               textDecorationLine: 'underline',
               paddingRight: 20,
-              color: isThemeDark(theme) ? DARK_THEME.brightColor : LIGHT_THEME.primaryTxt
+              color: isThemeDark(theme) ? DARK_THEME.brightColor : LIGHT_THEME.primaryTxt,
+              fontFamily: "CircularStd-Book",
             },
             outerCategoryContainer: {
               height: 200,
@@ -119,8 +121,9 @@ const getStyles = (state: RootStateOrAny): I_GenreCategoriesStyles => {
             },
             cardTitleText: {
                 fontWeight: "bold",
-                fontSize: 18,
-                color: SHARED_THEME.lightTextLv2
+                fontSize: 16,
+                color: SHARED_THEME.lightTextLv2,
+                fontFamily: "CircularStd-Book",
             }
         })
     )

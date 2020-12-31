@@ -4,6 +4,7 @@ import { RootStateOrAny, useSelector } from 'react-redux'
 import { DARK_THEME, LIGHT_THEME } from '../../../constants/theme'
 import { isThemeDark } from '../../../util/theme'
 import { I_SettingsProps, I_SettingsStyles } from './interfaces'
+import ReportIssue from './ReportIssue'
 import Theme from './Theme'
 
 interface I_GlobalStateProps {
@@ -16,6 +17,7 @@ const Settings: React.FC<I_SettingsProps> = (): JSX.Element => {
     return (
         <View style={styles.container}>
             <Theme />
+            <ReportIssue />
         </View>
     )
 }

@@ -76,6 +76,7 @@ const getStyles = (state: RootStateOrAny): I_SettingsThemeStyles => {
         },
         bottomText: {
             color: isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt,
+            fontFamily: "CircularStd-Book",
             paddingTop: 1,
             paddingBottom: 1,
         },

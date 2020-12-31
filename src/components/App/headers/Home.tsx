@@ -40,6 +40,7 @@ const getStyles = (state: RootStateOrAny): I_HomeHeaderStyles => {
       fontWeight: 'bold',
       color: 'white',
       fontSize: 10,
+      fontFamily: "CircularStd-Book",
     },
   });
 }

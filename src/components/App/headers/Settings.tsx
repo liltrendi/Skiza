@@ -39,6 +39,7 @@ const getStyles = (state: RootStateOrAny): I_SettingsHeaderStyles => {
       fontWeight: 'bold',
       color: 'white',
       fontSize: 10,
+      fontFamily: "CircularStd-Book",
     },
   });
 }

@@ -21,3 +21,15 @@ export interface I_SettingsThemeStyles {
     bottomText: TextStyle;
     switch: ViewStyle;
 }
+
+// Settings - Report Issue
+
+export interface I_SettingsReportIssueProps {}
+
+export interface I_SettingsReportIssueStyles {
+    container: ViewStyle;
+    icon: ViewStyle;
+    textContainer: ViewStyle;
+    topText: TextStyle;
+    bottomText: TextStyle;
+}

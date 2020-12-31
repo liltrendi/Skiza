@@ -107,7 +107,8 @@ const getStyles = (state: RootStateOrAny, storagePermissionStatus: I_ReadExterna
       backgroundColor: isThemeDark(theme) ? DARK_THEME.brightColor : LIGHT_THEME.brightColor
     },
     tabBarTextStyle: {
-      color: isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt
+      color: isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt,
+      fontFamily: "CircularStd-Book",
     }
   })
 }

@@ -116,6 +116,7 @@ const getStyles = (state: RootStateOrAny): I_PlayerFooterStyles => {
             color: isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt,
             paddingTop: 0,
             paddingBottom: 1,
+            fontFamily: "CircularStd-Book",
         },
         icon: {
             marginLeft: 15,

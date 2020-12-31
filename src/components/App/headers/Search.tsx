@@ -39,6 +39,7 @@ const getStyles = (state: RootStateOrAny): I_SearchHeaderStyles => {
       fontWeight: 'bold',
       color: 'white',
       fontSize: 10,
+      fontFamily: "CircularStd-Book",
     },
   });
 }
