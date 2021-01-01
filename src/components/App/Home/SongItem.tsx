@@ -37,7 +37,6 @@ const SongItem: React.FC<T_Props> = ({ id, title, author, cover, setCurrentSong,
 
     const playSong = (songId: string): void => {
         const song: I_SongSchema | undefined = allSongs.find((item: I_SongSchema) => item.id === songId);
-        console.log("Playing", song);
         setCurrentSong(song);
         setSongPlayingStatus(song, true)
     }

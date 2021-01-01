@@ -5,6 +5,12 @@ import { RootStateOrAny, useSelector } from 'react-redux';
 import { openSettings } from 'react-native-permissions';
 import { I_ReadStoragePermissionBlockedProps, I_ReadStoragePermissionBlockedStyles } from './interfaces'
 import { HOME_FOLDER_ERROR_ANIMATION } from '../../../../assets/animations';
+import { isThemeDark } from '../../../../util/theme';
+import { DARK_THEME, LIGHT_THEME, SHARED_THEME } from '../../../../constants/theme';
+
+interface I_GlobalStateProps {
+    theme: string;
+}
 
 const ReadStoragePermissionBlocked: React.FC<I_ReadStoragePermissionBlockedProps> = (): JSX.Element => {
     const folderAnimation = HOME_FOLDER_ERROR_ANIMATION;
@@ -39,6 +45,7 @@ const ReadStoragePermissionBlocked: React.FC<I_ReadStoragePermissionBlockedProps
 export default ReadStoragePermissionBlocked;
 
 const getStyles = (state: RootStateOrAny): I_ReadStoragePermissionBlockedStyles => {
+    const {theme}: I_GlobalStateProps = state;
     return StyleSheet.create<I_ReadStoragePermissionBlockedStyles>({
         container: {
             justifyContent: "center",
@@ -54,11 +61,12 @@ const getStyles = (state: RootStateOrAny): I_ReadStoragePermissionBlockedStyles 
             fontFamily: "CircularStd-Book",
             fontSize: 15,
             paddingLeft: 20,
-            paddingRight: 20
+            paddingRight: 20,
+            color: isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt
         },
         button: {
             alignItems: "center",
-            backgroundColor: "#f05454",
+            backgroundColor: isThemeDark(theme) ? SHARED_THEME.brightTextLv2 : SHARED_THEME.brightTextLv2,
             padding: 14,
             borderTopLeftRadius: 5,
             borderTopRightRadius: 5,
@@ -69,7 +77,7 @@ const getStyles = (state: RootStateOrAny): I_ReadStoragePermissionBlockedStyles 
         buttonText: {
             fontFamily: "CircularStd-Book",
             fontSize: 15,
-            color: "#fff"
+            color: isThemeDark(theme) ? SHARED_THEME.lightTextLv1 : SHARED_THEME.lightTextLv1
         }
     })
 }

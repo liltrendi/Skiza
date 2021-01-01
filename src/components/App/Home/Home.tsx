@@ -35,24 +35,6 @@ const Home: React.FC<I_HomeProps> = (): JSX.Element => {
 
   const styles: I_HomeStyles = getStyles(globalState, readExternalStoragePermissionStatus);
 
-  const RenderHomeView: React.FC<{}> = (): JSX.Element => {
-    if (readExternalStoragePermissionStatus.denied) {
-      return <ReadStoragePermissionDeniedError />
-    } else if (readExternalStoragePermissionStatus.granted) {
-      return (
-        <ScrollableTabView tabBarUnderlineStyle={styles.scrollableTabView} tabBarTextStyle={styles.tabBarTextStyle}>
-          <SongList tabLabel="Library" />
-          <SongList tabLabel="Playlists" />
-          <SongList tabLabel="Albums" />
-        </ScrollableTabView>
-      )
-    } else if (readExternalStoragePermissionStatus.blocked) {
-      return <ReadStoragePermissionBlockedError />
-    } else {
-      return <ActivityIndicator color={"#f05454"} />
-    }
-  }
-
   const appState = useRef<AppStateStatus>(AppState.currentState);
 
   const handleAppStateChange = async (nextAppState: AppStateStatus): Promise<void> => {
@@ -87,7 +69,19 @@ const Home: React.FC<I_HomeProps> = (): JSX.Element => {
 
   return (
     <SafeAreaView style={styles.container}>
-      <RenderHomeView />
+      {readExternalStoragePermissionStatus.blocked && (
+        <ReadStoragePermissionBlockedError />
+      )}
+      {readExternalStoragePermissionStatus.denied && (
+        <ReadStoragePermissionDeniedError />
+      )}
+      {readExternalStoragePermissionStatus.granted && (
+        <ScrollableTabView tabBarUnderlineStyle={styles.scrollableTabView} tabBarTextStyle={styles.tabBarTextStyle}>
+          <SongList tabLabel="Library" />
+          <SongList tabLabel="Playlists" />
+          <SongList tabLabel="Albums" />
+        </ScrollableTabView>
+      )}
     </SafeAreaView>
   );
 };

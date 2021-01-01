@@ -11,6 +11,13 @@ import { I_ReadExternalStoragePermissionStatusConfig } from "../../Home/interfac
 import { fetchSongs } from '../../../../actions/music';
 import { HOME_NOT_FOUND_ANIMATION } from '../../../../assets/animations';
 import { I_SongSchema } from '../../../../controllers/music/interfaces';
+import { isThemeDark } from '../../../../util/theme';
+import { DARK_THEME, LIGHT_THEME, SHARED_THEME } from '../../../../constants/theme';
+
+interface I_GlobalStateProps {
+    theme: string;
+    currentSong: null | I_SongSchema;
+}
 
 const NoSongsOnDevice: React.FC<I_NoSongsOnDeviceProps> = ({fetchSongs}): JSX.Element => {
 
@@ -71,13 +78,13 @@ export default connect(
 )(NoSongsOnDevice)
 
 const getStyles = (state: RootStateOrAny, storagePermissionStatus: I_ReadExternalStoragePermissionStatusConfig): I_NoSongsOnDeviceStyles => {
-    const currentSong: null | I_SongSchema = state.currentSong;
+    const {theme, currentSong}: I_GlobalStateProps = state;
     return StyleSheet.create<I_NoSongsOnDeviceStyles>({
         safeAreaContainer: {
             justifyContent: storagePermissionStatus.granted ? undefined : "center",
             alignItems: storagePermissionStatus.granted ? undefined : "center",
+            backgroundColor: isThemeDark(theme) ? DARK_THEME.primaryBg : LIGHT_THEME.primaryBg,
             marginBottom: currentSong ? 60 : 0,
-            marginTop: 60,
             flex: 1,
         },
         container: {
@@ -94,11 +101,12 @@ const getStyles = (state: RootStateOrAny, storagePermissionStatus: I_ReadExterna
             fontFamily: "CircularStd-Book",
             fontSize: 15,
             paddingLeft: 20,
-            paddingRight: 20
+            paddingRight: 20,
+            color: isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt
         },
         button: {
             alignItems: "center",
-            backgroundColor: "#f05454",
+            backgroundColor: isThemeDark(theme) ? SHARED_THEME.brightTextLv2 : SHARED_THEME.brightTextLv2,
             padding: 14,
             borderTopLeftRadius: 5,
             borderTopRightRadius: 5,
@@ -109,7 +117,7 @@ const getStyles = (state: RootStateOrAny, storagePermissionStatus: I_ReadExterna
         buttonText: {
             fontFamily: "CircularStd-Book",
             fontSize: 15,
-            color: "#fff"
+            color: isThemeDark(theme) ? SHARED_THEME.lightTextLv1 : SHARED_THEME.lightTextLv1
         }
     })
 }

@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { I_SettingsReportIssueProps, I_SettingsReportIssueStyles } from './interfaces';
 import { isThemeDark } from '../../../util/theme';
 import { DARK_THEME, LIGHT_THEME } from '../../../constants/theme';
-import { REPORT_A_PROBLEM_MAIL_LINK } from '../../../constants/miscellaneous';
+import { REPORT_A_PROBLEM_MAIL_LINK } from '../../../constants/settings';
 
 interface I_GlobalStateProps {
     theme: string;

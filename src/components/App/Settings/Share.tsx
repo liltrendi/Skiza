@@ -6,19 +6,20 @@ import Share from 'react-native-share';
 import { I_SettingsShareAppProps, I_SettingsShareAppStyles } from './interfaces';
 import { isThemeDark } from '../../../util/theme';
 import { DARK_THEME, LIGHT_THEME } from '../../../constants/theme';
-import { SHARE_APP_MESSAGE } from '../../../constants/miscellaneous';
+import { SHARE_APP_MESSAGE } from '../../../constants/settings';
 
 interface I_GlobalStateProps {
     theme: string;
 }
 
 const ShareApp: React.FC<I_SettingsShareAppProps> = ({}): JSX.Element => {
+
     const globalState: RootStateOrAny = useSelector((state: RootStateOrAny) => state);
     const {theme}: I_GlobalStateProps = globalState;
     const styles: I_SettingsShareAppStyles = getStyles(globalState);
 
-    const shareAppLink = (): void => {
-        Share.open({message: SHARE_APP_MESSAGE});
+    const shareAppLink = async (): Promise<void> => {
+        await Share.open({message: SHARE_APP_MESSAGE});
     }
 
     return (

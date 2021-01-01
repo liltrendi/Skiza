@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, View } from 'react-native'
+import { ScrollView, StyleSheet } from 'react-native'
 import { RootStateOrAny, useSelector } from 'react-redux'
 import { DARK_THEME, LIGHT_THEME } from '../../../constants/theme'
 import { isThemeDark } from '../../../util/theme'
@@ -17,12 +17,16 @@ const Settings: React.FC<I_SettingsProps> = (): JSX.Element => {
     const globalState: RootStateOrAny = useSelector((state: RootStateOrAny) => state);
     const styles: I_SettingsStyles = getStyles(globalState);
     return (
-        <View style={styles.container}>
+        <ScrollView
+            scrollEventThrottle={16}
+            style={styles.container}
+            showsVerticalScrollIndicator={false}
+        >
             <Theme />
             <ReportIssue />
             <ShareApp />
             <AboutApp />
-        </View>
+        </ScrollView>
     )
 }
 
