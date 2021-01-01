@@ -69,10 +69,9 @@ const getStyles = (state: RootStateOrAny): I_GenreCategoriesStyles => {
             },
             headerLeftTxt: {
               fontSize: 18,
-              fontWeight: '700',
               paddingHorizontal: 35,
               color: isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt,
-              fontFamily: "CircularStd-Book",
+              fontFamily: "CircularStd-Bold",
             },
             headerRightView: {
               justifyContent: 'center',
@@ -120,10 +119,9 @@ const getStyles = (state: RootStateOrAny): I_GenreCategoriesStyles => {
                 padding: 12,
             },
             cardTitleText: {
-                fontWeight: "bold",
                 fontSize: 16,
                 color: SHARED_THEME.lightTextLv2,
-                fontFamily: "CircularStd-Book",
+                fontFamily: "CircularStd-Bold",
             }
         })
     )

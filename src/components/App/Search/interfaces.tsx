@@ -44,6 +44,7 @@ export interface I_SearchResultsProps {
 
 export interface I_SearchResultsStyles {
     container: ViewStyle;
+    innerContainer: ViewStyle;
     LottieView: ViewStyle;
     noResultsText: TextStyle;
     searchTerm: TextStyle;

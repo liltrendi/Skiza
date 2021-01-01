@@ -9,6 +9,7 @@ import { onboardingSlides } from './slides';
 import { completeOnboarding } from "./../../actions/onboarding"
 import { I_OnboardingProps, I_SlideProps, I_OnboardingStyles} from "./interfaces"
 import { T_Slide } from './types';
+import { SHARED_THEME } from '../../constants/theme';
 
 const Onboarding: React.FC<I_OnboardingProps> = ({ showApp }): JSX.Element => {
 
@@ -95,10 +96,9 @@ const getStyles = (state: RootStateOrAny): I_OnboardingStyles => {
       borderBottomRightRadius: 5
     },
     doneButtonText: {
-      color: "#fff",
+      color: SHARED_THEME.lightTextLv1,
       letterSpacing: 1.2,
-      fontFamily: "CircularStd-Book",
-      fontWeight: "bold",
+      fontFamily: "CircularStd-Bold",
       fontSize: 17
     }
   })

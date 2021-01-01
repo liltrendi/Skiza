@@ -13,9 +13,8 @@ export const settingsHeaderOptions = (state: RootStateOrAny): StackNavigationOpt
   return {
     title: 'Settings',
     headerTitleStyle: {
-      fontFamily: "CircularStd-Book",
-      fontWeight: 'bold',
-      fontSize: 22,
+      fontFamily: "CircularStd-Bold",
+      fontSize: 23,
       color: isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt
     },
     headerTitleAlign: 'left',

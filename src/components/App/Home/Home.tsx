@@ -102,7 +102,9 @@ const getStyles = (state: RootStateOrAny, storagePermissionStatus: I_ReadExterna
     },
     tabBarTextStyle: {
       color: isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt,
-      fontFamily: "CircularStd-Book",
+      fontFamily: "CircularStd-Bold",
+      paddingTop: 4,
+      fontSize: 15,
     }
   })
 }

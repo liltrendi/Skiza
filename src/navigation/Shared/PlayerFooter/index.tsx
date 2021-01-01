@@ -106,8 +106,7 @@ const getStyles = (state: RootStateOrAny): I_PlayerFooterStyles => {
             flex: 1
         },
         topText: {
-            fontFamily: "CircularStd-Book",
-            fontWeight: "bold",
+            fontFamily: "CircularStd-Bold",
             fontSize: 16,
             paddingBottom: 3,
             color: isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt

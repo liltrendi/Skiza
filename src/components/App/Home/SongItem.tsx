@@ -114,8 +114,7 @@ const getStyles = (state: RootStateOrAny, isActive: boolean | undefined): I_Song
             flex: 1
         },
         title: {
-            fontFamily: "CircularStd-Book",
-            fontWeight: "bold",
+            fontFamily: "CircularStd-Bold",
             color: isActive ? SHARED_THEME.brightTextLv2 : (isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt),
             fontSize: 18,
         },

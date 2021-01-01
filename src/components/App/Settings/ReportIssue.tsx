@@ -59,8 +59,7 @@ const getStyles = (state: RootStateOrAny): I_SettingsReportIssueStyles => {
             flex: 1
         },
         topText: {
-            fontFamily: "CircularStd-Book",
-            fontWeight: "bold",
+            fontFamily: "CircularStd-Bold",
             fontSize: 16,
             paddingTop: 1,
             paddingBottom: 1,

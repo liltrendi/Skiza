@@ -34,14 +34,16 @@ const SearchResults: React.FC<I_SearchResultsProps> = ({searchTerm, matchedSongs
     if(isEmptyArray(matchedSongs)){
         return (
             <View style={styles.container}>
-                <LottieView
-                    source={noSongsAnimation}
-                    style={styles.LottieView}
-                    autoPlay={true}
-                />
-                <Text style={styles.noResultsText}>
-                    No results found for <Text style={styles.searchTerm}>{searchTerm}</Text>
-                </Text>
+                <View style={styles.innerContainer}>
+                    <LottieView
+                        source={noSongsAnimation}
+                        style={styles.LottieView}
+                        autoPlay={true}
+                    />
+                    <Text style={styles.noResultsText}>
+                        No results found for <Text style={styles.searchTerm}>{searchTerm}</Text>
+                    </Text>
+                </View>
             </View>
         )
     }
@@ -67,21 +69,27 @@ const getStyles = (state: RootStateOrAny): I_SearchResultsStyles => {
             alignItems: "center",
             flex: 1
         },
+        innerContainer: {
+            marginTop: -50,
+            alignItems: "center",
+            justifyContent: "center"
+        },
         LottieView: {
             height: 80,
             width: 80,
-            marginBottom: 10
+            marginBottom: 5,
         },
         noResultsText: {
             fontFamily: "CircularStd-Book",
             fontSize: 15,
             paddingLeft: 20,
             paddingRight: 20,
-            textAlign: "center"
+            textAlign: "center",
+            color: isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt,
         },
         searchTerm: {
-            fontWeight: "bold",
-            fontFamily: "CircularStd-Book",
+            fontFamily: "CircularStd-Bold",
+            color: isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt,
         },
         songList: {
             backgroundColor: isThemeDark(theme) ? DARK_THEME.primaryBg : LIGHT_THEME.primaryBg,

@@ -36,10 +36,9 @@ const getStyles = (state: RootStateOrAny): I_SettingsHeaderStyles => {
       top: -3,
     },
     badgeText: {
-      fontWeight: 'bold',
       color: 'white',
       fontSize: 10,
-      fontFamily: "CircularStd-Book",
+      fontFamily: "CircularStd-Bold",
     },
   });
 }

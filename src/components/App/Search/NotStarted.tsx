@@ -45,7 +45,8 @@ const getStyles = (state: RootStateOrAny): I_NotStartedStyles => {
         },
         innerAnimationContainer: {
             justifyContent: "center",
-            alignItems: "center"
+            alignItems: "center",
+            marginTop: -50
         },
         LottieView: {
             height: 180,
