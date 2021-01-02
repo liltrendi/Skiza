@@ -1,3 +1,5 @@
+import { ONBOARDING_COMPLETE } from "../../constants/actions";
+
 interface I_ActionProps {
     type: string;
     payload: boolean;
@@ -9,7 +11,7 @@ const initialState: boolean = false;
 
 export const onboardingReducer: T_OnboardingReducer = (state: boolean = initialState, action: I_ActionProps): boolean => {
     switch(action.type){
-        case "ONBOARDING_COMPLETE":
+        case ONBOARDING_COMPLETE:
             return action.payload
         default:
             return state;

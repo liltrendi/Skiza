@@ -1,3 +1,4 @@
+import { FETCHED_SONGS } from "../../constants/actions";
 import { I_SongSchema } from "../../controllers/music/interfaces";
 
 interface I_ActionProps {
@@ -11,7 +12,7 @@ const initialState: I_SongSchema[] = [];
 
 export const songsReducer: T_SongsReducer = (state: I_SongSchema[] = initialState, action: I_ActionProps): I_SongSchema[] => {
     switch(action.type){
-        case "FETCHED_SONGS":
+        case FETCHED_SONGS:
             return action.payload
         default:
             return state;

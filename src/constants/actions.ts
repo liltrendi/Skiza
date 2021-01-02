@@ -17,3 +17,8 @@ export const IS_NOT_PLAYING: string = "IS_NOT_PLAYING";
 
 export const SHOW_PLAYER_MODAL: string = "SHOW_PLAYER_MODAL";
 export const HIDE_PLAYER_MODAL: string = "HIDE_PLAYER_MODAL";
+
+// theme
+
+export const LIGHT_THEME: string = "LIGHT";
+export const DARK_THEME: string = "DARK";
