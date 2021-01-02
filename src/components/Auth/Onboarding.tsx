@@ -14,7 +14,7 @@ import { SHARED_THEME } from '../../constants/theme';
 const Onboarding: React.FC<I_OnboardingProps> = ({ showApp }): JSX.Element => {
 
   const globalState: RootStateOrAny = useSelector((state: RootStateOrAny) => state);
-  const styles: I_OnboardingStyles = getStyles(globalState)
+  const styles: I_OnboardingStyles = getStyles(globalState);
 
   const renderSlide = ({ item }: I_SlideProps): JSX.Element => {
     return (

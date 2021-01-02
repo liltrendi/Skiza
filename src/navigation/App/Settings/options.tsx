@@ -3,6 +3,7 @@ import { StackNavigationOptions } from '@react-navigation/stack';
 import { RootStateOrAny } from 'react-redux';
 import { isThemeDark } from '../../../util/theme';
 import { DARK_THEME, LIGHT_THEME } from '../../../constants/theme';
+import { CustomLeftBackButton } from '../../../components/App/headers/CustomLeftBackButton';
 
 interface I_GlobalStateProps {
   theme: string;
@@ -34,5 +35,37 @@ export const settingsHeaderOptions = (state: RootStateOrAny): StackNavigationOpt
       backgroundColor: isThemeDark(theme) ? DARK_THEME.primaryBg : LIGHT_THEME.primaryBg
 
     },
+  };
+}
+
+export const appInfoHeaderOptions = (state: RootStateOrAny): StackNavigationOptions => {
+  const {theme}: I_GlobalStateProps = state;
+  return {
+    title: 'App Info',
+    headerTitleStyle: {
+      fontFamily: "CircularStd-Bold",
+      fontSize: 23,
+      color: isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt
+    },
+    headerTitleAlign: 'left',
+    headerLeftContainerStyle: {
+      paddingLeft: 15,
+    },
+    headerRightContainerStyle: {
+      paddingRight: 15,
+      paddingBottom: 25
+    },
+    headerLeft: (props) => (
+      <CustomLeftBackButton />
+    ),
+    headerRight: (props) => (
+      <React.Fragment />
+    ),
+    headerTransparent: false,
+    headerStyle: {
+      height: 60,
+      backgroundColor: isThemeDark(theme) ? DARK_THEME.primaryBg : LIGHT_THEME.primaryBg
+
+    }
   };
 }

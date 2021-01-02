@@ -1,4 +1,4 @@
-import HomeScreen from "../../../screens/App/Home"
+import HomeScreen from "../../../screens/App/home/Home"
 
 export {
     HomeScreen

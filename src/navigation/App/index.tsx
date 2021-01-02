@@ -1,4 +1,4 @@
-import React from "react"
+import React, {useEffect, useState} from "react"
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs"
 import { HomeStackScreens } from "./Home"
 import { SearchStackScreens } from "./Search"
@@ -23,8 +23,18 @@ interface I_GlobalStateProps {
 const AppStack = createBottomTabNavigator<T_AppStackNavigatorParams>();
 
 export const AppStackScreens = (): JSX.Element => {
+
+    const [showSplashScreen, setShowSplashScreen] = useState<boolean>(true);
     const globalState: RootStateOrAny = useSelector((state: RootStateOrAny) => state);
     const {currentSong, theme}: I_GlobalStateProps = globalState;
+
+    useEffect(() => {
+        setTimeout(() => setShowSplashScreen(false), 700);
+    }, [])
+
+    if(showSplashScreen){
+        return <React.Fragment />
+    }
 
     return (
         <React.Fragment>

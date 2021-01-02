@@ -5,9 +5,10 @@ import Icon from 'react-native-vector-icons/Feather';
 import { I_SettingsAboutAppProps, I_SettingsAboutAppStyles } from './interfaces';
 import { isThemeDark } from '../../../util/theme';
 import { DARK_THEME, LIGHT_THEME } from '../../../constants/theme';
+import { useNavigation } from '@react-navigation/native';
 
 interface I_GlobalStateProps {
-    theme: string;
+    theme: string; 
 }
 
 const AboutApp: React.FC<I_SettingsAboutAppProps> = ({}): JSX.Element => {
@@ -15,8 +16,10 @@ const AboutApp: React.FC<I_SettingsAboutAppProps> = ({}): JSX.Element => {
     const {theme}: I_GlobalStateProps = globalState;
     const styles: I_SettingsAboutAppStyles = getStyles(globalState);
 
+    const navigation = useNavigation();
+
     return (
-        <TouchableOpacity activeOpacity={0.85} onPress={() => {}} style={styles.container}>
+        <TouchableOpacity activeOpacity={0.85} onPress={() => navigation.navigate("AppInfo")} style={styles.container}>
             <Icon name={"info"} size={35} color={isThemeDark(theme) ? DARK_THEME.brightColor : LIGHT_THEME.primaryTxt} style={styles.icon} />
             <View style={styles.textContainer}>
                 <Text style={styles.topText}>

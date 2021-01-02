@@ -1,4 +1,4 @@
-import SearchScreen from "./../../../screens/App/Search"
+import SearchScreen from "../../../screens/App/search/Search"
 
 export {
     SearchScreen

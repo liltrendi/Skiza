@@ -1,14 +1,14 @@
 import React from 'react'
 import { ScrollView, StyleSheet } from 'react-native'
 import { RootStateOrAny, useSelector } from 'react-redux'
-import { DARK_THEME, LIGHT_THEME } from '../../../constants/theme'
-import { isThemeDark } from '../../../util/theme'
-import AboutApp from './About'
-import { I_SettingsProps, I_SettingsStyles } from './interfaces'
-import ReportIssue from './ReportIssue'
-import ShareApp from './Share'
-import Theme from './Theme'
-
+import { DARK_THEME, LIGHT_THEME } from '../../../../constants/theme'
+import { isThemeDark } from '../../../../util/theme'
+import AboutApp from '../About'
+import { I_SettingsProps, I_SettingsStyles } from '../interfaces'
+import ReportIssue from '../ReportIssue'
+import ShareApp from '../Share'
+import Theme from '../Theme'
+ 
 interface I_GlobalStateProps {
     theme: string;
 }

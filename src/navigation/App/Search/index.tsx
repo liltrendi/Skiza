@@ -17,7 +17,7 @@ export const SearchStackScreens: React.FC<I_SearchStackScreensProps> = (): JSX.E
     return (
         <SearchStack.Navigator>
             <SearchStack.Screen name={"Search"} component={SearchScreen} options={searchHeaderOptions(globalState)} />
-            {/* add more screens to home */}
+            {/* add more screens to search */}
         </SearchStack.Navigator>
     )
 }

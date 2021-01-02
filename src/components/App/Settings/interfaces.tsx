@@ -57,3 +57,23 @@ export interface I_SettingsShareAppStyles {
     topText: TextStyle;
     bottomText: TextStyle;
 }
+
+// Settings - App Info Screen
+
+// Settings
+
+export interface I_AppInfoProps {}
+
+export interface I_AppInfoStyles {
+    container: ViewStyle;
+    innerContainer: ViewStyle;
+    appView: ViewStyle;
+    appName: TextStyle;
+    appVersion: TextStyle;
+    devView: ViewStyle;
+    devTitle: TextStyle;
+    devName: TextStyle;
+    contactView: ViewStyle;
+    contactTitle: TextStyle;
+    contactMail: TextStyle;
+}

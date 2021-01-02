@@ -42,3 +42,14 @@ export interface I_SettingsHeaderStyles {
   containerDot: ViewStyle;
   badgeText: TextStyle;
 }
+
+// App Info
+
+// Settings
+
+export interface I_CustomLeftBackButtonProps {
+}
+
+export interface I_CustomLeftBackButtonStyles {
+  icon: ViewStyle;
+}
