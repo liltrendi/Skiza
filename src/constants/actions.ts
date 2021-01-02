@@ -12,3 +12,8 @@ export const SET_CURRENT_SONG: string = "SET_CURRENT_SONG";
 export const RESET_CURRENT_SONG: string = "RESET_CURRENT_SONG";
 export const IS_PLAYING: string = "IS_PLAYING";
 export const IS_NOT_PLAYING: string = "IS_NOT_PLAYING";
+
+// player modal
+
+export const SHOW_PLAYER_MODAL: string = "SHOW_PLAYER_MODAL";
+export const HIDE_PLAYER_MODAL: string = "HIDE_PLAYER_MODAL";

@@ -29,7 +29,7 @@ interface I_GlobalStateProps {
 const SongItem: React.FC<T_Props> = ({ id, title, author, cover, setCurrentSong, setSongPlayingStatus }): JSX.Element => {
 
     const globalState: RootStateOrAny = useSelector((state: RootStateOrAny) => state);
-    const {songs: allSongs, currentSong}: I_GlobalStateProps = globalState;
+    const {songs: allSongs, currentSong, theme}: I_GlobalStateProps = globalState;
 
     const toggleOptions = (songId: string): void => {
         console.log("Options", songId)
@@ -41,9 +41,7 @@ const SongItem: React.FC<T_Props> = ({ id, title, author, cover, setCurrentSong,
         setSongPlayingStatus(song, true)
     }
 
-    const isActive: boolean = currentSong ? currentSong.id === id : false;
-
-    const styles: I_SongItemStyles = getStyles(globalState, isActive)
+    const styles: I_SongItemStyles = getStyles(globalState, id);
 
     return (
         <TouchableOpacity activeOpacity={0.9} onPress={(): void => playSong(id)} style={styles.container}>
@@ -54,7 +52,7 @@ const SongItem: React.FC<T_Props> = ({ id, title, author, cover, setCurrentSong,
                 <Text style={styles.author} numberOfLines={1}>{author}</Text>
             </View>
             <TouchableOpacity activeOpacity={0.85} onPress={(): void => toggleOptions(id)} style={styles.optionsIcon}>
-                <Icon name={"dots-vertical"} size={25} color={isThemeDark(globalState.theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt} />
+                <Icon name={"dots-vertical"} size={25} color={isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt} />
             </TouchableOpacity>
         </TouchableOpacity>
     )
@@ -76,8 +74,9 @@ export default connect(
     mapDispatchToProps
 )(SongItem)
 
-const getStyles = (state: RootStateOrAny, isActive: boolean | undefined): I_SongItemStyles => {
-    const {theme}: I_GlobalStateProps = state;
+const getStyles = (state: RootStateOrAny, songId: string): I_SongItemStyles => {
+    const {theme, currentSong}: I_GlobalStateProps = state;
+    const isActive: boolean = currentSong ? currentSong.id === songId : false;
     return StyleSheet.create<I_SongItemStyles>({
         container: {
             borderColor: isThemeDark(theme) ? DARK_THEME.lightBorder : LIGHT_THEME.darkBorder,

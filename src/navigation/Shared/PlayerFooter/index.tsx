@@ -11,24 +11,26 @@ import { I_SongSchema } from '../../../controllers/music/interfaces';
 import { deduceCoverArtToUse } from '../../../util/songs';
 import { MUSICAL_NOTE_IMAGE } from '../../../assets/images';
 import { isNullUndefined } from '../../../util/util';
-import { setSongPlayingStatus } from '../../../actions/music';
+import { setSongPlayingStatus, togglePlayerModal } from '../../../actions/music';
 
 interface I_GlobalStateProps {
     theme: string;
     currentSong: I_SongSchema | null | undefined;
     isPlaying: boolean;
+    showPlayerModal: boolean;
 }
 
 interface I_AdditionalProps extends I_PlayerFooterProps {
     setSongPlayingStatus: (song: I_SongSchema | undefined | null, status: boolean) => Promise<void>;
+    togglePlayerModal: (show: boolean) => Promise<void>;
 }
 
 type T_Props = I_PlayerFooterProps & I_AdditionalProps;
 
-const PlayerFooter: React.FC<T_Props> = ({setSongPlayingStatus}): JSX.Element => {
+const PlayerFooter: React.FC<T_Props> = ({setSongPlayingStatus, togglePlayerModal}): JSX.Element => {
 
     const globalState: RootStateOrAny = useSelector((state: RootStateOrAny) => state);
-    const {currentSong, theme, isPlaying}: I_GlobalStateProps = globalState;
+    const {currentSong, theme, isPlaying, showPlayerModal}: I_GlobalStateProps = globalState;
     const styles: I_PlayerFooterStyles = getStyles(globalState);
 
     const togglePlay = (): void => {
@@ -39,12 +41,16 @@ const PlayerFooter: React.FC<T_Props> = ({setSongPlayingStatus}): JSX.Element =>
         setSongPlayingStatus(currentSong, false);
     }
 
+    const toggleModal = (): void => {
+        togglePlayerModal(!showPlayerModal)
+    }
+
     if(isNullUndefined(currentSong)){
         return <React.Fragment />
     }
 
     return (
-        <TouchableOpacity activeOpacity={1} style={styles.container}>
+        <TouchableOpacity activeOpacity={1} style={styles.container} onPress={toggleModal}>
             <Image source={deduceCoverArtToUse(currentSong?.cover || "", MUSICAL_NOTE_IMAGE)} style={styles.thumbnail} />
             <View style={styles.textContainer}>
                 <Text style={styles.topText} numberOfLines={1}>
@@ -65,7 +71,8 @@ const mapStateToProps = () => {
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
     return {
-        setSongPlayingStatus: (song: I_SongSchema | undefined | null, status: boolean) => dispatch(setSongPlayingStatus(song, status))
+        setSongPlayingStatus: (song: I_SongSchema | undefined | null, status: boolean) => dispatch(setSongPlayingStatus(song, status)),
+        togglePlayerModal: (show: boolean) => dispatch(togglePlayerModal(show))
     }
 }
 
