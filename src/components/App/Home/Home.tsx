@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { ActivityIndicator, AppState, AppStateStatus, StyleSheet } from 'react-native';
+import { AppState, AppStateStatus, StyleSheet } from 'react-native';
 import { RootStateOrAny, useDispatch, useSelector } from 'react-redux';
 import SongList from './SongList';
 import ReadStoragePermissionBlockedError from '../Errors/Home/ReadStoragePermissionBlocked';

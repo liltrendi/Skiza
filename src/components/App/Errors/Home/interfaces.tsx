@@ -15,7 +15,7 @@ export interface I_ReadStoragePermissionBlockedStyles {
 // ReadStoragePermissionDenied
 
 export interface I_ReadExternalStoragePermissionDeniedProps { 
-    requestPermission: () => Promise<void>
+    requestReadExternalStoragePermissionAgain: () => Promise<void>
 }
 
 export interface I_ReadExternalStoragePermissionDeniedStyles {
