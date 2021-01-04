@@ -17,6 +17,9 @@ export interface I_PlayerModalStyles {
     song: TextStyle;
     artist: TextStyle;
     progressBar: ViewStyle;
+    durationView: ViewStyle;
+    start: TextStyle;
+    end: TextStyle;
     buttonsView: ViewStyle;
     shuffle: ViewStyle;
     previous: ViewStyle;

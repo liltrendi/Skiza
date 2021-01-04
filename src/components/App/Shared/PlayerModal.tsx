@@ -10,7 +10,7 @@ import { I_PlayerModalProps, I_PlayerModalStyles } from './interfaces'
 import { setSongPlayingStatus, togglePlayerModal, toggleRepeat, toggleShuffle } from '../../../actions/music';
 import { isThemeDark } from '../../../util/theme';
 import { DARK_THEME, LIGHT_THEME, SHARED_THEME } from '../../../constants/theme';
-import { deduceCoverArtToUse, showToast } from '../../../util/songs';
+import { deduceCoverArtToUse, getSongDurationInMinutes, showToast } from '../../../util/songs';
 import { I_SongSchema } from '../../../controllers/music/interfaces';
 import { MUSICAL_NOTE_IMAGE } from '../../../assets/images';
 import { isNullUndefined } from '../../../util/util';
@@ -82,33 +82,64 @@ const PlayerModal: React.FC<T_Props> = (props): JSX.Element => {
             style={styles.modal}
         >
             <View style={styles.container}>
+
                 <View style={styles.topView}>
+
                     <IoniconsIcon name={"chevron-down"} size={30} color={isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt} onPress={closeModal} />
+
                     <Text style={styles.barTitle}>
                         Now Playing
                     </Text>
+
                     <MaterialCommunityIcon name={"dots-vertical"} size={30} color={isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt} />
+
                 </View>
+
                 <View style={styles.middleView}>
                     <Image source={deduceCoverArtToUse(currentSong.cover, MUSICAL_NOTE_IMAGE)} style={styles.coverArt} />
                 </View>
+
                 <View style={styles.bottomView}>
+
                     <Text style={styles.song} numberOfLines={1}>
                         {currentSong.title}
                     </Text>
+
                     <Text style={styles.artist} numberOfLines={1}>
                         {currentSong.author}
                     </Text>
+
                     <View style={styles.progressBar}></View>
-                    <View style={styles.buttonsView}>
-                        <MaterialCommunityIcon name={songState.shuffling ? "shuffle" : "shuffle-disabled"} size={songState.shuffling ? 25 : 28} color={isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt} onPress={shuffleSongs} />
-                        <MaterialCommunityIcon name={"skip-previous"} size={50} color={isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt} />
-                        <IoniconsIcon name={songState.playing ? "pause-circle-outline" : "play-circle-outline"} size={65} color={isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt} onPress={songState.playing ? pauseSong : playSong} />
-                        <MaterialCommunityIcon name={"skip-next"} size={50} color={isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt} />
-                        <MaterialCommunityIcon name={songState.repeat === "none" ? "repeat-off" : songState.repeat === "all" ? "repeat" : "repeat-once"} size={25} color={isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt} onPress={repeatSongs} />
+
+                    <View style={styles.durationView}>
+
+                        <Text style={styles.start}>
+                            0:00
+                        </Text>
+
+                        <Text style={styles.end}>
+                            {getSongDurationInMinutes(currentSong.duration)}
+                        </Text>
                     </View>
+
+                    <View style={styles.buttonsView}>
+
+                        <MaterialCommunityIcon name={songState.shuffling ? "shuffle" : "shuffle-disabled"} size={songState.shuffling ? 25 : 28} color={isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt} onPress={shuffleSongs} />
+
+                        <MaterialCommunityIcon name={"skip-previous"} size={50} color={isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt} />
+
+                        <IoniconsIcon name={songState.playing ? "pause-circle-outline" : "play-circle-outline"} size={65} color={isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt} onPress={songState.playing ? pauseSong : playSong} />
+
+                        <MaterialCommunityIcon name={"skip-next"} size={50} color={isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt} />
+
+                        <MaterialCommunityIcon name={songState.repeat === "none" ? "repeat-off" : songState.repeat === "all" ? "repeat" : "repeat-once"} size={25} color={isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt} onPress={repeatSongs} />
+
+                    </View>
+
                     <View style={styles.placeholderView}></View>
+
                 </View>
+
             </View>
         </Modal>
     )
@@ -193,14 +224,24 @@ const getStyles = (state: RootStateOrAny): I_PlayerModalStyles => {
         progressBar: {
             backgroundColor: isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt,
             marginTop: 20,
-            marginBottom: 30,
             height: 1,
+        },
+        durationView: {
+            marginTop: 5,
+            flexDirection: "row",
+            justifyContent: "space-between"
+        },
+        start: {
+            color: isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt,
+        },
+        end: {
+            color: isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt,
         },
         buttonsView: {
             justifyContent: "space-around",
             flexDirection: "row",
             alignItems: "center",
-            marginTop: 20
+            marginTop: 30
         },
         shuffle: {},
         previous: {},

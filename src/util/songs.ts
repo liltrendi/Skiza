@@ -108,6 +108,14 @@ export const deduceCoverArtToUse = (songCover: string, placeholderImage: ImageSo
     return placeholderImage;
 }
 
+export const getSongDurationInMinutes = (duration: string): string => {
+    let hours:  number = Math.floor(parseInt(duration)/1000/60/60);
+    let minutes:  number, seconds:  number;
+    minutes = Math.floor((parseInt(duration)/1000/60/60 - hours)*60);
+    seconds = Math.floor(((parseInt(duration)/1000/60/60 - hours)*60 - minutes)*60);
+    return `${minutes < 10 ? ('0'+minutes) : minutes}:${seconds < 10 ? ('0'+seconds) : seconds}`;
+}
+
 export const showToast = (message: string): void => {
 	ToastAndroid.showWithGravityAndOffset(message, ToastAndroid.SHORT, ToastAndroid.BOTTOM, 0, 300);
 }
