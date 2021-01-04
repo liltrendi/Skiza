@@ -10,16 +10,17 @@ import { I_PlayerModalProps, I_PlayerModalStyles } from './interfaces'
 import { setSongPlayingStatus, togglePlayerModal } from '../../../actions/music';
 import { isThemeDark } from '../../../util/theme';
 import { DARK_THEME, LIGHT_THEME } from '../../../constants/theme';
-import { deduceCoverArtToUse } from '../../../util/songs';
+import { deduceCoverArtToUse, showToast } from '../../../util/songs';
 import { I_SongSchema } from '../../../controllers/music/interfaces';
 import { MUSICAL_NOTE_IMAGE } from '../../../assets/images';
 import { isNullUndefined } from '../../../util/util';
+import { I_SongStateInitialProps } from '../../../reducers/player/songState';
 
 interface I_GlobalStateProps {
     theme: string;
     showPlayerModal: boolean;
     currentSong: I_SongSchema;
-    isPlaying: boolean;
+    songState: I_SongStateInitialProps;
 }
 
 interface I_AdditionalProps extends I_PlayerModalProps {
@@ -34,7 +35,7 @@ const SCREEN_WIDTH = Dimensions.get('window').width;
 
 const PlayerModal: React.FC<T_Props> = ({togglePlayerModal, setSongPlayingStatus}): JSX.Element => {
     const globalState: RootStateOrAny = useSelector((state: RootStateOrAny) => state);
-    const {showPlayerModal, theme, currentSong, isPlaying}: I_GlobalStateProps = globalState;
+    const {showPlayerModal, theme, currentSong, songState}: I_GlobalStateProps = globalState;
 
     const closeModal = (): void => {
         togglePlayerModal(false);
@@ -46,6 +47,10 @@ const PlayerModal: React.FC<T_Props> = ({togglePlayerModal, setSongPlayingStatus
 
     const pauseSong = (): void => {
         setSongPlayingStatus(currentSong, false);
+    }
+
+    const toggleShuffle = (): void => {
+        showToast("Shuffle: On")
     }
 
     useEffect(() => {
@@ -87,9 +92,9 @@ const PlayerModal: React.FC<T_Props> = ({togglePlayerModal, setSongPlayingStatus
                     </Text>
                     <View style={styles.progressBar}></View>
                     <View style={styles.buttonsView}>
-                        <IoniconsIcon name={"shuffle"} size={25} color={isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt} />
+                        <IoniconsIcon name={"shuffle"} size={25} color={isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt} onPress={toggleShuffle} />
                         <MaterialCommunityIcon name={"skip-previous"} size={50} color={isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt} />
-                        <IoniconsIcon name={isPlaying ? "pause-circle-outline" : "play-circle-outline"} size={65} color={isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt} onPress={isPlaying ? pauseSong : playSong} />
+                        <IoniconsIcon name={songState.playing ? "pause-circle-outline" : "play-circle-outline"} size={65} color={isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt} onPress={songState.playing ? pauseSong : playSong} />
                         <MaterialCommunityIcon name={"skip-next"} size={50} color={isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt} />
                         <MaterialCommunityIcon name={"repeat"} size={25} color={isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt} />
                     </View>

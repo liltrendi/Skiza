@@ -12,12 +12,13 @@ import { deduceCoverArtToUse } from '../../../util/songs';
 import { MUSICAL_NOTE_IMAGE } from '../../../assets/images';
 import { isNullUndefined } from '../../../util/util';
 import { setSongPlayingStatus, togglePlayerModal } from '../../../actions/music';
+import { I_SongStateInitialProps } from '../../../reducers/player/songState';
 
 interface I_GlobalStateProps {
     theme: string;
     currentSong: I_SongSchema | null | undefined;
-    isPlaying: boolean;
     showPlayerModal: boolean;
+    songState: I_SongStateInitialProps;
 }
 
 interface I_AdditionalProps extends I_PlayerFooterProps {
@@ -30,7 +31,7 @@ type T_Props = I_PlayerFooterProps & I_AdditionalProps;
 const PlayerFooter: React.FC<T_Props> = ({setSongPlayingStatus, togglePlayerModal}): JSX.Element => {
 
     const globalState: RootStateOrAny = useSelector((state: RootStateOrAny) => state);
-    const {currentSong, theme, isPlaying, showPlayerModal}: I_GlobalStateProps = globalState;
+    const {currentSong, theme, showPlayerModal, songState}: I_GlobalStateProps = globalState;
     const styles: I_PlayerFooterStyles = getStyles(globalState);
 
     const togglePlay = (): void => {
@@ -60,7 +61,7 @@ const PlayerFooter: React.FC<T_Props> = ({setSongPlayingStatus, togglePlayerModa
                     {currentSong?.author}
                 </Text>
             </View>
-            <Icon name={isPlaying ? "pause" : "play"} size={32} color={isThemeDark(theme) ? DARK_THEME.brightColor : LIGHT_THEME.primaryTxt} style={styles.icon} onPress={isPlaying ? togglePause : togglePlay} />
+            <Icon name={songState.playing ? "pause" : "play"} size={32} color={isThemeDark(theme) ? DARK_THEME.brightColor : LIGHT_THEME.primaryTxt} style={styles.icon} onPress={songState.playing ? togglePause : togglePlay} />
         </TouchableOpacity>
     )
 }

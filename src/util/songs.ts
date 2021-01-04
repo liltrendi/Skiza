@@ -1,4 +1,4 @@
-import { ImageSourcePropType } from "react-native";
+import { ImageSourcePropType, ToastAndroid } from "react-native";
 import {I_SongSchema, I_UniqueArtist} from "../controllers/music/interfaces"
 import {capitalizeFirstLetter, isNullUndefined} from "./util"
 
@@ -106,4 +106,8 @@ export const deduceCoverArtToUse = (songCover: string, placeholderImage: ImageSo
     }
 
     return placeholderImage;
+}
+
+export const showToast = (message: string): void => {
+	ToastAndroid.showWithGravityAndOffset(message, ToastAndroid.SHORT, ToastAndroid.BOTTOM, 0, 300);
 }

@@ -4,8 +4,8 @@ import { onboardingReducer } from './onboarding';
 import { storageStatusReducer } from './permissions/storage';
 import { songsReducer } from './music/songs';
 import { currentSongReducer } from './player/currentSong';
-import { isPlayingReducer } from './player/isPlaying';
 import { playerModalReducer } from './player/modal';
+import { songStateReducer } from './player/songState';
 
 export const rootReducer = combineReducers({
     theme: themeReducer,
@@ -13,6 +13,6 @@ export const rootReducer = combineReducers({
     readExternalStoragePermission: storageStatusReducer,
     songs: songsReducer,
     currentSong: currentSongReducer,
-    isPlaying: isPlayingReducer,
+    songState: songStateReducer,
     showPlayerModal: playerModalReducer
 });
