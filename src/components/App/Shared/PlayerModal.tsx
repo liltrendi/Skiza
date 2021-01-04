@@ -9,7 +9,7 @@ import { AnyAction } from 'redux';
 import { I_PlayerModalProps, I_PlayerModalStyles } from './interfaces'
 import { setSongPlayingStatus, togglePlayerModal, toggleRepeat, toggleShuffle } from '../../../actions/music';
 import { isThemeDark } from '../../../util/theme';
-import { DARK_THEME, LIGHT_THEME, SHARED_THEME } from '../../../constants/theme';
+import { DARK_THEME, LIGHT_THEME } from '../../../constants/theme';
 import { deduceCoverArtToUse, getSongDurationInMinutes, showToast } from '../../../util/songs';
 import { I_SongSchema } from '../../../controllers/music/interfaces';
 import { MUSICAL_NOTE_IMAGE } from '../../../assets/images';
@@ -227,15 +227,17 @@ const getStyles = (state: RootStateOrAny): I_PlayerModalStyles => {
             height: 1,
         },
         durationView: {
-            marginTop: 5,
+            marginTop: 8,
             flexDirection: "row",
             justifyContent: "space-between"
         },
         start: {
             color: isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt,
+            fontFamily: "CircularStd-Book",
         },
         end: {
             color: isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt,
+            fontFamily: "CircularStd-Book",
         },
         buttonsView: {
             justifyContent: "space-around",
