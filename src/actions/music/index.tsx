@@ -33,7 +33,7 @@ export const setCurrentSong = (song: I_SongSchema | undefined, state: RootStateO
     }
 }
 
-export const resetCurrentSong = (): ThunkAction<Promise<void>, {}, {}, AnyAction> => {
+export const resetCurrentSong = (state: RootStateOrAny): ThunkAction<Promise<void>, {}, {}, AnyAction> => {
     return async (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {
         dispatch({ type: RESET_CURRENT_SONG, payload: null });
     }

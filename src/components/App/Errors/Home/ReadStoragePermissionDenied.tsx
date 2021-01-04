@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { connect, RootStateOrAny, useSelector } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
@@ -10,6 +10,7 @@ import { I_ReadExternalStoragePermissionDeniedProps, I_ReadExternalStoragePermis
 import { HOME_FOLDER_ERROR_ANIMATION } from '../../../../assets/animations';
 import { isThemeDark } from '../../../../util/theme';
 import { DARK_THEME, LIGHT_THEME, SHARED_THEME } from '../../../../constants/theme';
+import { resetCurrentSong } from '../../../../actions/music';
 
 interface I_GlobalStateProps {
     theme: string;
@@ -17,14 +18,20 @@ interface I_GlobalStateProps {
 
 interface I_AdditionalProps {
     requestReadExternalStoragePermissionAgain: (state: RootStateOrAny) => Promise<void>;
+    resetCurrentSong: (state: RootStateOrAny) => Promise<void>;
 }
 
 type T_Props = I_ReadExternalStoragePermissionDeniedProps & I_AdditionalProps;
 
-const ReadExternalStoragePermissionDenied: React.FC<T_Props> = ({requestReadExternalStoragePermissionAgain}): JSX.Element => {
+const ReadExternalStoragePermissionDenied: React.FC<T_Props> = ({requestReadExternalStoragePermissionAgain, resetCurrentSong}): JSX.Element => {
     const folderAnimation = HOME_FOLDER_ERROR_ANIMATION;
     const globalState: RootStateOrAny = useSelector((state: RootStateOrAny) => state);
     const styles: I_ReadExternalStoragePermissionDeniedStyles = getStyles(globalState);
+
+    useEffect(() => {
+        resetCurrentSong(globalState)
+    }, []);
+
     return (
         <View style={styles.container}>
             <LottieView
@@ -48,7 +55,8 @@ const mapStateToProps = () => {
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
     return {
-        requestReadExternalStoragePermissionAgain: (state: RootStateOrAny) => dispatch(requestReadExternalStoragePermissionAgain(state))
+        requestReadExternalStoragePermissionAgain: (state: RootStateOrAny) => dispatch(requestReadExternalStoragePermissionAgain(state)),
+        resetCurrentSong: (state: RootStateOrAny) => dispatch(resetCurrentSong(state))
     }
 }
 

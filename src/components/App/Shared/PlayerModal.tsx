@@ -32,6 +32,7 @@ interface I_AdditionalProps extends I_PlayerModalProps {
     toggleShuffle: (shuffle: boolean) => Promise<void>;
     toggleRepeat: (mode: string) => Promise<void>;
     setCurrentSong: (song: I_SongSchema | undefined, state: RootStateOrAny) => Promise<void>;
+    setSongQueue: (song: I_SongSchema | undefined, songs: I_SongSchema[], shuffle: boolean) => Promise<void>;
 }
 
 type T_Props = I_PlayerModalProps & I_AdditionalProps;
@@ -40,10 +41,9 @@ const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
 const PlayerModal: React.FC<T_Props> = (props): JSX.Element => {
-    const {togglePlayerModal, setSongPlayingStatus, toggleRepeat, toggleShuffle, setCurrentSong} = props;
+    const {togglePlayerModal, setSongPlayingStatus, toggleRepeat, toggleShuffle, setCurrentSong, setSongQueue} = props;
     const globalState: RootStateOrAny = useSelector((state: RootStateOrAny) => state);
-    const {songs}: I_GlobalStateProps = globalState;
-    const {showPlayerModal, theme, currentSong, songState, songQueue}: I_GlobalStateProps = globalState;
+    const {showPlayerModal, theme, currentSong, songState, songQueue, songs}: I_GlobalStateProps = globalState;
 
     const closeModal = (): void => {
         togglePlayerModal(false);
@@ -78,6 +78,7 @@ const PlayerModal: React.FC<T_Props> = (props): JSX.Element => {
     const shuffleSongs = (): void => {
         showToast(`Shuffle: ${songState.shuffling ? "Off" : "On"}`);
         toggleShuffle(!songState.shuffling);
+        setSongQueue(currentSong, songs, !songState.shuffling);
     }
 
     const repeatSongs = (): void => {

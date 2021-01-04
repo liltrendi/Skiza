@@ -1,18 +1,27 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import LottieView from 'lottie-react-native';
-import { RootStateOrAny, useSelector } from 'react-redux';
+import { connect, RootStateOrAny, useSelector } from 'react-redux';
 import { openSettings } from 'react-native-permissions';
 import { I_ReadStoragePermissionBlockedProps, I_ReadStoragePermissionBlockedStyles } from './interfaces'
 import { HOME_FOLDER_ERROR_ANIMATION } from '../../../../assets/animations';
 import { isThemeDark } from '../../../../util/theme';
 import { DARK_THEME, LIGHT_THEME, SHARED_THEME } from '../../../../constants/theme';
+import { resetCurrentSong } from '../../../../actions/music';
+import { ThunkDispatch } from 'redux-thunk';
+import { AnyAction } from 'redux';
 
 interface I_GlobalStateProps {
     theme: string;
 }
 
-const ReadStoragePermissionBlocked: React.FC<I_ReadStoragePermissionBlockedProps> = (): JSX.Element => {
+interface I_AdditionalProps {
+    resetCurrentSong: (state: RootStateOrAny) => Promise<void>;
+}
+
+type T_Props = I_ReadStoragePermissionBlockedProps & I_AdditionalProps;
+
+const ReadExternalStoragePermissionBlocked: React.FC<T_Props> = ({resetCurrentSong}): JSX.Element => {
     const folderAnimation = HOME_FOLDER_ERROR_ANIMATION;
     const globalState: RootStateOrAny = useSelector((state: RootStateOrAny) => state);
 
@@ -21,6 +30,10 @@ const ReadStoragePermissionBlocked: React.FC<I_ReadStoragePermissionBlockedProps
     }
 
     const styles: I_ReadStoragePermissionBlockedStyles = getStyles(globalState);
+
+    useEffect(() => {
+        resetCurrentSong(globalState)
+    }, []);
 
     return (
         <View style={styles.container}>
@@ -42,7 +55,20 @@ const ReadStoragePermissionBlocked: React.FC<I_ReadStoragePermissionBlockedProps
     )
 }
 
-export default ReadStoragePermissionBlocked;
+const mapStateToProps = () => {
+    return {}
+}
+
+const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
+    return {
+        resetCurrentSong: (state: RootStateOrAny) => dispatch(resetCurrentSong(state))
+    }
+}
+
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(ReadExternalStoragePermissionBlocked)
 
 const getStyles = (state: RootStateOrAny): I_ReadStoragePermissionBlockedStyles => {
     const {theme}: I_GlobalStateProps = state;
