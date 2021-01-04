@@ -7,7 +7,7 @@ import { RootStateOrAny, useSelector, connect } from 'react-redux'
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import { I_PlayerModalProps, I_PlayerModalStyles } from './interfaces'
-import { setSongPlayingStatus, togglePlayerModal, toggleRepeat, toggleShuffle } from '../../../actions/music';
+import { setCurrentSong, setSongPlayingStatus, setSongQueue, togglePlayerModal, toggleRepeat, toggleShuffle } from '../../../actions/music';
 import { isThemeDark } from '../../../util/theme';
 import { DARK_THEME, LIGHT_THEME } from '../../../constants/theme';
 import { deduceCoverArtToUse, getSongDurationInMinutes, showToast } from '../../../util/songs';
@@ -15,12 +15,15 @@ import { I_SongSchema } from '../../../controllers/music/interfaces';
 import { MUSICAL_NOTE_IMAGE } from '../../../assets/images';
 import { isNullUndefined } from '../../../util/util';
 import { I_SongStateInitialProps } from '../../../reducers/player/songState';
+import { I_SongQueue } from '../../../reducers/music/queue';
 
 interface I_GlobalStateProps {
     theme: string;
     showPlayerModal: boolean;
     currentSong: I_SongSchema;
     songState: I_SongStateInitialProps;
+    songQueue: I_SongQueue;
+    songs: I_SongSchema[]; 
 }
 
 interface I_AdditionalProps extends I_PlayerModalProps {
@@ -28,6 +31,7 @@ interface I_AdditionalProps extends I_PlayerModalProps {
     setSongPlayingStatus: (song: I_SongSchema | undefined | null, status: boolean) => Promise<void>;
     toggleShuffle: (shuffle: boolean) => Promise<void>;
     toggleRepeat: (mode: string) => Promise<void>;
+    setCurrentSong: (song: I_SongSchema | undefined, state: RootStateOrAny) => Promise<void>;
 }
 
 type T_Props = I_PlayerModalProps & I_AdditionalProps;
@@ -36,9 +40,10 @@ const SCREEN_HEIGHT = Dimensions.get('window').height;
 const SCREEN_WIDTH = Dimensions.get('window').width;
 
 const PlayerModal: React.FC<T_Props> = (props): JSX.Element => {
-    const {togglePlayerModal, setSongPlayingStatus, toggleRepeat, toggleShuffle} = props;
+    const {togglePlayerModal, setSongPlayingStatus, toggleRepeat, toggleShuffle, setCurrentSong} = props;
     const globalState: RootStateOrAny = useSelector((state: RootStateOrAny) => state);
-    const {showPlayerModal, theme, currentSong, songState}: I_GlobalStateProps = globalState;
+    const {songs}: I_GlobalStateProps = globalState;
+    const {showPlayerModal, theme, currentSong, songState, songQueue}: I_GlobalStateProps = globalState;
 
     const closeModal = (): void => {
         togglePlayerModal(false);
@@ -50,6 +55,24 @@ const PlayerModal: React.FC<T_Props> = (props): JSX.Element => {
 
     const pauseSong = (): void => {
         setSongPlayingStatus(currentSong, false);
+    }
+
+    const playNext = (): void => {
+        if(isNullUndefined(currentSong)){
+            return;
+        }
+
+        const song: I_SongSchema | undefined = songs.find((item: I_SongSchema) => item.id === songQueue.next);
+        setCurrentSong(song, globalState);
+    }
+
+    const playPrevious = (): void => {
+        if(isNullUndefined(currentSong)){
+            return;
+        }
+
+        const song: I_SongSchema | undefined = songs.find((item: I_SongSchema) => item.id === songQueue.prev);
+        setCurrentSong(song, globalState);
     }
 
     const shuffleSongs = (): void => {
@@ -126,11 +149,11 @@ const PlayerModal: React.FC<T_Props> = (props): JSX.Element => {
 
                         <MaterialCommunityIcon name={songState.shuffling ? "shuffle" : "shuffle-disabled"} size={songState.shuffling ? 25 : 28} color={isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt} onPress={shuffleSongs} />
 
-                        <MaterialCommunityIcon name={"skip-previous"} size={50} color={isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt} />
+                        <MaterialCommunityIcon name={"skip-previous"} size={50} color={isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt} onPress={playPrevious} />
 
                         <IoniconsIcon name={songState.playing ? "pause-circle-outline" : "play-circle-outline"} size={65} color={isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt} onPress={songState.playing ? pauseSong : playSong} />
 
-                        <MaterialCommunityIcon name={"skip-next"} size={50} color={isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt} />
+                        <MaterialCommunityIcon name={"skip-next"} size={50} color={isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt} onPress={playNext} />
 
                         <MaterialCommunityIcon name={songState.repeat === "none" ? "repeat-off" : songState.repeat === "all" ? "repeat" : "repeat-once"} size={25} color={isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt} onPress={repeatSongs} />
 
@@ -155,6 +178,8 @@ const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
         setSongPlayingStatus: (song: I_SongSchema | undefined | null, status: boolean) => dispatch(setSongPlayingStatus(song, status)),
         toggleShuffle: (shuffle: boolean) => dispatch(toggleShuffle(shuffle)),
         toggleRepeat: (mode: string) => dispatch(toggleRepeat(mode)),
+        setCurrentSong: (song: I_SongSchema | undefined, state: RootStateOrAny) => dispatch(setCurrentSong(song, state)),
+        setSongQueue: (song: I_SongSchema | undefined, songs: I_SongSchema[], shuffle: boolean) => dispatch(setSongQueue(song, songs, shuffle))
     }
 }
 

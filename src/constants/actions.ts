@@ -8,6 +8,7 @@ export const ONBOARDING_COMPLETE: string = "ONBOARDING_COMPLETE";
 // music
 
 export const FETCHED_SONGS: string = "FETCHED_SONGS";
+export const SET_SONG_QUEUE: string = "SET_SONG_QUEUE";
 export const SET_CURRENT_SONG: string = "SET_CURRENT_SONG";
 export const RESET_CURRENT_SONG: string = "RESET_CURRENT_SONG";
 export const IS_PLAYING: string = "IS_PLAYING";

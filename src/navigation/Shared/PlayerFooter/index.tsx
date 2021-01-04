@@ -24,7 +24,7 @@ interface I_GlobalStateProps {
 interface I_AdditionalProps extends I_PlayerFooterProps {
     setSongPlayingStatus: (song: I_SongSchema | undefined | null, status: boolean) => Promise<void>;
     togglePlayerModal: (show: boolean) => Promise<void>;
-}
+} 
 
 type T_Props = I_PlayerFooterProps & I_AdditionalProps;
 

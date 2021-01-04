@@ -15,7 +15,13 @@ interface I_GlobalStateProps {
     theme: string;
 }
 
-const ReadExternalStoragePermissionDenied: React.FC<I_ReadExternalStoragePermissionDeniedProps> = ({requestPermission}): JSX.Element => {
+interface I_AdditionalProps {
+    requestReadExternalStoragePermissionAgain: (state: RootStateOrAny) => Promise<void>;
+}
+
+type T_Props = I_ReadExternalStoragePermissionDeniedProps & I_AdditionalProps;
+
+const ReadExternalStoragePermissionDenied: React.FC<T_Props> = ({requestReadExternalStoragePermissionAgain}): JSX.Element => {
     const folderAnimation = HOME_FOLDER_ERROR_ANIMATION;
     const globalState: RootStateOrAny = useSelector((state: RootStateOrAny) => state);
     const styles: I_ReadExternalStoragePermissionDeniedStyles = getStyles(globalState);
@@ -29,7 +35,7 @@ const ReadExternalStoragePermissionDenied: React.FC<I_ReadExternalStoragePermiss
             <Text style={styles.screenText}>
                 Oops! We can't find any songs.
             </Text>
-            <TouchableOpacity style={styles.button} activeOpacity={0.85} onPress={requestPermission}>
+            <TouchableOpacity style={styles.button} activeOpacity={0.85} onPress={() => requestReadExternalStoragePermissionAgain(globalState)}>
                 <Text style={styles.buttonText}>Rescan</Text>
             </TouchableOpacity>
         </View>
@@ -42,7 +48,7 @@ const mapStateToProps = () => {
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
     return {
-        requestPermission: () => dispatch(requestReadExternalStoragePermissionAgain())
+        requestReadExternalStoragePermissionAgain: (state: RootStateOrAny) => dispatch(requestReadExternalStoragePermissionAgain(state))
     }
 }
 

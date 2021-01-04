@@ -1,6 +1,8 @@
 import { ImageSourcePropType, ToastAndroid } from "react-native";
+import * as _ from "lodash";
 import {I_SongSchema, I_UniqueArtist} from "../controllers/music/interfaces"
 import {capitalizeFirstLetter, isNullUndefined} from "./util"
+import { I_SongQueue } from "../reducers/music/queue";
 
 const uuid = require('react-native-uuid');
 
@@ -114,6 +116,22 @@ export const getSongDurationInMinutes = (duration: string): string => {
     minutes = Math.floor((parseInt(duration)/1000/60/60 - hours)*60);
     seconds = Math.floor(((parseInt(duration)/1000/60/60 - hours)*60 - minutes)*60);
     return `${minutes < 10 ? ('0'+minutes) : minutes}:${seconds < 10 ? ('0'+seconds) : seconds}`;
+}
+
+export const getSongQueue = (currentSongId: string, songs: I_SongSchema[], shuffle: boolean): I_SongQueue => {
+    let songQueue: string[] = [];
+
+    let songList: I_SongSchema[] = shuffle ? _.shuffle(songs) : _.cloneDeep(songs);
+
+    //set the song index to the first song's if no song is playing
+    let songIndex: number = currentSongId.length === 0 ? 0 : songList.findIndex((item: I_SongSchema) => item.id === currentSongId);
+
+    let nextSongs: string[] = songList.slice(songIndex + 1).map(item => item.id);
+    let priorSongs: string[] = songList.slice(0, songList.length - nextSongs.length).map(item => item.id);
+
+    songQueue = songQueue.concat(nextSongs, priorSongs);
+
+    return {queue: songQueue, next: songQueue[0], prev: songQueue[songQueue.length - 2]};
 }
 
 export const showToast = (message: string): void => {

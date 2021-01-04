@@ -11,7 +11,14 @@ import { I_OnboardingProps, I_SlideProps, I_OnboardingStyles} from "./interfaces
 import { T_Slide } from './types';
 import { SHARED_THEME } from '../../constants/theme';
 
-const Onboarding: React.FC<I_OnboardingProps> = ({ showApp }): JSX.Element => {
+
+interface I_AdditionalProps {
+  showApp: (state: RootStateOrAny) => Promise<void>;
+}
+
+type T_Props = I_OnboardingProps & I_AdditionalProps;
+
+const Onboarding: React.FC<T_Props> = ({ showApp }): JSX.Element => {
 
   const globalState: RootStateOrAny = useSelector((state: RootStateOrAny) => state);
   const styles: I_OnboardingStyles = getStyles(globalState);
@@ -33,7 +40,7 @@ const Onboarding: React.FC<I_OnboardingProps> = ({ showApp }): JSX.Element => {
       <TouchableOpacity
         activeOpacity={0.65}
         style={styles.doneButtonView}
-        onPress={showApp}
+        onPress={() => showApp(globalState)}
       >
         <Text style={styles.doneButtonText}>Get Started</Text>
       </TouchableOpacity>
@@ -110,7 +117,7 @@ const mapStateToProps = () => {
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
   return {
-    showApp: () => dispatch(completeOnboarding())
+    showApp: (state: RootStateOrAny) => dispatch(completeOnboarding(state))
   }
 }
 

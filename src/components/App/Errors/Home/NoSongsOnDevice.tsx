@@ -8,22 +8,32 @@ import LottieView from 'lottie-react-native';
 import { openSettings } from 'react-native-permissions';
 import { I_NoSongsOnDeviceStyles, I_NoSongsOnDeviceProps } from "./interfaces"
 import { I_ReadExternalStoragePermissionStatusConfig } from "../../Home/interfaces"
-import { fetchSongs } from '../../../../actions/music';
+import { fetchSongs, setSongQueue } from '../../../../actions/music';
 import { HOME_NOT_FOUND_ANIMATION } from '../../../../assets/animations';
 import { I_SongSchema } from '../../../../controllers/music/interfaces';
 import { isThemeDark } from '../../../../util/theme';
 import { DARK_THEME, LIGHT_THEME, SHARED_THEME } from '../../../../constants/theme';
+import { I_SongStateInitialProps } from '../../../../reducers/player/songState';
 
 interface I_GlobalStateProps {
     theme: string;
-    currentSong: null | I_SongSchema;
+    currentSong: I_SongSchema;
+    songs: I_SongSchema[];
+    songState: I_SongStateInitialProps;
 }
 
-const NoSongsOnDevice: React.FC<I_NoSongsOnDeviceProps> = ({fetchSongs}): JSX.Element => {
+interface I_AdditionalProps {
+    setSongQueue: (song: I_SongSchema | undefined, songs: I_SongSchema[], shuffle: boolean) => Promise<void>;
+}
+
+type T_Props = I_NoSongsOnDeviceProps & I_AdditionalProps;
+
+const NoSongsOnDevice: React.FC<T_Props> = ({fetchSongs, setSongQueue}): JSX.Element => {
 
     const noSongsAnimation = HOME_NOT_FOUND_ANIMATION;
 
     const globalState: RootStateOrAny = useSelector((state: RootStateOrAny) => state);
+    const {currentSong, songs, songState}: I_GlobalStateProps = globalState;
     const readExternalStoragePermission: string = globalState.readExternalStoragePermission;
 
     const readExternalStoragePermissionStatus: I_ReadExternalStoragePermissionStatusConfig = {
@@ -51,6 +61,12 @@ const NoSongsOnDevice: React.FC<I_NoSongsOnDeviceProps> = ({fetchSongs}): JSX.El
                 <TouchableOpacity style={styles.button} activeOpacity={0.85} onPress={() => {
                     if(readExternalStoragePermissionStatus.granted){
                         fetchSongs()
+                            .then(() => {
+                                setSongQueue(currentSong, songs, songState.shuffling)
+                            })
+                            .catch((err: Error) => {
+                                
+                            })
                     }else{
                         Alert.alert("Permission Denied", "Please grant Skiza access to your storage from your device Settings", [{text: "Allow access", onPress: openSettings }], { cancelable: true })
                     }
@@ -68,7 +84,8 @@ const mapStateToProps = () => {
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
     return {
-        fetchSongs: () => dispatch(fetchSongs())
+        fetchSongs: () => dispatch(fetchSongs()),
+        setSongQueue: (song: I_SongSchema | undefined, songs: I_SongSchema[], shuffle: boolean) => dispatch(setSongQueue(song, songs, shuffle))
     }
 }
   
