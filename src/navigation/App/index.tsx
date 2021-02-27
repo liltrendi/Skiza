@@ -49,7 +49,7 @@ export const AppStackScreens = (): JSX.Element => {
                 <AppStack.Screen name={"Home"} component={HomeStackScreens} />
                 <AppStack.Screen name={"Search"} component={SearchStackScreens} />
                 <AppStack.Screen name={"Settings"} component={SettingsStackScreens} />
-                <AppStack.Screen name={"CreatePlaylist"} component={CreatePlaylist} options={{}} />
+                <AppStack.Screen name={"CreatePlaylist"} component={CreatePlaylist} />
             </AppStack.Navigator>
             {showPlayerModal && <PlayerModal />}
             {currentSong && <PlayerFooter />}

@@ -13,12 +13,12 @@ interface I_TabBarIconProps {
 
 interface I_ScreenOptionsProps {
     tabBarIcon: ({ }: I_TabBarIconProps) => JSX.Element;
-    tabBarButton: () => null | undefined;
+    tabBarButton: (() => null) | undefined;
 }
 
 type T_ScreenOptions = ({ }: I_RouteProps) => I_ScreenOptionsProps
 
-const routesToExclude: Array<string> = [
+const routesToExclude: string[] = [
     "CreatePlaylist"
 ];
 

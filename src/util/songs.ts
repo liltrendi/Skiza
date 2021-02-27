@@ -11,7 +11,7 @@ export function getFolder(path: string): string {
 	return dirArr[dirArr.length - 2];
 }
 
-export async function restructureFetchedSongs(fetchedSongs: Promise<Array<I_SongSchema>>): Promise<Array<I_SongSchema>>{
+export async function restructureFetchedSongs(fetchedSongs: Promise<I_SongSchema[]>): Promise<I_SongSchema[]>{
     if(isNullUndefined(fetchedSongs)){
         return [];
     }

@@ -18,6 +18,7 @@ export const IS_NOT_SHUFFLING: string = "SHUFFLE_OFF";
 export const REPEAT_NONE: string = "REPEAT_NONE";
 export const REPEAT_ONE: string = "REPEAT_ONE";
 export const REPEAT_ALL: string = "REPEAT_ALL";
+export const CREATE_PLAYLIST: string = "CREATE_PLAYLIST";
 
 // player modal
 

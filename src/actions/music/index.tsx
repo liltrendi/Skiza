@@ -1,11 +1,14 @@
 import { RootStateOrAny } from "react-redux";
 import { AnyAction } from "redux"
 import { ThunkAction, ThunkDispatch } from "redux-thunk"
-import { FETCHED_SONGS, HIDE_PLAYER_MODAL, IS_NOT_PLAYING, IS_NOT_SHUFFLING, IS_PLAYING, IS_SHUFFLING, REPEAT_ALL, REPEAT_NONE, REPEAT_ONE, RESET_CURRENT_SONG, SET_CURRENT_SONG, SET_SONG_QUEUE, SHOW_PLAYER_MODAL } from "../../constants/actions";
+import { CREATE_PLAYLIST, FETCHED_SONGS, HIDE_PLAYER_MODAL, IS_NOT_PLAYING, IS_NOT_SHUFFLING, IS_PLAYING, IS_SHUFFLING, REPEAT_ALL, REPEAT_NONE, REPEAT_ONE, RESET_CURRENT_SONG, SET_CURRENT_SONG, SET_SONG_QUEUE, SHOW_PLAYER_MODAL } from "../../constants/actions";
 import { fetchSongsFromLocalStorage, defaultSongOptions } from "../../controllers/music/getSongs";
-import { I_SongSchema } from '../../controllers/music/interfaces';
+import { I_Playlist, I_SongSchema } from '../../controllers/music/interfaces';
+import { getCurrentPlaylists } from "../../controllers/music/playlists";
 import { I_SongStateInitialProps } from "../../reducers/player/songState";
 import { getSongQueue } from "../../util/songs";
+
+const uuid = require('react-native-uuid');
 
 interface I_GlobalStateProps {
     songs: I_SongSchema[];
@@ -60,5 +63,13 @@ export const toggleShuffle = (shuffle: boolean): ThunkAction<Promise<void>, {}, 
 export const toggleRepeat = (mode: string): ThunkAction<Promise<void>, {}, {}, AnyAction> => {
     return async (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {
         dispatch({ type: mode === "none" ? REPEAT_ALL : mode === "all" ? REPEAT_ONE : REPEAT_NONE })
+    }
+}
+
+export const createPlaylist = (state: RootStateOrAny, playlistName: string): ThunkAction<Promise<void>, {}, {}, AnyAction> => {
+    let newPlaylist: I_Playlist = {name: playlistName, id: uuid.v4(), songs: []};
+    return async (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {
+        let currentPlaylists: I_Playlist[] = await getCurrentPlaylists(state);
+        dispatch({ type: CREATE_PLAYLIST, payload: [...currentPlaylists, newPlaylist] });
     }
 }

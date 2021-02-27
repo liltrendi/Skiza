@@ -1,29 +1,45 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import { RootStateOrAny, useSelector } from 'react-redux';
+import { connect, RootStateOrAny, useSelector } from 'react-redux';
+import { ThunkDispatch } from 'redux-thunk';
+import { AnyAction } from 'redux';
 import { Input, Item } from 'native-base'
 import { useNavigation } from '@react-navigation/native';
 import { I_CreatePlaylistProps, I_CreatePlaylistStyles } from './interfaces'
-import { I_SongSchema } from '../../../controllers/music/interfaces';
+import { I_Playlist, I_SongSchema } from '../../../controllers/music/interfaces';
 import { isThemeDark } from '../../../util/theme';
 import { DARK_THEME, LIGHT_THEME, SHARED_THEME } from '../../../constants/theme';
 import { widthPercentageToDP as wdp } from 'react-native-responsive-screen';
+import { createPlaylist } from '../../../actions/music';
 
 interface I_GlobalStateProps {
     theme: string;
     songs: I_SongSchema[];
     currentSong: I_SongSchema;
+    playlists: I_Playlist[];
 }
 
-const CreatePlaylist: React.FC<I_CreatePlaylistProps> = (): JSX.Element => {
+interface I_AdditionalProps {
+    createPlaylist: (state: RootStateOrAny, playlistName: string) => Promise<void>;
+}
+
+type T_Props = I_CreatePlaylistProps & I_AdditionalProps;
+
+const CreatePlaylist: React.FC<T_Props> = ({createPlaylist}): JSX.Element => {
     const navigation = useNavigation();
     const [playlistName, setPlaylistName] = useState<string>("");
 
     const globalState: RootStateOrAny = useSelector((state: RootStateOrAny) => state);
-    const {}: I_GlobalStateProps = globalState;
+    const {playlists}: I_GlobalStateProps = globalState;
     const styles: I_CreatePlaylistStyles = getStyles(globalState);
 
     const onChangeText = (text: string): void => setPlaylistName(text);
+
+    const makePlaylist = (): void => {
+        createPlaylist(globalState, playlistName);
+        setPlaylistName("");
+        navigation.goBack();
+    };
 
     return (
         <View style={styles.container}>
@@ -37,7 +53,7 @@ const CreatePlaylist: React.FC<I_CreatePlaylistProps> = (): JSX.Element => {
                         Cancel
                     </Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.create} activeOpacity={0.85}>
+                <TouchableOpacity style={styles.create} activeOpacity={0.85} onPress={makePlaylist}>
                     <Text style={styles.createText}>
                         Create
                     </Text>
@@ -47,7 +63,20 @@ const CreatePlaylist: React.FC<I_CreatePlaylistProps> = (): JSX.Element => {
     )
 }
 
-export default CreatePlaylist;
+const mapStateToProps = () => {
+    return {}
+}
+
+const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
+    return {
+        createPlaylist: (state: RootStateOrAny, playlistName: string) => dispatch(createPlaylist(state, playlistName))
+    }
+}
+  
+export default connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(CreatePlaylist)
 
 const getStyles = (state: RootStateOrAny): I_CreatePlaylistStyles => {
     const {theme}: I_GlobalStateProps = state;

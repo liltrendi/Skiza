@@ -12,8 +12,8 @@ export const defaultSongOptions: I_SongOptions = {
     blured: false
 }
 
-export async function fetchSongsFromLocalStorage(songOptions: I_SongOptions): Promise<Array<I_SongSchema>>{
+export async function fetchSongsFromLocalStorage(songOptions: I_SongOptions): Promise<I_SongSchema[]>{
     const coverFolder: string = RNFetchBlob.fs.dirs.DocumentDir + '/.skiza';
-    let results: Promise<Array<I_SongSchema>> = await RNAndroidAudioStore.getAll({...songOptions, coverFolder});
+    let results: Promise<I_SongSchema[]> = await RNAndroidAudioStore.getAll({...songOptions, coverFolder});
     return await restructureFetchedSongs(results);
 }

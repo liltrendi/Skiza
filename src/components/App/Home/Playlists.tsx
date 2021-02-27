@@ -1,9 +1,10 @@
 import React from 'react';
-import { ScrollView, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { RootStateOrAny, useSelector } from 'react-redux';
 import { DARK_THEME, LIGHT_THEME } from '../../../constants/theme';
-import { I_SongSchema } from '../../../controllers/music/interfaces';
+import { I_Playlist, I_SongSchema } from '../../../controllers/music/interfaces';
 import { isThemeDark } from '../../../util/theme';
 import NoPlaylists from '../Errors/Home/NoPlaylists';
 import { I_PlaylistsProps, I_PlaylistsStyles } from './interfaces';
@@ -11,14 +12,16 @@ import { I_PlaylistsProps, I_PlaylistsStyles } from './interfaces';
 interface I_GlobalStateProps {
     songs: I_SongSchema[];
     theme: string;
+    playlists: I_Playlist[];
 }
 
 const Playlists: React.FC<I_PlaylistsProps> = (): JSX.Element => {
+    const navigation = useNavigation();
     const globalState: RootStateOrAny = useSelector((state: RootStateOrAny) => state);
-    const {songs: allSongs}: I_GlobalStateProps = globalState;
+    const {playlists}: I_GlobalStateProps = globalState;
     const styles: I_PlaylistsStyles = getStyles(globalState);
 
-    if(true){
+    if(playlists.length < 1){
         return (
             <NoPlaylists />
         )
@@ -31,17 +34,21 @@ const Playlists: React.FC<I_PlaylistsProps> = (): JSX.Element => {
             showsVerticalScrollIndicator={false}
             horizontal={false}
         >
-            <TouchableOpacity style={styles.createPlaylist}>
+            <TouchableOpacity style={styles.createPlaylist} onPress={() => navigation.navigate("CreatePlaylist")}>
                 <Icon name={"plus"} size={25} color={isThemeDark(globalState.theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt} />
                 <Text style={styles.createPlaylistText}>
                     Create Playlist
                 </Text>
             </TouchableOpacity>
-            {(new Array(10).fill(1)).map((item, key) => {
+            {playlists.map((playlist) => {
                 return (
-                    <TouchableOpacity key={key} style={styles.playlist}>
-                        <Text style={styles.playlistName}>Classics {key}</Text>
-                        <Text style={styles.songCount}>{key*2.5} songs</Text>
+                    <TouchableOpacity key={playlist.id} style={styles.playlist}>
+                        <Text style={styles.playlistName}>
+                            {playlist.name}
+                        </Text>
+                        <Text style={styles.songCount}>
+                            {playlist.songs.length} songs
+                        </Text>
                     </TouchableOpacity>
                 )
             })}

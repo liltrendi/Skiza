@@ -3,7 +3,7 @@ import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
 import LottieView from 'lottie-react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { RootStateOrAny, useSelector } from 'react-redux';
-import { I_SongSchema } from '../../../../controllers/music/interfaces';
+import { I_Playlist, I_SongSchema } from '../../../../controllers/music/interfaces';
 import { I_NoPlaylistsProps, I_NoPlaylistsStyles } from './interfaces'
 import { HOME_NOT_FOUND_ANIMATION } from '../../../../assets/animations';
 import { isThemeDark } from '../../../../util/theme';
@@ -14,6 +14,7 @@ interface I_GlobalStateProps {
     theme: string;
     songs: I_SongSchema[];
     currentSong: I_SongSchema;
+    playlists: I_Playlist[];
 }
 
 const NoPlaylists: React.FC<I_NoPlaylistsProps> = (): JSX.Element => {
@@ -21,8 +22,12 @@ const NoPlaylists: React.FC<I_NoPlaylistsProps> = (): JSX.Element => {
     const noSongsAnimation = HOME_NOT_FOUND_ANIMATION;
     const navigation = useNavigation();
     const globalState: RootStateOrAny = useSelector((state: RootStateOrAny) => state);
-    const {}: I_GlobalStateProps = globalState;
+    const {playlists}: I_GlobalStateProps = globalState;
     const styles: I_NoPlaylistsStyles = getStyles(globalState);
+
+    if(playlists.length > 0){
+        return <React.Fragment />
+    }
 
     return (
         <SafeAreaView style={styles.safeAreaContainer}>

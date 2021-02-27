@@ -7,6 +7,7 @@ import { currentSongReducer } from './player/currentSong';
 import { playerModalReducer } from './player/modal';
 import { songStateReducer } from './player/songState';
 import { songQueueReducer } from './music/queue';
+import { playlistsReducer } from './music/playlists'
 
 export const rootReducer = combineReducers({
     theme: themeReducer,
@@ -16,5 +17,6 @@ export const rootReducer = combineReducers({
     songQueue: songQueueReducer,
     currentSong: currentSongReducer,
     songState: songStateReducer,
-    showPlayerModal: playerModalReducer
+    showPlayerModal: playerModalReducer,
+    playlists: playlistsReducer
 });

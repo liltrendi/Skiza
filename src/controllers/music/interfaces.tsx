@@ -31,3 +31,9 @@ export interface I_UniqueArtist {
     albums: string[];
     randomCover: string;
 }
+
+export interface I_Playlist {
+    id: string;
+    name: string;
+    songs: string[];
+}
