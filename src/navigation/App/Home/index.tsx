@@ -6,6 +6,7 @@ import { RootStateOrAny, useSelector } from "react-redux"
 
 export type T_HomeStackNavigatorParams = {
     Home: undefined;
+    CreatePlaylist: undefined;
 }
 
 const HomeStack = createStackNavigator<T_HomeStackNavigatorParams>()
@@ -17,7 +18,6 @@ export const HomeStackScreens: React.FC<I_HomeStackScreensProps> = (): JSX.Eleme
     return (
         <HomeStack.Navigator>
             <HomeStack.Screen name={"Home"} component={HomeScreen} options={homeHeaderOptions(globalState)} />
-            {/* add more screens to home */}
         </HomeStack.Navigator>
     )
 }

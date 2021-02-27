@@ -9,11 +9,13 @@ import { tabBarOptions } from "./NavigatorOptions/BottomTab"
 import PlayerFooter from "../Shared/PlayerFooter"
 import { I_SongSchema } from "../../controllers/music/interfaces"
 import PlayerModal from "../../components/App/Shared/PlayerModal"
+import CreatePlaylist from "../../components/App/Home/CreatePlaylist"
 
 type T_AppStackNavigatorParams = {
     Home: undefined;
     Search: undefined;
     Settings: undefined;
+    CreatePlaylist: undefined;
 }
 
 interface I_GlobalStateProps {
@@ -47,6 +49,7 @@ export const AppStackScreens = (): JSX.Element => {
                 <AppStack.Screen name={"Home"} component={HomeStackScreens} />
                 <AppStack.Screen name={"Search"} component={SearchStackScreens} />
                 <AppStack.Screen name={"Settings"} component={SettingsStackScreens} />
+                <AppStack.Screen name={"CreatePlaylist"} component={CreatePlaylist} options={{}} />
             </AppStack.Navigator>
             {showPlayerModal && <PlayerModal />}
             {currentSong && <PlayerFooter />}

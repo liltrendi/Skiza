@@ -22,7 +22,6 @@ const SongList: React.FC<I_SongListProps> = (): JSX.Element => {
         if(index === 0 && uniqueArtists.length > 2){
             return <GenreCategories uniqueArtists={uniqueArtists} />
         }
-
         return <React.Fragment />
     }
 

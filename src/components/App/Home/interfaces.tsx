@@ -73,3 +73,35 @@ export interface I_GenreCategoriesStyles {
   cardTitleView: ViewStyle;
   cardTitleText: TextStyle;
 }
+
+// Playlists
+
+export interface I_PlaylistsProps {
+  tabLabel?: string;
+}
+
+export interface I_PlaylistsStyles {
+  container: ViewStyle;
+  createPlaylist: ViewStyle;
+  createPlaylistText: TextStyle;
+  playlist: ViewStyle;
+  playlistName: TextStyle;
+  songCount: TextStyle;
+}
+
+// Create Playlist
+
+export interface I_CreatePlaylistProps {
+}
+
+export interface I_CreatePlaylistStyles {
+  container: ViewStyle;
+  inputText: TextStyle;
+  bar: ViewStyle;
+  input: ViewStyle;
+  buttons: ViewStyle;
+  cancel: ViewStyle;
+  cancelText: TextStyle;
+  create: ViewStyle;
+  createText: TextStyle;
+}

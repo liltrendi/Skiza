@@ -3,9 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "android": "clear; cd android && ./gradlew clean && cd .. ; react-native run-android",
+    "android": "react-native run-android",
     "ios": "react-native run-ios",
-    "start": "clear;react-native start --reset-cache",
+    "start": "react-native start --reset-cache",
     "test": "jest",
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
     "logger": "adb logcat *:S ReactNative:V ReactNativeJS:V",

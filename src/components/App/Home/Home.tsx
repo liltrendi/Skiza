@@ -13,6 +13,7 @@ import NoSongsOnDevice from '../Errors/Home/NoSongsOnDevice';
 import { I_SongSchema } from '../../../controllers/music/interfaces';
 import { isThemeDark } from '../../../util/theme';
 import { DARK_THEME, LIGHT_THEME } from '../../../constants/theme';
+import Playlists from './Playlists';
 
 const ScrollableTabView = require('react-native-scrollable-tab-view');
 
@@ -78,7 +79,7 @@ const Home: React.FC<I_HomeProps> = (): JSX.Element => {
       {readExternalStoragePermissionStatus.granted && (
         <ScrollableTabView tabBarUnderlineStyle={styles.scrollableTabView} tabBarTextStyle={styles.tabBarTextStyle}>
           <SongList tabLabel="Library" />
-          <SongList tabLabel="Playlists" />
+          <Playlists tabLabel="Playlists" />
           <SongList tabLabel="Albums" />
         </ScrollableTabView>
       )}

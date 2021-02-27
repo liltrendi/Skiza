@@ -40,3 +40,18 @@ export interface I_NoSongsOnDeviceStyles {
     button: ViewStyle;
     buttonText: TextStyle;
 }
+
+// NoPlaylists
+
+export interface I_NoPlaylistsProps {
+    
+}
+
+export interface I_NoPlaylistsStyles {
+    safeAreaContainer: ViewStyle;
+    container: ViewStyle;
+    LottieView: ViewStyle;
+    screenText: TextStyle;
+    button: ViewStyle;
+    buttonText: TextStyle;
+}

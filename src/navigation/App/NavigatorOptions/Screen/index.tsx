@@ -12,12 +12,18 @@ interface I_TabBarIconProps {
 }
 
 interface I_ScreenOptionsProps {
-    tabBarIcon: ({ }: I_TabBarIconProps) => JSX.Element
+    tabBarIcon: ({ }: I_TabBarIconProps) => JSX.Element;
+    tabBarButton: () => null | undefined;
 }
 
 type T_ScreenOptions = ({ }: I_RouteProps) => I_ScreenOptionsProps
 
+const routesToExclude: Array<string> = [
+    "CreatePlaylist"
+];
+
 export const screenOptions: T_ScreenOptions = ({ route, theme }): I_ScreenOptionsProps => ({
+    tabBarButton: routesToExclude.includes(route.name) ? () => null : undefined,
     tabBarIcon: ({ focused, color }): JSX.Element => {
         let iconName: string = "";
         if (route.name === 'Home') {
@@ -26,6 +32,8 @@ export const screenOptions: T_ScreenOptions = ({ route, theme }): I_ScreenOption
             iconName = "magnify"
         } else if(route.name === "Settings"){
             iconName = "account-cog-outline"
+        } else {
+            return <React.Fragment />
         }
         return <Icon name={iconName} size={focused ? 33 : 30} color={color} />;
     }
