@@ -105,3 +105,14 @@ export interface I_CreatePlaylistStyles {
   create: ViewStyle;
   createText: TextStyle;
 }
+
+// Playlist
+
+export interface I_PlaylistProps {
+  id: string;
+}
+
+export interface I_PlaylistStyles {
+  safeAreaView: ViewStyle;
+  flatlist: ViewStyle;
+}

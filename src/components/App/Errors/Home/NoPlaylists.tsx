@@ -41,7 +41,7 @@ const NoPlaylists: React.FC<I_NoPlaylistsProps> = (): JSX.Element => {
                     Whoa, it's a little deserted here.
                 </Text>
                 <Text style={styles.screenText}>
-                    Start by making your own playlists now.
+                    Try making your own playlist now.
                 </Text>
                 <TouchableOpacity style={styles.button} activeOpacity={0.85} onPress={() => navigation.navigate("CreatePlaylist")}>
                     <Text style={styles.buttonText}>Create Playlist</Text>

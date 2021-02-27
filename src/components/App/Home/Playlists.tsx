@@ -42,7 +42,7 @@ const Playlists: React.FC<I_PlaylistsProps> = (): JSX.Element => {
             </TouchableOpacity>
             {playlists.map((playlist) => {
                 return (
-                    <TouchableOpacity key={playlist.id} style={styles.playlist}>
+                    <TouchableOpacity key={playlist.id} style={styles.playlist} onPress={() => navigation.navigate("Playlist", {id: playlist.id})}>
                         <Text style={styles.playlistName}>
                             {playlist.name}
                         </Text>
