@@ -9,7 +9,7 @@ import { tabBarOptions } from "./NavigatorOptions/BottomTab"
 import PlayerFooter from "../Shared/PlayerFooter"
 import { I_SongSchema } from "../../controllers/music/interfaces"
 import PlayerModal from "../../components/App/Shared/PlayerModal"
-import CreatePlaylist from "../../components/App/Home/CreatePlaylist"
+import CreatePlaylist from "../../components/App/Home/Playlists/CreatePlaylist"
 
 type T_AppStackNavigatorParams = {
     Home: undefined;

@@ -3,12 +3,12 @@ import { ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { RootStateOrAny, useSelector } from 'react-redux';
-import { DARK_THEME, LIGHT_THEME } from '../../../constants/theme';
-import { I_Playlist, I_SongSchema } from '../../../controllers/music/interfaces';
-import { isThemeDark } from '../../../util/theme';
-import NoPlaylists from '../Errors/Home/NoPlaylists';
-import { I_PlaylistsProps, I_PlaylistsStyles } from './interfaces';
-import { sortPlaylistsByAscendingSongCount } from '../../../util/util';
+import { DARK_THEME, LIGHT_THEME } from '../../../../constants/theme';
+import { I_Playlist, I_SongSchema } from '../../../../controllers/music/interfaces';
+import { isThemeDark } from '../../../../util/theme';
+import NoPlaylists from '../../Errors/Home/NoPlaylists';
+import { I_PlaylistsProps, I_PlaylistsStyles } from './../interfaces';
+import { sortPlaylistsByAscendingSongCount } from '../../../../util/util';
 
 interface I_GlobalStateProps {
     songs: I_SongSchema[];

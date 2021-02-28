@@ -13,7 +13,7 @@ import NoSongsOnDevice from '../Errors/Home/NoSongsOnDevice';
 import { I_SongSchema } from '../../../controllers/music/interfaces';
 import { isThemeDark } from '../../../util/theme';
 import { DARK_THEME, LIGHT_THEME } from '../../../constants/theme';
-import Playlists from './Playlists';
+import Playlists from './Playlists/Playlists';
 
 const ScrollableTabView = require('react-native-scrollable-tab-view');
 

@@ -3,8 +3,8 @@ import {createStackNavigator} from "@react-navigation/stack"
 import {HomeScreen} from "./screens"
 import {addSongsToPlaylistHeaderOptions, homeHeaderOptions, playlistHeaderOptions} from "./options"
 import { RootStateOrAny, useSelector } from "react-redux"
-import Playlist from "../../../components/App/Home/Playlist"
-import AddSongsToPlaylist from "../../../components/App/Home/AddSongsToPlaylist"
+import Playlist from "../../../components/App/Home/Playlists/Playlist"
+import AddSongsToPlaylist from "../../../components/App/Home/Playlists/AddSongsToPlaylist"
 
 export type T_HomeStackNavigatorParams = {
     Home: undefined;

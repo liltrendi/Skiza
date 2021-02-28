@@ -61,7 +61,7 @@ export const playlistHeaderOptions = (state: RootStateOrAny, route: Route<string
       paddingRight: 15,
     },
     headerRight: (props) => (
-      <Icon name={"cog-outline"} size={25} color={isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt} onPress={() => navigation.navigate("CreatePlaylist")} />
+      <Icon name={"cog-outline"} size={25} color={isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt} onPress={() => navigation.navigate("PlaylistSettings")} />
     ),
     headerTransparent: true,
     headerStyle: {

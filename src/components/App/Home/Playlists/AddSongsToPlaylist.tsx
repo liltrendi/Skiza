@@ -5,14 +5,14 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { connect, RootStateOrAny, useSelector } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
-import { DARK_THEME, LIGHT_THEME } from '../../../constants/theme';
-import { I_Playlist, I_SongSchema } from '../../../controllers/music/interfaces';
-import { isThemeDark } from '../../../util/theme';
-import AddToPlaylistIcon from '../Icons/AddToPlaylist';
-import { I_AddSongsToPlaylistProps, I_AddSongsToPlaylistStyles, I_RenderItemProps } from './interfaces'
-import SongItem from './SongItem';
-import { showToast } from '../../../util/songs';
-import { addSongToPlaylist } from '../../../actions/music';
+import { DARK_THEME, LIGHT_THEME } from '../../../../constants/theme';
+import { I_Playlist, I_SongSchema } from '../../../../controllers/music/interfaces';
+import { isThemeDark } from '../../../../util/theme';
+import AddToPlaylistIcon from '../../Icons/AddToPlaylist';
+import { I_AddSongsToPlaylistProps, I_AddSongsToPlaylistStyles, I_RenderItemProps } from '../interfaces'
+import SongItem from '../SongItem';
+import { showToast } from '../../../../util/songs';
+import { addSongToPlaylist } from '../../../../actions/music';
 
 interface I_GlobalStateProps {
     currentSong: I_SongSchema | null;
