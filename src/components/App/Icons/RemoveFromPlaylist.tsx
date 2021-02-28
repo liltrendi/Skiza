@@ -1,23 +1,23 @@
-import React, { useState, useRef, useEffect } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { ActivityIndicator, StyleSheet, TouchableOpacity } from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 import { RootStateOrAny, useSelector } from 'react-redux';
 import { DARK_THEME, LIGHT_THEME } from '../../../constants/theme';
 import { isThemeDark } from '../../../util/theme';
-import { I_AddToPlaylistIconProps, I_AddToPlaylistIconStyles } from './interfaces';
+import { I_RemoveFromPlaylistIconProps, I_RemoveFromPlaylistIconStyles } from './interfaces';
 
 interface I_GlobalStateProps {
     theme: string;
 }
 
-const AddToPlaylistIcon: React.FC<I_AddToPlaylistIconProps> = ({executor}): JSX.Element => {
+const RemoveFromPlaylistIcon: React.FC<I_RemoveFromPlaylistIconProps> = ({executor}): JSX.Element => {
     const mountedRef: React.MutableRefObject<boolean> = useRef<boolean>(true);
     const globalState: RootStateOrAny = useSelector((state: RootStateOrAny) => state);
     const [loading, setLoading] = useState<boolean>(false);
     const {theme}: I_GlobalStateProps = globalState;
-    const styles: I_AddToPlaylistIconStyles = getStyles(globalState);
+    const styles: I_RemoveFromPlaylistIconStyles = getStyles(globalState);
 
-    const addToPlaylist = async (): Promise<void> => {
+    const removeFromPlaylist = async (): Promise<void> => {
         if(loading) return;
         setLoading(true);
         setTimeout(async () => {
@@ -35,20 +35,20 @@ const AddToPlaylistIcon: React.FC<I_AddToPlaylistIconProps> = ({executor}): JSX.
     }, [])
 
     return (
-        <TouchableOpacity activeOpacity={0.85} onPress={addToPlaylist} style={styles.addIcon}>
+        <TouchableOpacity activeOpacity={0.85} onPress={removeFromPlaylist} style={styles.addIcon}>
             {loading ? (
                 <ActivityIndicator size={20} color={isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt} />
             ) : (
-                <Icon name={"plus"} size={25} color={isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt} />
+                <Icon name={"remove-circle-outline"} size={25} color={isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt} />
             )}
         </TouchableOpacity>
     )
 }
 
-export default AddToPlaylistIcon;
+export default RemoveFromPlaylistIcon;
 
-const getStyles = (state: RootStateOrAny): I_AddToPlaylistIconStyles => {
-    return StyleSheet.create<I_AddToPlaylistIconStyles>({
+const getStyles = (state: RootStateOrAny): I_RemoveFromPlaylistIconStyles => {
+    return StyleSheet.create<I_RemoveFromPlaylistIconStyles>({
         addIcon: {
             paddingLeft: 50,
             paddingRight: 0

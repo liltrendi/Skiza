@@ -28,7 +28,7 @@ const SearchResults: React.FC<I_SearchResultsProps> = ({searchTerm, matchedSongs
 
     const flatListRenderer = useCallback(({item}: I_RenderItemProps) => {
         return (
-            <SongItem id={item.id} title={item.title} author={item.author} cover={item.cover} ActionIcon={(): JSX.Element => <SongItemOptionsIcon executor={() => toggleOptions(item.id)} />} />
+            <SongItem id={item.id} title={item.title} author={item.author} cover={item.cover} ActionIcon={(): JSX.Element => <SongItemOptionsIcon executor={() => toggleOptions(item.id)} iconStyles={{}} />} />
         )
     }, []);
     

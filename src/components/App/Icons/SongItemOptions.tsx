@@ -10,13 +10,13 @@ interface I_GlobalStateProps {
     theme: string;
 }
 
-const SongItemOptionsIcon: React.FC<I_SongItemOptionsIconProps> = ({executor}): JSX.Element => {
+const SongItemOptionsIcon: React.FC<I_SongItemOptionsIconProps> = ({executor, iconStyles}): JSX.Element => {
     const globalState: RootStateOrAny = useSelector((state: RootStateOrAny) => state);
     const {theme}: I_GlobalStateProps = globalState;
     const styles: I_SongItemOptionsIconStyles = getStyles(globalState);
 
     return (
-        <TouchableOpacity activeOpacity={0.85} onPress={executor} style={styles.addIcon}>
+        <TouchableOpacity activeOpacity={0.85} onPress={executor} style={{...styles.addIcon, ...iconStyles}}>
             <Icon name={"dots-vertical"} size={25} color={isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt} />
         </TouchableOpacity>
     )
