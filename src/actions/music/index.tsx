@@ -1,7 +1,7 @@
 import { RootStateOrAny } from "react-redux";
 import { AnyAction } from "redux"
 import { ThunkAction, ThunkDispatch } from "redux-thunk"
-import { ADD_SONG_TO_PLAYLIST, CREATE_PLAYLIST, FETCHED_SONGS, HIDE_PLAYER_MODAL, IS_NOT_PLAYING, IS_NOT_SHUFFLING, IS_PLAYING, IS_SHUFFLING, REMOVE_SONG_FROM_PLAYLIST, RENAME_PLAYLIST, REPEAT_ALL, REPEAT_NONE, REPEAT_ONE, RESET_CURRENT_SONG, SET_CURRENT_SONG, SET_SONG_QUEUE, SHOW_PLAYER_MODAL } from "../../constants/actions";
+import { ADD_SONG_TO_PLAYLIST, CREATE_PLAYLIST, DELETE_PLAYLIST, FETCHED_SONGS, HIDE_PLAYER_MODAL, IS_NOT_PLAYING, IS_NOT_SHUFFLING, IS_PLAYING, IS_SHUFFLING, REMOVE_SONG_FROM_PLAYLIST, RENAME_PLAYLIST, REPEAT_ALL, REPEAT_NONE, REPEAT_ONE, RESET_CURRENT_SONG, SET_CURRENT_SONG, SET_SONG_QUEUE, SHOW_PLAYER_MODAL } from "../../constants/actions";
 import { fetchSongsFromLocalStorage, defaultSongOptions } from "../../controllers/music/getSongs";
 import { I_Playlist, I_SongSchema } from '../../controllers/music/interfaces';
 import { getCurrentPlaylists } from "../../controllers/music/playlists";
@@ -123,5 +123,15 @@ export const removeSongFromPlaylist = (state: RootStateOrAny, playlistId: string
         let updatedPlaylists: I_Playlist[] = currentPlaylists.filter((playlist: I_Playlist) => playlist.id !== playlistId).concat(newPlaylist);
 
         dispatch({ type: REMOVE_SONG_FROM_PLAYLIST, payload: updatedPlaylists });
+    }
+}
+
+export const deletePlaylist = (state: RootStateOrAny, playlistId: string): ThunkAction<Promise<void>, {}, {}, AnyAction> => {
+    return async (dispatch: ThunkDispatch<{}, {}, AnyAction>): Promise<void> => {
+        let currentPlaylists: I_Playlist[] = await getCurrentPlaylists(state);
+
+        let updatedPlaylists: I_Playlist[] = currentPlaylists.filter((playlist: I_Playlist) => playlist.id !== playlistId)
+
+        dispatch({ type: DELETE_PLAYLIST, payload: updatedPlaylists });
     }
 }

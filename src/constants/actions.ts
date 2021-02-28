@@ -22,6 +22,7 @@ export const CREATE_PLAYLIST: string = "CREATE_PLAYLIST";
 export const ADD_SONG_TO_PLAYLIST: string = "ADD_SONG_TO_PLAYLIST";
 export const REMOVE_SONG_FROM_PLAYLIST: string = "REMOVE_SONG_FROM_PLAYLIST";
 export const RENAME_PLAYLIST: string = "RENAME_PLAYLIST";
+export const DELETE_PLAYLIST: string = "DELETE_PLAYLIST";
 
 // player modal
 
