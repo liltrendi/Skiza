@@ -5,7 +5,6 @@ import { connect, useSelector } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import { I_SongItemProps, I_SongItemStyles } from "./interfaces"
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { setCurrentSong, setSongPlayingStatus, setSongQueue } from '../../../actions/music';
 import { I_SongSchema } from '../../../controllers/music/interfaces';
 import { MUSICAL_NOTE_IMAGE } from '../../../assets/images';
@@ -29,14 +28,10 @@ interface I_GlobalStateProps {
     songState: I_SongStateInitialProps;
 }
 
-const SongItem: React.FC<T_Props> = ({ id, title, author, cover, setCurrentSong, setSongPlayingStatus, setSongQueue }): JSX.Element => {
+const SongItem: React.FC<T_Props> = ({ id, title, author, cover, ActionIcon, setCurrentSong, setSongPlayingStatus, setSongQueue }): JSX.Element => {
 
     const globalState: RootStateOrAny = useSelector((state: RootStateOrAny) => state);
-    const {songs: allSongs, currentSong, theme, songState}: I_GlobalStateProps = globalState;
-
-    const toggleOptions = (songId: string): void => {
-        console.log("Options", songId)
-    }
+    const {songs: allSongs, songState}: I_GlobalStateProps = globalState;
 
     const playSong = (songId: string): void => {
         const song: I_SongSchema | undefined = allSongs.find((item: I_SongSchema) => item.id === songId);
@@ -55,9 +50,7 @@ const SongItem: React.FC<T_Props> = ({ id, title, author, cover, setCurrentSong,
                 <View style={styles.divider}></View>
                 <Text style={styles.author} numberOfLines={1}>{author}</Text>
             </View>
-            <TouchableOpacity activeOpacity={0.85} onPress={(): void => toggleOptions(id)} style={styles.optionsIcon}>
-                <Icon name={"dots-vertical"} size={25} color={isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt} />
-            </TouchableOpacity>
+            {ActionIcon?.({})}
         </TouchableOpacity>
     )
 }

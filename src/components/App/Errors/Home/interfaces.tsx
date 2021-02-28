@@ -1,4 +1,5 @@
 import { ViewStyle, TextStyle } from 'react-native'
+import { I_Playlist } from '../../../../controllers/music/interfaces';
 
 // ReadStoragePermissionBlocked
 
@@ -59,7 +60,7 @@ export interface I_NoPlaylistsStyles {
 // NoSongsInPlaylist
 
 export interface I_NoSongsInPlaylistProps {
-    playlistName: string | null;
+    playlist: I_Playlist | undefined;
 }
 
 export interface I_NoSongsInPlaylistStyles {

@@ -10,6 +10,7 @@ import { HOME_NOT_FOUND_ANIMATION } from '../../../assets/animations';
 import { RootStateOrAny, useSelector } from 'react-redux';
 import { isThemeDark } from '../../../util/theme';
 import { DARK_THEME, LIGHT_THEME } from '../../../constants/theme';
+import SongItemOptionsIcon from '../Icons/SongItemOptions';
 
 interface I_GlobalStateProps {
     currentSong: null | I_SongSchema;
@@ -21,9 +22,13 @@ const SearchResults: React.FC<I_SearchResultsProps> = ({searchTerm, matchedSongs
     const noSongsAnimation = HOME_NOT_FOUND_ANIMATION;
     const globalState: RootStateOrAny = useSelector((state: RootStateOrAny) => state);
 
+    const toggleOptions = (songId: string): void => {
+        console.log("Options", songId)
+    }
+
     const flatListRenderer = useCallback(({item}: I_RenderItemProps) => {
         return (
-            <SongItem id={item.id} title={item.title} author={item.author} cover={item.cover} />
+            <SongItem id={item.id} title={item.title} author={item.author} cover={item.cover} ActionIcon={(): JSX.Element => <SongItemOptionsIcon executor={() => toggleOptions(item.id)} />} />
         )
     }, []);
     

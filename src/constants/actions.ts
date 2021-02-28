@@ -19,6 +19,7 @@ export const REPEAT_NONE: string = "REPEAT_NONE";
 export const REPEAT_ONE: string = "REPEAT_ONE";
 export const REPEAT_ALL: string = "REPEAT_ALL";
 export const CREATE_PLAYLIST: string = "CREATE_PLAYLIST";
+export const ADD_SONG_TO_PLAYLIST: string = "ADD_SONG_TO_PLAYLIST";
 
 // player modal
 

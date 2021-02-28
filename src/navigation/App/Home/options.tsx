@@ -71,3 +71,36 @@ export const playlistHeaderOptions = (state: RootStateOrAny, route: Route<string
     },
   };
 }
+
+export const addSongsToPlaylistHeaderOptions = (state: RootStateOrAny, route: Route<string, {id: string} | undefined>): StackNavigationOptions => {
+  const {theme, playlists}: I_GlobalStateProps = state;
+  let playlistId: string | undefined = route.params?.id;
+  let playlistName: string | undefined;
+  if(playlistId){
+    playlistName = playlists.find((playlist: I_Playlist) => playlist.id === playlistId)?.name;
+  }
+  return {
+    title: "Add songs", 
+    headerTitleStyle: {
+      fontFamily: "CircularStd-Bold",
+      fontSize: 23,
+      color: isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt
+    },
+    headerTitleAlign: 'center',
+    headerLeftContainerStyle: {
+      paddingLeft: 15,
+    },
+    headerRightContainerStyle: {
+      paddingRight: 15,
+      paddingBottom: 25
+    },
+    headerRight: (props) => (
+      <React.Fragment />
+    ),
+    headerTransparent: true,
+    headerStyle: {
+      height: 60,
+      backgroundColor: isThemeDark(theme) ? DARK_THEME.primaryBg : LIGHT_THEME.primaryBg
+    },
+  };
+}

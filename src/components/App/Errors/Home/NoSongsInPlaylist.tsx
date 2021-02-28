@@ -17,7 +17,7 @@ interface I_GlobalStateProps {
     playlists: I_Playlist[];
 }
 
-const NoSongsInPlaylist: React.FC<I_NoSongsInPlaylistProps> = ({playlistName}): JSX.Element => {
+const NoSongsInPlaylist: React.FC<I_NoSongsInPlaylistProps> = ({playlist}): JSX.Element => {
 
     const noSongsAnimation = HOME_NOT_FOUND_ANIMATION;
     const navigation = useNavigation();
@@ -35,16 +35,16 @@ const NoSongsInPlaylist: React.FC<I_NoSongsInPlaylistProps> = ({playlistName}): 
                 <Text style={styles.screenText}>
                     Whoops, nothing to see here.
                 </Text>
-                {playlistName ? (
+                {playlist ? (
                     <Text style={styles.screenText}>
-                        Add songs to <Text style={styles.playlistName}>{playlistName}</Text>.
+                        Add songs to <Text style={styles.playlistName}>{playlist.name}</Text>.
                     </Text>
                 ) : (
                     <React.Fragment />
                 )}
-                <TouchableOpacity style={styles.button} activeOpacity={0.85} onPress={() => playlistName ? navigation.navigate("CreatePlaylist") : navigation.goBack()}>
+                <TouchableOpacity style={styles.button} activeOpacity={0.85} onPress={() => playlist ? navigation.navigate("AddSongsToPlaylist", {playlist}) : navigation.goBack()}>
                     <Text style={styles.buttonText}>
-                        {playlistName ? "Show Me" : "Go Back"}
+                        {playlist ? "Let's Go" : "Go Back"}
                     </Text>
                 </TouchableOpacity>
             </View>

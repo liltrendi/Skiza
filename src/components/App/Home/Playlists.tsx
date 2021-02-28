@@ -8,6 +8,7 @@ import { I_Playlist, I_SongSchema } from '../../../controllers/music/interfaces'
 import { isThemeDark } from '../../../util/theme';
 import NoPlaylists from '../Errors/Home/NoPlaylists';
 import { I_PlaylistsProps, I_PlaylistsStyles } from './interfaces';
+import { sortPlaylistsByAscendingSongCount } from '../../../util/util';
 
 interface I_GlobalStateProps {
     songs: I_SongSchema[];
@@ -40,7 +41,7 @@ const Playlists: React.FC<I_PlaylistsProps> = (): JSX.Element => {
                     Create Playlist
                 </Text>
             </TouchableOpacity>
-            {playlists.map((playlist) => {
+            {playlists.sort(sortPlaylistsByAscendingSongCount).map((playlist) => {
                 return (
                     <TouchableOpacity key={playlist.id} style={styles.playlist} onPress={() => navigation.navigate("Playlist", {id: playlist.id})}>
                         <Text style={styles.playlistName}>

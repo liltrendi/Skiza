@@ -7,6 +7,7 @@ import GenreCategories from './GenreCategories';
 import { I_SongSchema, I_UniqueArtist } from '../../../controllers/music/interfaces';
 import { RootStateOrAny } from 'react-redux';
 import { getUniqueArtists } from '../../../util/songs';
+import SongItemOptionsIcon from '../Icons/SongItemOptions';
 
 interface I_GlobalStateProps {
     songs: I_SongSchema[];
@@ -17,6 +18,10 @@ const SongList: React.FC<I_SongListProps> = (): JSX.Element => {
     const globalState: RootStateOrAny = useSelector((state: RootStateOrAny) => state);
     const {songs: allSongs}: I_GlobalStateProps = globalState;
     const uniqueArtists: I_UniqueArtist[] = getUniqueArtists(allSongs);
+
+    const toggleOptions = (songId: string): void => {
+        console.log("Options", songId)
+    }
 
     const ArtistsTopSection: React.FC<{index: number}> = ({index}): JSX.Element => {
         if(index === 0 && uniqueArtists.length > 2){
@@ -29,7 +34,7 @@ const SongList: React.FC<I_SongListProps> = (): JSX.Element => {
         return (
             <React.Fragment>
                 <ArtistsTopSection index={index} />
-                <SongItem id={item.id} title={item.title} author={item.author} cover={item.cover} />
+                <SongItem id={item.id} title={item.title} author={item.author} cover={item.cover} ActionIcon={(): JSX.Element => <SongItemOptionsIcon executor={() => toggleOptions(item.id)} />} />
             </React.Fragment>
         )
     }, []);

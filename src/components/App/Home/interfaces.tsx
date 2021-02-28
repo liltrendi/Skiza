@@ -33,6 +33,7 @@ export interface I_SongItemProps {
     title: string;
     author: string;
     cover: string;
+    ActionIcon?: React.FC<any>
 }
 
 export interface I_RenderItemProps {
@@ -113,6 +114,17 @@ export interface I_PlaylistProps {
 }
 
 export interface I_PlaylistStyles {
+  safeAreaView: ViewStyle;
+  flatlist: ViewStyle;
+}
+
+// AddSongsToPlaylist
+
+export interface I_AddSongsToPlaylistProps {
+  id: string;
+}
+
+export interface I_AddSongsToPlaylistStyles {
   safeAreaView: ViewStyle;
   flatlist: ViewStyle;
 }

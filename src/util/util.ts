@@ -1,3 +1,5 @@
+import { I_Playlist } from "../controllers/music/interfaces";
+
 export const isNullUndefined = (item: any): boolean => {
     try {
         return item === null || item === undefined;
@@ -24,4 +26,8 @@ export const isEmptyString = (item: string): boolean => {
 
 export const capitalizeFirstLetter = (item: string): string => {
     return item.charAt(0).toUpperCase() + item.slice(1);
+}
+
+export const sortPlaylistsByAscendingSongCount = (playlist1: I_Playlist, playlist2: I_Playlist): number => {
+    return playlist2.songs.length - playlist1.songs.length;
 }
