@@ -64,7 +64,7 @@ export const playlistHeaderOptions = (state: RootStateOrAny, route: Route<string
     headerRight: (props) => (
       <React.Fragment />
     ),
-    headerTransparent: false,
+    headerTransparent: true,
     headerStyle: {
       height: 60,
       backgroundColor: isThemeDark(theme) ? DARK_THEME.primaryBg : LIGHT_THEME.primaryBg

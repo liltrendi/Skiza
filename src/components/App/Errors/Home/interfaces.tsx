@@ -55,3 +55,19 @@ export interface I_NoPlaylistsStyles {
     button: ViewStyle;
     buttonText: TextStyle;
 }
+
+// NoSongsInPlaylist
+
+export interface I_NoSongsInPlaylistProps {
+    playlistName: string | null;
+}
+
+export interface I_NoSongsInPlaylistStyles {
+    safeAreaContainer: ViewStyle;
+    container: ViewStyle;
+    LottieView: ViewStyle;
+    screenText: TextStyle;
+    playlistName: TextStyle;
+    button: ViewStyle;
+    buttonText: TextStyle;
+}

@@ -11,6 +11,7 @@ import { isThemeDark } from '../../../util/theme';
 import { DARK_THEME, LIGHT_THEME, SHARED_THEME } from '../../../constants/theme';
 import { widthPercentageToDP as wdp } from 'react-native-responsive-screen';
 import { createPlaylist } from '../../../actions/music';
+import { showToast } from '../../../util/songs';
 
 interface I_GlobalStateProps {
     theme: string;
@@ -30,12 +31,15 @@ const CreatePlaylist: React.FC<T_Props> = ({createPlaylist}): JSX.Element => {
     const [playlistName, setPlaylistName] = useState<string>("");
 
     const globalState: RootStateOrAny = useSelector((state: RootStateOrAny) => state);
-    const {playlists}: I_GlobalStateProps = globalState;
     const styles: I_CreatePlaylistStyles = getStyles(globalState);
 
     const onChangeText = (text: string): void => setPlaylistName(text);
 
     const makePlaylist = (): void => {
+        if(playlistName.length < 1){
+            showToast("Please enter a name for your playlist")
+            return;
+        }
         createPlaylist(globalState, playlistName);
         setPlaylistName("");
         navigation.goBack();

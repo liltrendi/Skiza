@@ -9,6 +9,7 @@ import { useRoute, Route } from '@react-navigation/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { isThemeDark } from '../../../util/theme';
 import { DARK_THEME, LIGHT_THEME, SHARED_THEME } from '../../../constants/theme';
+import NoSongsInPlaylist from '../Errors/Home/NoSongsInPlaylist';
 
 interface I_GlobalStateProps {
     playlists: I_Playlist[];
@@ -49,15 +50,11 @@ const Playlist: React.FC<I_PlaylistProps> = (): JSX.Element => {
     }
 
     if(!playlist){
-        return <NoPlaylists />
+        return <NoSongsInPlaylist playlistName={null} />
     }
 
     if(playlistSongs.length < 1){
-        return (
-            <View>
-                <Text>No songs</Text>
-            </View>
-        )
+        return <NoSongsInPlaylist playlistName={playlist.name} />
     }
 
     return (
@@ -83,7 +80,7 @@ const getStyles = (state: RootStateOrAny): I_PlaylistStyles => {
             alignItems: storagePermissionStatus === "granted" ? undefined : "center",
             marginBottom: showingPlayerFooter ? 60 : 0,
             backgroundColor: isThemeDark(theme) ? DARK_THEME.primaryBg : LIGHT_THEME.primaryBg,
-            marginTop: 0,
+            marginTop: 60,
             flex: 1,
         },
         flatlist: {
