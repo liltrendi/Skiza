@@ -1,4 +1,4 @@
-import { ADD_SONG_TO_PLAYLIST, CREATE_PLAYLIST } from "../../constants/actions";
+import { ADD_SONG_TO_PLAYLIST, CREATE_PLAYLIST, RENAME_PLAYLIST } from "../../constants/actions";
 import { I_Playlist } from "../../controllers/music/interfaces";
 
 interface I_ActionProps {
@@ -15,6 +15,8 @@ export const playlistsReducer: T_PlaylistsReducer = (state: I_Playlist[] = initi
         case CREATE_PLAYLIST:
             return action.payload;
         case ADD_SONG_TO_PLAYLIST:
+            return action.payload;
+        case RENAME_PLAYLIST:
             return action.payload;
         default:
             return state;

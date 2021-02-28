@@ -10,13 +10,13 @@ import { songQueueReducer } from './music/queue';
 import { playlistsReducer } from './music/playlists'
 
 export const rootReducer = combineReducers({
-    theme: themeReducer,
     onboarded: onboardingReducer,
     readExternalStoragePermission: storageStatusReducer,
+    theme: themeReducer,
+    showPlayerModal: playerModalReducer,
+    songState: songStateReducer,
+    currentSong: currentSongReducer,
     songs: songsReducer,
     songQueue: songQueueReducer,
-    currentSong: currentSongReducer,
-    songState: songStateReducer,
-    showPlayerModal: playerModalReducer,
     playlists: playlistsReducer
 });

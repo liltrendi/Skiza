@@ -1,55 +1,57 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View, ScrollView } from 'react-native'
 import { connect, RootStateOrAny, useSelector } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import { Input, Item } from 'native-base'
-import { useNavigation } from '@react-navigation/native';
-import { I_CreatePlaylistProps, I_CreatePlaylistStyles } from './interfaces'
-import { I_Playlist, I_SongSchema } from '../../../../controllers/music/interfaces';
-import { isThemeDark } from '../../../../util/theme';
-import { DARK_THEME, LIGHT_THEME, SHARED_THEME } from '../../../../constants/theme';
-import { widthPercentageToDP as wdp } from 'react-native-responsive-screen';
-import { createPlaylist } from '../../../../actions/music';
-import { showToast } from '../../../../util/songs';
+import { Route, useNavigation, useRoute } from '@react-navigation/native';
+import { I_RenamePlaylistProps, I_RenamePlaylistStyles } from './interfaces'
+import { renamePlaylist } from '../../../../../actions/music';
+import { I_Playlist } from '../../../../../controllers/music/interfaces';
+import { isThemeDark } from '../../../../../util/theme';
+import { DARK_THEME, LIGHT_THEME, SHARED_THEME } from '../../../../../constants/theme';
+import { widthPercentageToDP as wdp } from 'react-native-responsive-screen'
+import { showToast } from '../../../../../util/songs';
 
 interface I_GlobalStateProps {
     theme: string;
-    songs: I_SongSchema[];
-    currentSong: I_SongSchema;
     playlists: I_Playlist[];
 }
 
 interface I_AdditionalProps {
-    createPlaylist: (state: RootStateOrAny, playlistName: string) => Promise<void>;
+    renamePlaylist: (state: RootStateOrAny, playlistId: string, newName: string) => Promise<void>;
 }
 
-type T_Props = I_CreatePlaylistProps & I_AdditionalProps;
+type T_Props = I_RenamePlaylistProps & I_AdditionalProps;
 
-const CreatePlaylist: React.FC<T_Props> = ({createPlaylist}): JSX.Element => {
+const RenamePlaylist: React.FC<T_Props> = ({renamePlaylist}): JSX.Element => {
+    const route: Route<string, {playlistId: string | undefined} | undefined> = useRoute();
     const navigation = useNavigation();
-    const [playlistName, setPlaylistName] = useState<string>("");
-
     const globalState: RootStateOrAny = useSelector((state: RootStateOrAny) => state);
-    const styles: I_CreatePlaylistStyles = getStyles(globalState);
+    const {playlists}: I_GlobalStateProps = globalState;
+    const styles: I_RenamePlaylistStyles = getStyles(globalState);
 
-    const onChangeText = (text: string): void => setPlaylistName(text);
+    const playlist: I_Playlist | undefined = playlists.find((item: I_Playlist) => item.id === route.params?.playlistId);
 
-    const makePlaylist = async (): Promise<void> => {
-        if(playlistName.length < 1){
-            showToast("Please enter a name for your playlist")
+    const [newName, setNewName] = useState<string|undefined>(playlist?.name);
+
+    const onChangeText = (text: string): void => setNewName(text);
+
+    const updatePlaylistName = async (): Promise<void> => {
+        if(!newName || newName.length < 1){
+            showToast("Please enter a name for your playlist");
             return;
         }
-        await createPlaylist(globalState, playlistName);
-        setPlaylistName("");
+        await renamePlaylist(globalState, playlist?.id || "", newName);
+        showToast("Playlist updated successfully")
         navigation.goBack();
     };
 
     return (
         <View style={styles.container}>
-            <Text style={styles.inputText}>Give your new playlist a name</Text>
+            <Text style={styles.inputText}>Rename your playlist</Text>
             <Item style={styles.bar}>
-                <Input placeholder={""} onChangeText={onChangeText} value={playlistName} placeholderTextColor={isThemeDark(globalState.theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt} style={styles.input} />
+                <Input placeholder={""} onChangeText={onChangeText} value={newName} placeholderTextColor={isThemeDark(globalState.theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt} style={styles.input} />
             </Item>
             <View style={styles.buttons}>
                 <TouchableOpacity style={styles.cancel} onPress={() => navigation.goBack()} activeOpacity={0.85}>
@@ -57,9 +59,9 @@ const CreatePlaylist: React.FC<T_Props> = ({createPlaylist}): JSX.Element => {
                         Cancel
                     </Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.create} activeOpacity={0.85} onPress={makePlaylist}>
-                    <Text style={styles.createText}>
-                        Create
+                <TouchableOpacity style={styles.update} activeOpacity={0.85} onPress={updatePlaylistName}>
+                    <Text style={styles.updateText}>
+                        Save Changes
                     </Text>
                 </TouchableOpacity>
             </View>
@@ -73,19 +75,18 @@ const mapStateToProps = () => {
 
 const mapDispatchToProps = (dispatch: ThunkDispatch<any, any, AnyAction>) => {
     return {
-        createPlaylist: (state: RootStateOrAny, playlistName: string) => dispatch(createPlaylist(state, playlistName))
+        renamePlaylist: (state: RootStateOrAny, playlistId: string, newName: string) => dispatch(renamePlaylist(state, playlistId, newName))
     }
 }
   
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(CreatePlaylist)
+)(RenamePlaylist)
 
-const getStyles = (state: RootStateOrAny): I_CreatePlaylistStyles => {
+const getStyles = (state: RootStateOrAny): I_RenamePlaylistStyles => {
     const {theme}: I_GlobalStateProps = state;
-    
-    return StyleSheet.create<I_CreatePlaylistStyles>({
+    return StyleSheet.create<I_RenamePlaylistStyles>({
         container: {
             flex: 1,
             justifyContent: "center",
@@ -128,7 +129,7 @@ const getStyles = (state: RootStateOrAny): I_CreatePlaylistStyles => {
             fontSize: 15,
             color: isThemeDark(theme) ? SHARED_THEME.lightTextLv1 : SHARED_THEME.lightTextLv1
         },
-        create: {
+        update: {
             alignItems: "center",
             backgroundColor: isThemeDark(theme) ? SHARED_THEME.brightTextLv2 : SHARED_THEME.brightTextLv2,
             padding: 14,
@@ -138,7 +139,7 @@ const getStyles = (state: RootStateOrAny): I_CreatePlaylistStyles => {
             borderBottomRightRadius: 5,
             marginTop: 20
         },
-        createText: {
+        updateText: {
             fontFamily: "CircularStd-Book",
             fontSize: 15,
             color: isThemeDark(theme) ? SHARED_THEME.lightTextLv1 : SHARED_THEME.lightTextLv1

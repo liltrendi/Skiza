@@ -71,4 +71,14 @@ export interface I_PlaylistsProps {
 
   export interface I_PlaylistSettingsStyles {
       container: ViewStyle;
+      renameContainer: ViewStyle;
+      renameIcon: ViewStyle;
+      renameTextContainer: TextStyle;
+      renameTopText: TextStyle;
+      renameBottomText: TextStyle;
+      otherContainer: ViewStyle;
+      otherIcon: ViewStyle;
+      otherTextContainer: TextStyle;
+      otherTopText: TextStyle;
+      otherBottomText: TextStyle;
   }

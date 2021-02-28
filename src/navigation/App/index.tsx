@@ -10,12 +10,14 @@ import PlayerFooter from "../Shared/PlayerFooter"
 import { I_SongSchema } from "../../controllers/music/interfaces"
 import PlayerModal from "../../components/App/Shared/PlayerModal"
 import CreatePlaylist from "../../components/App/Home/Playlists/CreatePlaylist"
+import RenamePlaylist from "../../components/App/Home/Playlists/Settings/RenamePlaylist"
 
 type T_AppStackNavigatorParams = {
     Home: undefined;
     Search: undefined;
     Settings: undefined;
     CreatePlaylist: undefined;
+    RenamePlaylist: undefined;
 }
 
 interface I_GlobalStateProps {
@@ -50,6 +52,7 @@ export const AppStackScreens = (): JSX.Element => {
                 <AppStack.Screen name={"Search"} component={SearchStackScreens} />
                 <AppStack.Screen name={"Settings"} component={SettingsStackScreens} />
                 <AppStack.Screen name={"CreatePlaylist"} component={CreatePlaylist} />
+                <AppStack.Screen name={"RenamePlaylist"} component={RenamePlaylist} />
             </AppStack.Navigator>
             {showPlayerModal && <PlayerModal />}
             {currentSong && <PlayerFooter />}

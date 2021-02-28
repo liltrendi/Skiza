@@ -19,7 +19,8 @@ interface I_ScreenOptionsProps {
 type T_ScreenOptions = ({ }: I_RouteProps) => I_ScreenOptionsProps
 
 const routesToExclude: string[] = [
-    "CreatePlaylist"
+    "CreatePlaylist",
+    "RenamePlaylist"
 ];
 
 export const screenOptions: T_ScreenOptions = ({ route, theme }): I_ScreenOptionsProps => ({

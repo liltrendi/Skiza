@@ -112,7 +112,6 @@ export const playlistSettingsHeaderOptions = (state: RootStateOrAny, route: Rout
   if(playlistId){
     playlistName = playlists.find((playlist: I_Playlist) => playlist.id === playlistId)?.name;
   }
-  console.log(route)
   return {
     title: `Settings ${playlistName ?  "- " + playlistName : ""}`, 
     headerTitleStyle: {

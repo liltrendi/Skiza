@@ -44,10 +44,10 @@ const Playlists: React.FC<I_PlaylistsProps> = (): JSX.Element => {
             {playlists.sort(sortPlaylistsByAscendingSongCount).map((playlist) => {
                 return (
                     <TouchableOpacity key={playlist.id} style={styles.playlist} onPress={() => navigation.navigate("Playlist", {id: playlist.id})}>
-                        <Text style={styles.playlistName}>
+                        <Text style={styles.playlistName} numberOfLines={1}>
                             {playlist.name}
                         </Text>
-                        <Text style={styles.songCount}>
+                        <Text style={styles.songCount} numberOfLines={1}>
                             {playlist.songs.length} songs
                         </Text>
                     </TouchableOpacity>
