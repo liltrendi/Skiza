@@ -1,7 +1,7 @@
 import React, { useCallback } from 'react'
 import { FlatList, StyleSheet } from 'react-native';
 import { RootStateOrAny, useSelector } from 'react-redux';
-import {I_PlaylistProps, I_PlaylistStyles, I_RenderItemProps} from "../interfaces"
+import {I_PlaylistProps, I_PlaylistStyles, I_RenderItemProps} from "./interfaces"
 import { I_Playlist, I_SongSchema } from '../../../../controllers/music/interfaces';
 import SongItem from '../SongItem';
 import { useRoute, Route } from '@react-navigation/native';

@@ -9,7 +9,7 @@ import { DARK_THEME, LIGHT_THEME } from '../../../../constants/theme';
 import { I_Playlist, I_SongSchema } from '../../../../controllers/music/interfaces';
 import { isThemeDark } from '../../../../util/theme';
 import AddToPlaylistIcon from '../../Icons/AddToPlaylist';
-import { I_AddSongsToPlaylistProps, I_AddSongsToPlaylistStyles, I_RenderItemProps } from '../interfaces'
+import { I_AddSongsToPlaylistProps, I_AddSongsToPlaylistStyles, I_RenderItemProps } from './interfaces'
 import SongItem from '../SongItem';
 import { showToast } from '../../../../util/songs';
 import { addSongToPlaylist } from '../../../../actions/music';

@@ -7,7 +7,7 @@ import { DARK_THEME, LIGHT_THEME } from '../../../../constants/theme';
 import { I_Playlist, I_SongSchema } from '../../../../controllers/music/interfaces';
 import { isThemeDark } from '../../../../util/theme';
 import NoPlaylists from '../../Errors/Home/NoPlaylists';
-import { I_PlaylistsProps, I_PlaylistsStyles } from './../interfaces';
+import { I_PlaylistsProps, I_PlaylistsStyles } from './interfaces';
 import { sortPlaylistsByAscendingSongCount } from '../../../../util/util';
 
 interface I_GlobalStateProps {

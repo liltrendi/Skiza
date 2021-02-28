@@ -5,7 +5,7 @@ import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
 import { Input, Item } from 'native-base'
 import { useNavigation } from '@react-navigation/native';
-import { I_CreatePlaylistProps, I_CreatePlaylistStyles } from '../interfaces'
+import { I_CreatePlaylistProps, I_CreatePlaylistStyles } from './interfaces'
 import { I_Playlist, I_SongSchema } from '../../../../controllers/music/interfaces';
 import { isThemeDark } from '../../../../util/theme';
 import { DARK_THEME, LIGHT_THEME, SHARED_THEME } from '../../../../constants/theme';
