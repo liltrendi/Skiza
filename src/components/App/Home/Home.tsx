@@ -95,7 +95,7 @@ const getStyles = (state: RootStateOrAny, storagePermissionStatus: I_ReadExterna
       alignItems: storagePermissionStatus.granted ? undefined : "center",
       marginBottom: showingPlayerFooter ? 60 : 0,
       backgroundColor: isThemeDark(theme) ? DARK_THEME.primaryBg : LIGHT_THEME.primaryBg,
-      marginTop: 0,
+      paddingTop: 60,
       flex: 1,
     },
     scrollableTabView: {

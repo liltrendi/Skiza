@@ -31,7 +31,7 @@ export const homeHeaderOptions = (state: RootStateOrAny): StackNavigationOptions
     headerRight: (props) => (
       <React.Fragment />
     ),
-    headerTransparent: false,
+    headerTransparent: true,
     headerStyle: {
       height: 60,
       backgroundColor: isThemeDark(theme) ? DARK_THEME.primaryBg : LIGHT_THEME.primaryBg
