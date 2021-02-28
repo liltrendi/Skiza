@@ -1,9 +1,10 @@
 import React from 'react'
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import { StackNavigationOptions } from '@react-navigation/stack';
 import { RootStateOrAny } from 'react-redux';
 import { isThemeDark } from '../../../util/theme';
 import { DARK_THEME, LIGHT_THEME } from '../../../constants/theme';
-import { Route } from "@react-navigation/native"
+import { Route, useNavigation } from "@react-navigation/native"
 import { I_Playlist } from '../../../controllers/music/interfaces';
 
 interface I_GlobalStateProps {
@@ -26,7 +27,6 @@ export const homeHeaderOptions = (state: RootStateOrAny): StackNavigationOptions
     },
     headerRightContainerStyle: {
       paddingRight: 15,
-      paddingBottom: 25
     },
     headerRight: (props) => (
       <React.Fragment />
@@ -39,7 +39,7 @@ export const homeHeaderOptions = (state: RootStateOrAny): StackNavigationOptions
   };
 }
 
-export const playlistHeaderOptions = (state: RootStateOrAny, route: Route<string, {id: string} | undefined>): StackNavigationOptions => {
+export const playlistHeaderOptions = (state: RootStateOrAny, route: Route<string, {id: string} | undefined>, navigation: any): StackNavigationOptions => {
   const {theme, playlists}: I_GlobalStateProps = state;
   let playlistId: string | undefined = route.params?.id;
   let playlistName: string | undefined;
@@ -55,20 +55,20 @@ export const playlistHeaderOptions = (state: RootStateOrAny, route: Route<string
     },
     headerTitleAlign: 'center',
     headerLeftContainerStyle: {
-      paddingLeft: 15,
+      paddingLeft: 5,
     },
     headerRightContainerStyle: {
       paddingRight: 15,
-      paddingBottom: 25
     },
     headerRight: (props) => (
-      <React.Fragment />
+      <Icon name={"cog-outline"} size={25} color={isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt} onPress={() => navigation.navigate("CreatePlaylist")} />
     ),
     headerTransparent: true,
     headerStyle: {
       height: 60,
       backgroundColor: isThemeDark(theme) ? DARK_THEME.primaryBg : LIGHT_THEME.primaryBg
     },
+    headerTintColor: isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt
   };
 }
 
@@ -88,11 +88,10 @@ export const addSongsToPlaylistHeaderOptions = (state: RootStateOrAny, route: Ro
     },
     headerTitleAlign: 'center',
     headerLeftContainerStyle: {
-      paddingLeft: 15,
+      paddingLeft: 5,
     },
     headerRightContainerStyle: {
       paddingRight: 15,
-      paddingBottom: 25
     },
     headerRight: (props) => (
       <React.Fragment />
@@ -102,5 +101,6 @@ export const addSongsToPlaylistHeaderOptions = (state: RootStateOrAny, route: Ro
       height: 60,
       backgroundColor: isThemeDark(theme) ? DARK_THEME.primaryBg : LIGHT_THEME.primaryBg
     },
+    headerTintColor: isThemeDark(theme) ? DARK_THEME.primaryTxt : LIGHT_THEME.primaryTxt
   };
 }

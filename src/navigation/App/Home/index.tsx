@@ -21,7 +21,7 @@ export const HomeStackScreens: React.FC<I_HomeStackScreensProps> = (): JSX.Eleme
     return (
         <HomeStack.Navigator>
             <HomeStack.Screen name={"Home"} component={HomeScreen} options={homeHeaderOptions(globalState)} />
-            <HomeStack.Screen name={"Playlist"} component={Playlist} options={({route}) => playlistHeaderOptions(globalState, route)} />
+            <HomeStack.Screen name={"Playlist"} component={Playlist} options={({route, navigation}) => playlistHeaderOptions(globalState, route, navigation)} />
             <HomeStack.Screen name={"AddSongsToPlaylist"} component={AddSongsToPlaylist} options={({route}) => addSongsToPlaylistHeaderOptions(globalState, route)} />
         </HomeStack.Navigator>
     )
