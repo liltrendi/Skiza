@@ -21,7 +21,7 @@ export interface I_SongOptions {
     album: boolean;
     duration: boolean;
     cover: boolean;
-    blured: boolean;
+    blured?: boolean;
 }
 
 export interface I_UniqueArtist {

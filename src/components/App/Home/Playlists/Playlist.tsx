@@ -55,7 +55,7 @@ const Playlist: React.FC<T_Props> = ({removeSongFromPlaylist}): JSX.Element => {
 
     const flatListRenderer = useCallback(({item}: I_RenderItemProps) => {
         return (
-            <SongItem id={item.id} title={item.title} author={item.author} cover={item.cover} ActionIcon={(): JSX.Element => <OptionsAndRemoveIcons songId={item.id} />} />
+            <SongItem id={item.id} title={item.title} author={item.author} cover={item.cover}  path={item.path} ActionIcon={(): JSX.Element => <OptionsAndRemoveIcons songId={item.id} />} />
         )
     }, []);
     

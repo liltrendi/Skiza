@@ -9,7 +9,6 @@ export const defaultSongOptions: I_SongOptions = {
     album: true,
     duration: true,
     cover: true,
-    blured: false
 }
 
 export async function fetchSongsFromLocalStorage(songOptions: I_SongOptions): Promise<I_SongSchema[]>{

@@ -34,7 +34,7 @@ const SongList: React.FC<I_SongListProps> = (): JSX.Element => {
         return (
             <React.Fragment>
                 <ArtistsTopSection index={index} />
-                <SongItem id={item.id} title={item.title} author={item.author} cover={item.cover} ActionIcon={(): JSX.Element => <SongItemOptionsIcon executor={() => toggleOptions(item.id)} iconStyles={{}} />} />
+                <SongItem id={item.id} title={item.title} author={item.author} cover={item.cover} path={item.path} ActionIcon={(): JSX.Element => <SongItemOptionsIcon executor={() => toggleOptions(item.id)} iconStyles={{}} />} />
             </React.Fragment>
         )
     }, []);

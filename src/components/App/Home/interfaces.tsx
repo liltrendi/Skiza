@@ -33,6 +33,7 @@ export interface I_SongItemProps {
     title: string;
     author: string;
     cover: string;
+    path: string;
     ActionIcon?: React.FC<any>
 }
 

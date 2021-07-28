@@ -4,6 +4,7 @@ import { RootStateOrAny } from 'react-redux';
 import { connect, useSelector } from 'react-redux';
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
+import { CoverImage } from "react-native-get-music-files-v3dev-test";
 import { I_SongItemProps, I_SongItemStyles } from "./interfaces"
 import { setCurrentSong, setSongPlayingStatus, setSongQueue } from '../../../actions/music';
 import { I_SongSchema } from '../../../controllers/music/interfaces';
@@ -28,7 +29,7 @@ interface I_GlobalStateProps {
     songState: I_SongStateInitialProps;
 }
 
-const SongItem: React.FC<T_Props> = ({ id, title, author, cover, ActionIcon, setCurrentSong, setSongPlayingStatus, setSongQueue }): JSX.Element => {
+const SongItem: React.FC<T_Props> = ({ id, title, author, cover, path, ActionIcon, setCurrentSong, setSongPlayingStatus, setSongQueue }): JSX.Element => {
 
     const globalState: RootStateOrAny = useSelector((state: RootStateOrAny) => state);
     const {songs: allSongs, songState}: I_GlobalStateProps = globalState;
@@ -44,7 +45,8 @@ const SongItem: React.FC<T_Props> = ({ id, title, author, cover, ActionIcon, set
 
     return (
         <TouchableOpacity activeOpacity={0.9} onPress={(): void => playSong(id)} style={styles.container}>
-            <Image source={deduceCoverArtToUse(cover, MUSICAL_NOTE_IMAGE)} style={styles.cover} />
+            {/* <Image source={deduceCoverArtToUse(cover, MUSICAL_NOTE_IMAGE)} style={styles.cover} /> */}
+            <CoverImage source={path} src={path} style={styles.cover} />
             <View style={styles.textContainer}>
                 <Text style={styles.title} numberOfLines={1}>{title}</Text>
                 <View style={styles.divider}></View>

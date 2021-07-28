@@ -6,6 +6,7 @@ import MaterialCommunityIcon from 'react-native-vector-icons/MaterialCommunityIc
 import { RootStateOrAny, useSelector, connect } from 'react-redux'
 import { ThunkDispatch } from 'redux-thunk';
 import { AnyAction } from 'redux';
+import { CoverImage } from "react-native-get-music-files-v3dev-test";
 import { I_PlayerModalProps, I_PlayerModalStyles } from './interfaces'
 import { setCurrentSong, setSongPlayingStatus, setSongQueue, togglePlayerModal, toggleRepeat, toggleShuffle } from '../../../actions/music';
 import { isThemeDark } from '../../../util/theme';
@@ -120,7 +121,8 @@ const PlayerModal: React.FC<T_Props> = (props): JSX.Element => {
                 </View>
 
                 <View style={styles.middleView}>
-                    <Image source={deduceCoverArtToUse(currentSong.cover, MUSICAL_NOTE_IMAGE)} style={styles.coverArt} />
+                    {/* <Image source={deduceCoverArtToUse(currentSong.cover, MUSICAL_NOTE_IMAGE)} style={styles.coverArt} /> */}
+                    <CoverImage source={currentSong.path} src={currentSong.path} style={styles.coverArt} />
                 </View>
 
                 <View style={styles.bottomView}>
